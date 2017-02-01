@@ -1,0 +1,407 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C5C3ACDDF309F1580555828B /* Pods_GymTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E5911B6B736C5B306A18F3 /* Pods_GymTime.framework */; };
+		EE3252911E4218D3004761FC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252901E4218D3004761FC /* AppState.swift */; };
+		EE3252931E422353004761FC /* MeasurementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252921E422353004761FC /* MeasurementHelper.swift */; };
+		EE3252951E422378004761FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252941E422378004761FC /* Constants.swift */; };
+		EE6AFE401E420F6B00ECDCBB /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */; };
+		EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C1B881E3E82970008F5AD /* AppDelegate.swift */; };
+		EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C1B8A1E3E82970008F5AD /* ViewController.swift */; };
+		EE8C1B8E1E3E82970008F5AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B8C1E3E82970008F5AD /* Main.storyboard */; };
+		EE8C1B901E3E82970008F5AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B8F1E3E82970008F5AD /* Assets.xcassets */; };
+		EE8C1B931E3E82970008F5AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */; };
+		EE8C1B9D1E3E99E50008F5AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B9C1E3E99E50008F5AD /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		988DAE269B8891CECFE35FA0 /* Pods-GymTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.debug.xcconfig"; sourceTree = "<group>"; };
+		B7E5911B6B736C5B306A18F3 /* Pods_GymTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE3252901E4218D3004761FC /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		EE3252921E422353004761FC /* MeasurementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementHelper.swift; sourceTree = "<group>"; };
+		EE3252941E422378004761FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		EE8C1B851E3E82970008F5AD /* GymTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE8C1B881E3E82970008F5AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EE8C1B8A1E3E82970008F5AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EE8C1B8D1E3E82970008F5AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EE8C1B8F1E3E82970008F5AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EE8C1B921E3E82970008F5AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EE8C1B941E3E82970008F5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE8C1B9C1E3E99E50008F5AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F743C6A49BEC8D4C676A2E2E /* Pods-GymTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EE8C1B821E3E82970008F5AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5C3ACDDF309F1580555828B /* Pods_GymTime.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		90332BECC3E29BFB310A8536 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				988DAE269B8891CECFE35FA0 /* Pods-GymTime.debug.xcconfig */,
+				F743C6A49BEC8D4C676A2E2E /* Pods-GymTime.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		94434383A8A1955CF648266B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B7E5911B6B736C5B306A18F3 /* Pods_GymTime.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE8C1B7C1E3E82970008F5AD = {
+			isa = PBXGroup;
+			children = (
+				EE8C1B9C1E3E99E50008F5AD /* GoogleService-Info.plist */,
+				EE8C1B871E3E82970008F5AD /* GymTime */,
+				EE8C1B861E3E82970008F5AD /* Products */,
+				90332BECC3E29BFB310A8536 /* Pods */,
+				94434383A8A1955CF648266B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EE8C1B861E3E82970008F5AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EE8C1B851E3E82970008F5AD /* GymTime.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EE8C1B871E3E82970008F5AD /* GymTime */ = {
+			isa = PBXGroup;
+			children = (
+				EE8C1B881E3E82970008F5AD /* AppDelegate.swift */,
+				EE8C1B8A1E3E82970008F5AD /* ViewController.swift */,
+				EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */,
+				EE3252901E4218D3004761FC /* AppState.swift */,
+				EE3252921E422353004761FC /* MeasurementHelper.swift */,
+				EE3252941E422378004761FC /* Constants.swift */,
+				EE8C1B8C1E3E82970008F5AD /* Main.storyboard */,
+				EE8C1B8F1E3E82970008F5AD /* Assets.xcassets */,
+				EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */,
+				EE8C1B941E3E82970008F5AD /* Info.plist */,
+			);
+			path = GymTime;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EE8C1B841E3E82970008F5AD /* GymTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE8C1B971E3E82970008F5AD /* Build configuration list for PBXNativeTarget "GymTime" */;
+			buildPhases = (
+				7677156A4F8718228B3F3DD9 /* [CP] Check Pods Manifest.lock */,
+				EE8C1B811E3E82970008F5AD /* Sources */,
+				EE8C1B821E3E82970008F5AD /* Frameworks */,
+				EE8C1B831E3E82970008F5AD /* Resources */,
+				086BE148042E1F326AC65C1F /* [CP] Embed Pods Frameworks */,
+				49A96732D20DB946093A7E7E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GymTime;
+			productName = GymTime;
+			productReference = EE8C1B851E3E82970008F5AD /* GymTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EE8C1B7D1E3E82970008F5AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Laura Rundle";
+				TargetAttributes = {
+					EE8C1B841E3E82970008F5AD = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = R57X2AV6Q6;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = EE8C1B801E3E82970008F5AD /* Build configuration list for PBXProject "GymTime" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EE8C1B7C1E3E82970008F5AD;
+			productRefGroup = EE8C1B861E3E82970008F5AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EE8C1B841E3E82970008F5AD /* GymTime */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EE8C1B831E3E82970008F5AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE8C1B931E3E82970008F5AD /* LaunchScreen.storyboard in Resources */,
+				EE8C1B9D1E3E99E50008F5AD /* GoogleService-Info.plist in Resources */,
+				EE8C1B901E3E82970008F5AD /* Assets.xcassets in Resources */,
+				EE8C1B8E1E3E82970008F5AD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		086BE148042E1F326AC65C1F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymTime/Pods-GymTime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49A96732D20DB946093A7E7E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymTime/Pods-GymTime-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7677156A4F8718228B3F3DD9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EE8C1B811E3E82970008F5AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */,
+				EE3252931E422353004761FC /* MeasurementHelper.swift in Sources */,
+				EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */,
+				EE6AFE401E420F6B00ECDCBB /* SignInViewController.swift in Sources */,
+				EE3252911E4218D3004761FC /* AppState.swift in Sources */,
+				EE3252951E422378004761FC /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EE8C1B8C1E3E82970008F5AD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE8C1B8D1E3E82970008F5AD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE8C1B921E3E82970008F5AD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EE8C1B951E3E82970008F5AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EE8C1B961E3E82970008F5AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EE8C1B981E3E82970008F5AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 988DAE269B8891CECFE35FA0 /* Pods-GymTime.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R57X2AV6Q6;
+				INFOPLIST_FILE = GymTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tcd.13321661.GymTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		EE8C1B991E3E82970008F5AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F743C6A49BEC8D4C676A2E2E /* Pods-GymTime.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R57X2AV6Q6;
+				INFOPLIST_FILE = GymTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tcd.13321661.GymTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EE8C1B801E3E82970008F5AD /* Build configuration list for PBXProject "GymTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE8C1B951E3E82970008F5AD /* Debug */,
+				EE8C1B961E3E82970008F5AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE8C1B971E3E82970008F5AD /* Build configuration list for PBXNativeTarget "GymTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE8C1B981E3E82970008F5AD /* Debug */,
+				EE8C1B991E3E82970008F5AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EE8C1B7D1E3E82970008F5AD /* Project object */;
+}

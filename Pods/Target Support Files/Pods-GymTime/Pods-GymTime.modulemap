@@ -1,0 +1,6 @@
+framework module Pods_GymTime {
+  umbrella header "Pods-GymTime-umbrella.h"
+
+  export *
+  module * { export * }
+}
