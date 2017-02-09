@@ -17,9 +17,9 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     
     override func viewDidAppear(_ animated: Bool) {
-        if let user = FIRAuth.auth()?.currentUser {
-            self.signedIn(user)
-        }
+       // if let user = FIRAuth.auth()?.currentUser {
+           // self.signedIn(user)
+        
     }
 
     @IBAction func didTapSignIn(_ sender: AnyObject) {
