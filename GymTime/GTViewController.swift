@@ -14,6 +14,8 @@ class GTViewController: UIViewController{
     
     @IBOutlet weak var welcomeLabel: UILabel!
     
+    
+    
     var ref: FIRDatabaseReference!
     var messages: [FIRDataSnapshot]! = []
     var msglength: NSNumber = 10
@@ -44,4 +46,10 @@ class GTViewController: UIViewController{
             strongSelf.messages.append(snapshot)
         })
     }
-   }
+    
+    
+    //@IBAction func calendarButton(_ sender: UIButton!) {
+   //     performSegue(withIdentifier: Constants.Segues.CalendarViewLoad, sender: self)
+   // }
+
+}

@@ -13,12 +13,14 @@
 		EE3252951E422378004761FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252941E422378004761FC /* Constants.swift */; };
 		EE5CE55C1E479D5F008D26F0 /* GTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5CE55B1E479D5F008D26F0 /* GTViewController.swift */; };
 		EE6AFE401E420F6B00ECDCBB /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */; };
+		EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */; };
 		EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C1B881E3E82970008F5AD /* AppDelegate.swift */; };
 		EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C1B8A1E3E82970008F5AD /* ViewController.swift */; };
 		EE8C1B8E1E3E82970008F5AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B8C1E3E82970008F5AD /* Main.storyboard */; };
 		EE8C1B901E3E82970008F5AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B8F1E3E82970008F5AD /* Assets.xcassets */; };
 		EE8C1B931E3E82970008F5AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */; };
 		EE8C1B9D1E3E99E50008F5AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B9C1E3E99E50008F5AD /* GoogleService-Info.plist */; };
+		EE9119961E4CE76900475E04 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9119951E4CE76900475E04 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,7 @@
 		EE3252941E422378004761FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EE5CE55B1E479D5F008D26F0 /* GTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTViewController.swift; sourceTree = "<group>"; };
 		EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		EE8C1B851E3E82970008F5AD /* GymTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE8C1B881E3E82970008F5AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE8C1B8A1E3E82970008F5AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +40,7 @@
 		EE8C1B921E3E82970008F5AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE8C1B941E3E82970008F5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE8C1B9C1E3E99E50008F5AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EE9119951E4CE76900475E04 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		F743C6A49BEC8D4C676A2E2E /* Pods-GymTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,14 +95,16 @@
 		EE8C1B871E3E82970008F5AD /* GymTime */ = {
 			isa = PBXGroup;
 			children = (
+				EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */,
 				EE8C1B881E3E82970008F5AD /* AppDelegate.swift */,
 				EE8C1B8A1E3E82970008F5AD /* ViewController.swift */,
+				EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */,
 				EE5CE55B1E479D5F008D26F0 /* GTViewController.swift */,
-				EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */,
 				EE3252901E4218D3004761FC /* AppState.swift */,
 				EE3252921E422353004761FC /* MeasurementHelper.swift */,
 				EE3252941E422378004761FC /* Constants.swift */,
 				EE8C1B8C1E3E82970008F5AD /* Main.storyboard */,
+				EE9119951E4CE76900475E04 /* TableViewController.swift */,
 				EE8C1B8F1E3E82970008F5AD /* Assets.xcassets */,
 				EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */,
 				EE8C1B941E3E82970008F5AD /* Info.plist */,
@@ -234,8 +240,10 @@
 				EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */,
 				EE3252931E422353004761FC /* MeasurementHelper.swift in Sources */,
 				EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */,
+				EE9119961E4CE76900475E04 /* TableViewController.swift in Sources */,
 				EE6AFE401E420F6B00ECDCBB /* SignInViewController.swift in Sources */,
 				EE3252911E4218D3004761FC /* AppState.swift in Sources */,
+				EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */,
 				EE5CE55C1E479D5F008D26F0 /* GTViewController.swift in Sources */,
 				EE3252951E422378004761FC /* Constants.swift in Sources */,
 			);

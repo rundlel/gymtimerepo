@@ -13,8 +13,10 @@ struct Constants {
     }
     
     struct Segues {
-        static let SignInToFp = "SignInToFP"
+        static let SignInToGT = "SignInToGT"
         static let FpToSignIn = "FPToSignIn"
+        static let CalendarViewLoad = "CalendarViewLoad"
+        static let CreateAccountView = "CreateAccountView"
     }
     
     struct MessageFields {
