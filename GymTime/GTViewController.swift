@@ -20,7 +20,12 @@ class GTViewController: UIViewController{
     var messages: [FIRDataSnapshot]! = []
     var msglength: NSNumber = 10
     fileprivate var _refHandle: FIRDatabaseHandle!
+    
+    let AverageMonthArray = [11,12,3,4]
+    let BusyMonthArray = [1,2,9,10]
 
+
+    @IBOutlet var includeWeekends: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
         welcomeUser()
@@ -47,6 +52,16 @@ class GTViewController: UIViewController{
         })
     }
     
+    @IBAction func weekendSwitch(_ sender: UISwitch) {
+        if (sender.isOn == true)
+        {
+            includeWeekends.text = "switch is on"
+        }
+        else{
+            includeWeekends.text = "switch is off"
+        }
+        
+    }
     
     //@IBAction func calendarButton(_ sender: UIButton!) {
    //     performSegue(withIdentifier: Constants.Segues.CalendarViewLoad, sender: self)
