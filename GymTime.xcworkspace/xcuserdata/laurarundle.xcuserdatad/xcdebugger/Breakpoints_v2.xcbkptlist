@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/GTViewController.swift"
-            timestampString = "511037850.088936"
+            timestampString = "511040182.099536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "welcomeUser()"
             landmarkType = "7">
          </BreakpointContent>
