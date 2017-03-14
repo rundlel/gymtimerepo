@@ -14,6 +14,11 @@ class GTViewController: UIViewController{
     
     @IBOutlet weak var welcomeLabel: UILabel!
     
+    @IBAction func personalisedTimes(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: nil)
+
+    }
     
     var monthType = "null"
     var switchButton = 0
@@ -31,20 +36,21 @@ class GTViewController: UIViewController{
     @IBOutlet var includeWeekends: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
-        welcomeUser()
+     //   welcomeUser()
         configureDatabase()
-        displayData()
+        getMonth()
+        displayInitialData()
     }
     
     
-    func welcomeUser()
-    {
-        guard let user = FIRAuth.auth()?.currentUser else {return}
+  //  func welcomeUser()
+  //  {
+   //     guard let user = FIRAuth.auth()?.currentUser else {return}
         
-        let displayName = user.email!.components(separatedBy: "@")[0]
+   //     let displayName = user.email!.components(separatedBy: "@")[0]
         
-       // welcomeLabel.text = "Welcome to GymTime " + displayName
-    }
+       //welcomeLabel.text = "Welcome to GymTime " + displayName
+   // }
     
     func configureDatabase() {
         ref = FIRDatabase.database().reference()
@@ -53,6 +59,37 @@ class GTViewController: UIViewController{
             guard let strongSelf = self else { return }
             strongSelf.messages.append(snapshot)
         })
+    }
+    
+    func getMonth()
+    {
+        let date = Date()
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: date)
+        
+        for index in 0...3
+        {
+            if (AverageMonthArray[index] == month)
+            {
+                monthType = "average"
+            }
+            else if (BusyMonthArray[index] == month)
+            {
+                monthType = "busy"
+            }
+        }
+
+    }
+    func displayInitialData()
+    {
+        if (monthType == "busy")
+        {
+            displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: FRIDAY 7am - 12pm, 8am - 10am all week \n\n🕐✗WORST TIME: MONDAY 12pm-8pm, 4pm - 7pm all week"
+        }
+        else
+        {
+            displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: 8am - 11am all week \n\n🕐✗WORST TIME: 4pm - 7pm all week"
+        }
     }
     
     @IBAction func weekendSwitch(_ sender: UISwitch) {
@@ -69,31 +106,15 @@ class GTViewController: UIViewController{
            // includeWeekends.text = "no, don't include weekends"
         }
         
-        let date = Date()
-        let calendar = Calendar.current
-        
-        
-        let month = calendar.component(.month, from: date)
-        for index in 0...3
-        {
-            if (AverageMonthArray[index] == month)
-            {
-                monthType = "average"
-            }
-            else if (BusyMonthArray[index] == month)
-            {
-                monthType = "busy"
-            }
-        }
-        if (monthType == "busy")
+            if (monthType == "busy")
         {
             if(switchButton == 0)
             {
-                displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: FRIDAY 7am - 12pm, 8am - 10am all week \n\n🕐✗WORST TIME: MONDAY 12pm-8pm, 4pm - 7pm all week"
+               displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: FRIDAY 7am - 12pm, 8am - 10am all week \n\n🕐✗WORST TIME: MONDAY 12pm-8pm, 4pm - 7pm all week"
             }
             if(switchButton == 1)
             {
-                displayLabel.text = "🗓✓ BEST DAYS: FRIDAY, SATURDAY, SUNDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: FRIDAY 7am - 12pm, 8am - 10am all week \n\n🕐✗WORST TIME: MONDAY 12pm-8pm, 4pm - 7pm all week"
+               displayLabel.text = "🗓✓ BEST DAYS: FRIDAY, SATURDAY, SUNDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: FRIDAY 7am - 12pm, 8am - 10am all week \n\n🕐✗WORST TIME: MONDAY 12pm-8pm, 4pm - 7pm all week"
             }
             
         }
@@ -101,11 +122,11 @@ class GTViewController: UIViewController{
         {
             if(switchButton == 0)
             {
-                displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: 8am - 11am all week \n\n🕐✗WORST TIME: 4pm - 7pm all week"
+               displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: 8am - 11am all week \n\n🕐✗WORST TIME: 4pm - 7pm all week"
             }
             if(switchButton == 1)
             {
-                displayLabel.text = "🗓✓ BEST DAYS: FRIDAY, SATURDAY, SUNDAY \n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: 8am - 11am all week \n🕐✗WORST TIME: 4pm - 7pm all week"
+                displayLabel.text = "🗓✓ BEST DAYS: FRIDAY, SATURDAY, SUNDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: 8am - 11am all week \n\n🕐✗WORST TIME: 4pm - 7pm all week"
             }
             
         }
@@ -113,43 +134,5 @@ class GTViewController: UIViewController{
         
     }
     
-    func displayData()
-    {
-        let date = Date()
-        let calendar = Calendar.current
-        
-        
-        let month = calendar.component(.month, from: date)
-        for index in 0...3
-        {
-            if (AverageMonthArray[index] == month)
-            {
-                monthType = "average"
-            }
-            else if (BusyMonthArray[index] == month)
-            {
-                monthType = "busy"
-            }
-        }
-        
-        
-        print(monthType)
-        
-        if (monthType == "average")
-        {
-            if(switchButton == 0)
-            {
-                displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐BEST TIME: 8am - 11am all week \n🕐WORST TIME: 5pm all week"
-            }
-            if(switchButton == 1)
-            {
-                displayLabel.text = "🗓✓ BEST DAYS: FRIDAY, SATURDAY, SUNDAY \n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐BEST TIME: 8am - 11am all week \n🕐WORST TIME: 5pm all week"
-            }
-            
-        }
-        
-        
-        
-    }
 
 }

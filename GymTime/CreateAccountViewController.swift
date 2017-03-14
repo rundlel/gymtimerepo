@@ -12,10 +12,12 @@ import Firebase
 @objc(CreateAccountViewController)
 class CreateAccountViewController: UIViewController {
     
+    
     @IBOutlet weak var createAccEmailField: UITextField!
     
     @IBOutlet weak var createAccPasswordField: UITextField!
     
+    @IBOutlet var errorMessage: UILabel!
     
     @IBAction func didTapcreateAccount(_ sender: AnyObject) {
         guard let email = createAccEmailField.text, let password = createAccPasswordField.text else { return }
@@ -23,12 +25,30 @@ class CreateAccountViewController: UIViewController {
             in
             if let error = error {
                 print(error.localizedDescription)
+                if (error.localizedDescription.range(of:"badly formatted") != nil)
+                {
+                    self.errorMessage.text = "This is not a valid email address"
+                }
+                else if (error.localizedDescription.range(of: "6") != nil)
+                {
+                    self.errorMessage.text = "Your password must be at least 6 characters long"
+                }
+                else if (error.localizedDescription.range(of: "already in use") != nil)
+                {
+                    self.errorMessage.text = "This email address is already in use by another account"
+                }
+                
                 return
             }
             self.setDisplayName(user!)
         }
         
         
+    }
+    
+    @IBAction func backToSignIn(_ sender: UIButton) {
+        
+       performSegue(withIdentifier: Constants.Segues.BackToSignInView, sender: nil) 
     }
     
     func setDisplayName(_ user: FIRUser?) {

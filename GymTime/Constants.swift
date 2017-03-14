@@ -17,6 +17,8 @@ struct Constants {
         static let FpToSignIn = "FPToSignIn"
         static let CalendarViewLoad = "CalendarViewLoad"
         static let CreateAccountView = "CreateAccountView"
+        static let PersonalisedTimesView = "PersonalisedTimesView"
+        static let BackToSignInView = "BackToLaunchScreen"
     }
     
     struct MessageFields {
