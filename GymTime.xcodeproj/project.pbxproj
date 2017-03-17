@@ -13,6 +13,7 @@
 		EE3252951E422378004761FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252941E422378004761FC /* Constants.swift */; };
 		EE5CE55C1E479D5F008D26F0 /* GTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5CE55B1E479D5F008D26F0 /* GTViewController.swift */; };
 		EE6AFE401E420F6B00ECDCBB /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */; };
+		EE78498F1E7C4A9E002CB355 /* PreferredTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE78498E1E7C4A9E002CB355 /* PreferredTimesViewController.swift */; };
 		EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */; };
 		EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C1B881E3E82970008F5AD /* AppDelegate.swift */; };
 		EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C1B8A1E3E82970008F5AD /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		EE3252941E422378004761FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EE5CE55B1E479D5F008D26F0 /* GTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTViewController.swift; sourceTree = "<group>"; };
 		EE6AFE3F1E420F6B00ECDCBB /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		EE78498E1E7C4A9E002CB355 /* PreferredTimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferredTimesViewController.swift; sourceTree = "<group>"; };
 		EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		EE8C1B851E3E82970008F5AD /* GymTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE8C1B881E3E82970008F5AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				EE5CE55B1E479D5F008D26F0 /* GTViewController.swift */,
 				EE3252901E4218D3004761FC /* AppState.swift */,
 				EE3252921E422353004761FC /* MeasurementHelper.swift */,
+				EE78498E1E7C4A9E002CB355 /* PreferredTimesViewController.swift */,
 				EE3252941E422378004761FC /* Constants.swift */,
 				EE8C1B8C1E3E82970008F5AD /* Main.storyboard */,
 				EE9119951E4CE76900475E04 /* TableViewController.swift */,
@@ -246,6 +249,7 @@
 				EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */,
 				EE5CE55C1E479D5F008D26F0 /* GTViewController.swift in Sources */,
 				EE3252951E422378004761FC /* Constants.swift in Sources */,
+				EE78498F1E7C4A9E002CB355 /* PreferredTimesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
