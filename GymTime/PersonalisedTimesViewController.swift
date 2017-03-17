@@ -1,25 +1,26 @@
 //
-//  PreferredTimesViewController.swift
+//  PersonalisedTimesViewController.swift
 //  GymTime
 //
 //  Created by Laura Rundle on 17/03/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
 //
 
-
+import Foundation
 import UIKit
 import EventKit
 import Firebase
 
-class PreferredTimeViewController: UIViewController {
+class PersonalisedTimeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        getEvents()
         
     }
-
     
-    func test (){
+    
+    func getEvents()
+    {
         let eventStore: EKEventStore = EKEventStore()
         
         let startDate = NSDate().addingTimeInterval(-60*60*24)
@@ -34,7 +35,7 @@ class PreferredTimeViewController: UIViewController {
         if eventVar != nil {
             for i in eventVar! {
                 print("Title  \(i.title)" )
-                print("stareDate: \(i.startDate)" )
+                print("startDate: \(i.startDate)" )
                 print("endDate: \(i.endDate)" )
                 
                 if i.title == "Test Title" {

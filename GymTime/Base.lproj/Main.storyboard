@@ -254,7 +254,7 @@
                                 </state>
                                 <connections>
                                     <action selector="personalisedTimes:" destination="ir7-hk-YVO" eventType="touchUpInside" id="7gu-wy-Vqb"/>
-                                    <segue destination="JLb-HJ-aTs" kind="show" identifier="PersonalisedTimesView" id="lrZ-Mh-SHm"/>
+                                    <segue destination="D7t-5Z-MiD" kind="show" identifier="PersonalisedTimesView" id="6RB-r5-JnX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -267,25 +267,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daY-cp-Ob9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-594.39999999999998" y="1103.2983508245877"/>
+            <point key="canvasLocation" x="-494" y="1100"/>
         </scene>
-        <!--PersonalisedTimesView-->
-        <scene sceneID="Oqt-en-Bsa">
+        <!--PersonalisedViewController-->
+        <scene sceneID="sPp-Hp-bxF">
             <objects>
-                <viewController title="PersonalisedTimesView" id="JLb-HJ-aTs" customClass="PreferredTimesViewController" sceneMemberID="viewController">
+                <viewController title="PersonalisedViewController" id="D7t-5Z-MiD" customClass="PersonalisedTimeViewController" customModule="GymTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="AZl-cX-zjK"/>
-                        <viewControllerLayoutGuide type="bottom" id="rBg-KI-zGu"/>
+                        <viewControllerLayoutGuide type="top" id="9gF-9C-vBP"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xmx-s0-Eod"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kpQ-5E-YWH">
+                    <view key="view" contentMode="scaleToFill" id="zto-hN-nuW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Waves-geometric-vectors-background-material" translatesAutoresizingMaskIntoConstraints="NO" id="Gh2-xy-DoP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="682"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bku-zK-7Em" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xh6-ul-JGG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="468" y="1102.3988005997003"/>
+            <point key="canvasLocation" x="580" y="1100"/>
         </scene>
     </scenes>
     <resources>
