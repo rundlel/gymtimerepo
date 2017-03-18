@@ -15,9 +15,11 @@ class PersonalisedTimeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
        checkAuthorisation()
-        getEvents()
+      //  getEvents()
+        getEventByTime()
         
     }
+    var dateFormatter =  DateFormatter()
     
     func checkAuthorisation()
     {
@@ -82,6 +84,7 @@ class PersonalisedTimeViewController: UIViewController {
             UIApplication.shared.openURL(openSettingsUrl!)
 
         }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
        present(alert, animated: true, completion: nil)
         
     
@@ -91,9 +94,11 @@ class PersonalisedTimeViewController: UIViewController {
     {
         let eventStore: EKEventStore = EKEventStore()
         
-        let startDate = NSDate().addingTimeInterval(-60*60*24)
-        let endDate = NSDate().addingTimeInterval(60*60*24*3)
+        let startDate = NSDate()
+        let endDate = NSDate().addingTimeInterval(60*60*24*7)
+        print(dateFormatter.string(from: startDate as Date))
         
+
         let predicate1 = eventStore.predicateForEvents(withStart: startDate as Date, end: endDate as Date, calendars: nil)
         
         print("startDate:\(startDate) endDate:\(endDate)")
@@ -106,6 +111,10 @@ class PersonalisedTimeViewController: UIViewController {
                 print("startDate: \(i.startDate)" )
                 print("endDate: \(i.endDate)" )
                 
+                
+                print(dateFormatter.string(from: i.startDate))
+                
+                
                 if i.title == "Test Title" {
                     print("YES" )
                     // Uncomment if you want to delete
@@ -114,5 +123,71 @@ class PersonalisedTimeViewController: UIViewController {
             }
         }
     }
+    
+    func getEventByTime()
+    {
+        
+        let eventStore2: EKEventStore = EKEventStore()
+        var startDate = NSDate()
+        let endDate = NSDate().addingTimeInterval(60*60*24)
+        var y = endDate.timeIntervalSince(startDate as Date)
+        
+        var x = endDate.timeIntervalSince(startDate as Date)
+        if(x<0)
+        {
+            print("yes")
+        }
+        
+        
+        var whileBool = true
+        
+      
+        while (whileBool == true)
+        {
+            
+            let predicate = eventStore2.predicateForEvents(withStart: startDate as Date, end: endDate as Date, calendars: nil)
+            let eventVar = eventStore2.events(matching: predicate) as [EKEvent]!
+            
+            if eventVar != nil
+            {
+               for i in eventVar! {
+                    print("Title  \(i.title)" )
+                    print("startDate: \(i.startDate)" )
+                    print("endDate: \(i.endDate)" )
+                    //duration of the event
+                    y = i.endDate.timeIntervalSince(i.startDate as Date)
+                    print(y)
+                
+                }
+                
+            }
+            
+            startDate = startDate.addingTimeInterval(60*60*1*1)
+            
+            
+          //  print("startDate:\(startDate) endDate:\(endDate)")
+            
+            x = endDate.timeIntervalSince(startDate as Date)
+        
+            if(x<0)
+            {
+                whileBool = false
+            }
+            
+           /* if(startDate.isEqual(to: endDate as Date))
+            {
+                print("FALSE")
+                whileBool = false
+            }
+            else
+            {
+                print("TRUE")
+            }*/
+        
+
+        }
+        
+    }
+    
     
 }
