@@ -168,8 +168,6 @@ class PersonalisedTimeViewController: UIViewController {
     func durationConversionToHours(minute: Int) -> Int {
         
         var hour = minute/60
-        print("MINUTES MINUTES MINUTES")
-        print(minute)
         if(minute % 60 > 0)
         {
             hour = hour + 1
@@ -196,17 +194,7 @@ class PersonalisedTimeViewController: UIViewController {
             
             
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
-            
-            
             let durationHours = durationConversionToHours(minute: durationMinutes)
-            
-            var numberOfHours = false
-            
-            if(durationHours > 1)
-            {
-                numberOfHours = true
-            }
-            
             
             let x = determineDay(date: components.day!, today: today.day!)
            
@@ -215,47 +203,50 @@ class PersonalisedTimeViewController: UIViewController {
                 switch(x)
                 {
                     case 0:
-                        for i in 1...durationHours
+                        for _ in 1...durationHours
                         {
                             One[hour-7] = "busy"
                             hour = hour + 1
                         }
                     case 1:
-                        for i in 1...durationHours
+                        for _ in 1...durationHours
                         {
                             Two[hour-7] = "busy"
                             hour = hour + 1
                         }
                     case 2:
-                        for i in 1...durationHours
+                        for _ in 1...durationHours
                         {
                             Three[hour-7] = "busy"
                             hour = hour + 1
                         }
                     case 3:
-                        for i in 1...durationHours
+                        for _ in 1...durationHours
                         {
                             Four[hour-7] = "busy"
                             hour = hour + 1
                         }
                     case 4:
-                        for i in 1...durationHours
+                        for _ in 1...durationHours
                         {
                             Five[hour-7] = "busy"
                             hour = hour + 1
                         }
                     case 5:
-                        for i in 1...durationHours
+                        for _ in 1...durationHours
                         {
                             Six[hour-7] = "busy"
                             hour = hour + 1
                         }
                     case 6:
-                        for i in 1...durationHours
+                        for _ in 1...durationHours
                         {
                             Seven[hour-7] = "busy"
                             hour = hour + 1
                         }
+                    
+                    
+                    
                     default:
                     print("ERROR ERROR ERROR")
                     print(hour-7)
@@ -286,6 +277,19 @@ class PersonalisedTimeViewController: UIViewController {
         return x
     }
     
+    func determineBusyHours(array: [String], duration: Int, hour: Int) -> [String]
+    {
+        var tempHour = hour
+        
+        for _ in 1...duration
+        {
+      //      array[tempHour-7] = "busy"
+            tempHour = tempHour + 1
+        }
+        return array
+        
+    }
+    
     func printTimeTables(array: [String])
     {
         for index in 0...14
@@ -294,19 +298,6 @@ class PersonalisedTimeViewController: UIViewController {
         }
         
         print("*******************")
-    }
-    
-    func determineBusyHours(array: [String], duration: Int, hour: Int) -> [String]
-    {
-        var tempHour = hour
-        
-        for index in 1...duration
-        {
-      //      array[tempHour-7] = "busy"
-            tempHour = tempHour + 1
-        }
-        return array
-        
     }
   
 }
