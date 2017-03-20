@@ -167,7 +167,14 @@ class PersonalisedTimeViewController: UIViewController {
     
     func durationConversionToHours(minute: Int) -> Int {
         
-        let hour = minute/60
+        var hour = minute/60
+        print("MINUTES MINUTES MINUTES")
+        print(minute)
+        if(minute % 60 > 0)
+        {
+            hour = hour + 1
+        }
+        
         return hour
     }
     
@@ -185,15 +192,19 @@ class PersonalisedTimeViewController: UIViewController {
         {
             print(EventArray[i].startDate)
             components = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].startDate as Date)
-            let hour = Int(components.hour!)
+            var hour = Int(components.hour!)
             
             
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
+            
+            
             let durationHours = durationConversionToHours(minute: durationMinutes)
+            
+            var numberOfHours = false
             
             if(durationHours > 1)
             {
-                //TODO
+                numberOfHours = true
             }
             
             
@@ -204,19 +215,47 @@ class PersonalisedTimeViewController: UIViewController {
                 switch(x)
                 {
                     case 0:
-                        One[hour-7] = "busy"
+                        for i in 1...durationHours
+                        {
+                            One[hour-7] = "busy"
+                            hour = hour + 1
+                        }
                     case 1:
-                        Two[hour-7] = "busy"
+                        for i in 1...durationHours
+                        {
+                            Two[hour-7] = "busy"
+                            hour = hour + 1
+                        }
                     case 2:
-                        Three[hour-7] = "busy"
+                        for i in 1...durationHours
+                        {
+                            Three[hour-7] = "busy"
+                            hour = hour + 1
+                        }
                     case 3:
-                        Four[hour-7] = "busy"
+                        for i in 1...durationHours
+                        {
+                            Four[hour-7] = "busy"
+                            hour = hour + 1
+                        }
                     case 4:
-                        Five[hour-7] = "busy"
+                        for i in 1...durationHours
+                        {
+                            Five[hour-7] = "busy"
+                            hour = hour + 1
+                        }
                     case 5:
-                        Six[hour-7] = "busy"
+                        for i in 1...durationHours
+                        {
+                            Six[hour-7] = "busy"
+                            hour = hour + 1
+                        }
                     case 6:
-                        Seven[hour-7] = "busy"
+                        for i in 1...durationHours
+                        {
+                            Seven[hour-7] = "busy"
+                            hour = hour + 1
+                        }
                     default:
                     print("ERROR ERROR ERROR")
                     print(hour-7)
@@ -256,189 +295,21 @@ class PersonalisedTimeViewController: UIViewController {
         
         print("*******************")
     }
-  /*
-    func getEventByTime()
+    
+    func determineBusyHours(array: [String], duration: Int, hour: Int) -> [String]
     {
+        var tempHour = hour
         
-        let eventStore2: EKEventStore = EKEventStore()
-        var startDate = NSDate()
-        var startPlusHour = NSDate().addingTimeInterval(60*60*24)
-        let endOfWeek = NSDate().addingTimeInterval(60*60*24*7)
-        var y = endOfWeek.timeIntervalSince(startDate as Date)
-        
-        var x = endOfWeek.timeIntervalSince(startDate as Date)
-       // var dateInt = 0
-        
-    
-        
-        //extract hour from a date
-       // let testDate = NSDate()
-        let unitFlags = Set<Calendar.Component>([.hour])
-        var components =  NSCalendar.current.dateComponents(unitFlags, from: startDate as Date)
-       
-        
-        
-        print(components)
-        
-        
-    
-        var whileBool = true
-        
-      
-        while (whileBool == true)
+        for index in 1...duration
         {
-            
-            //nil means search all calendars
-            let predicate = eventStore2.predicateForEvents(withStart: startDate as Date, end: startPlusHour as Date, calendars: nil)
-            let eventVar = eventStore2.events(matching: predicate) as [EKEvent]!
-            
-           
-            
-            if eventVar != nil
-            {
-                for i in eventVar! {
-                    print("Title  \(i.title)" )
-                    print("startDate: \(i.startDate)" )
-                    print("endDate: \(i.endDate)" )
-                    
-                    //duration of the event in seconds
-                    y = i.endDate.timeIntervalSince(i.startDate as Date)
-                    print(y)
-                    components = NSCalendar.current.dateComponents(unitFlags, from: startDate as Date)
-                    
-                    switch(components.hour!){
-                    case 7:
-                        Monday[0] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 8:
-                        Monday[1] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 9:
-                        Monday[2] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 10:
-                        Monday[3] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 11:
-                        Monday[4] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 12:
-                        Monday[5] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 13:
-                        Monday[6] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 14:
-                        Monday[7] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 15:
-                        Monday[8] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 16:
-                        Monday[9] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 17:
-                        Monday[10] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 18:
-                        Monday[11] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 19:
-                        Monday[12] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 20:
-                        Monday[13] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    case 21:
-                        Monday[14] = "busy"
-                        print(components.hour!)
-                        print("busy")
-                    default:
-                        print(components)
-                        break
-                        
-                        
-                        
-                    }
-
-                }
-            }
-            
-            
-            
-            startDate = startDate.addingTimeInterval(60*60*24*1)
-            startPlusHour = startPlusHour.addingTimeInterval(60*60*24*1)
-            
-            x = endOfWeek.timeIntervalSince(startDate as Date)
-            
-            if(x<0)
-            {
-                whileBool = false
-            }
-         }
-        
-        for index in 0...14
-        {
-            print(Monday[index])
+      //      array[tempHour-7] = "busy"
+            tempHour = tempHour + 1
         }
-            /*
-            let predicate = eventStore2.predicateForEvents(withStart: startDate as Date, end: endOfWeek as Date, calendars: nil)
-            let eventVar = eventStore2.events(matching: predicate) as [EKEvent]!
-            
-            if eventVar != nil
-            {
-               for i in eventVar! {
-                    print("Title  \(i.title)" )
-                    print("startDate: \(i.startDate)" )
-                    print("endDate: \(i.endDate)" )
-                    //duration of the event in seconds
-                    y = i.endDate.timeIntervalSince(i.startDate as Date)
-                    print(y)
-                
-                }
-                
-            }
-            
-            startDate = startDate.addingTimeInterval(60*60*24*1)
-            
-            
-            print("startDate:\(startDate) endDate:\(endOfWeek)")
-            
-            x = endOfWeek.timeIntervalSince(startDate as Date)
-        
-            if(x<0)
-            {
-                whileBool = false
-            }
-            */
-           /* if(startDate.isEqual(to: endDate as Date))
-            {
-                print("FALSE")
-                whileBool = false
-            }
-            else
-            {
-                print("TRUE")
-            }*/
-        
-
-        }*/
+        return array
         
     }
+  
+}
     
     //TIMETABLE VISUALISATION
     //[  0   ][   1  ]
