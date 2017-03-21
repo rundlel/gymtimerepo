@@ -22,6 +22,7 @@
 		EE8C1B931E3E82970008F5AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */; };
 		EE8C1B9D1E3E99E50008F5AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B9C1E3E99E50008F5AD /* GoogleService-Info.plist */; };
 		EE9BA30D1E814D3200504E6B /* EventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BA30C1E814D3200504E6B /* EventDetails.swift */; };
+		EE9BA30F1E816A4B00504E6B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		EE8C1B941E3E82970008F5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE8C1B9C1E3E99E50008F5AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE9BA30C1E814D3200504E6B /* EventDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
+		EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		F743C6A49BEC8D4C676A2E2E /* Pods-GymTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 				EE9BA30C1E814D3200504E6B /* EventDetails.swift */,
 				EE3252941E422378004761FC /* Constants.swift */,
 				EE8C1B8C1E3E82970008F5AD /* Main.storyboard */,
+				EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */,
 				EE7849901E7C7190002CB355 /* PersonalisedTimesViewController.swift */,
 				EE8C1B8F1E3E82970008F5AD /* Assets.xcassets */,
 				EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */,
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE9BA30F1E816A4B00504E6B /* UIViewExtensions.swift in Sources */,
 				EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */,
 				EE9BA30D1E814D3200504E6B /* EventDetails.swift in Sources */,
 				EE3252931E422353004761FC /* MeasurementHelper.swift in Sources */,

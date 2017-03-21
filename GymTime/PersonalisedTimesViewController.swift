@@ -14,6 +14,40 @@ import Firebase
 @objc(PersonalisedTimeViewController)
 class PersonalisedTimeViewController: UIViewController {
     
+    var includeToday = true
+    var includeWeekend = true
+    
+    @IBOutlet weak var includeTodayLabel: UILabel!
+    @IBOutlet weak var includeWeekendsLabel: UILabel!
+    
+    @IBAction func includeToday(_ sender: UISwitch) {
+        if(sender.isOn)
+        {
+            includeToday = true
+            print("include today")
+        }
+        else
+        {
+            includeToday = false
+            print(" don't include today")
+        }
+    }
+    @IBAction func includeWeekend(_ sender: UISwitch) {if(sender.isOn)
+    {
+        includeWeekend = true
+        print("include weekend")
+    }
+    else
+    {
+        includeWeekend = false
+        print(" don't include weekend")
+    }
+        
+    }
+    
+    
+
+    
     var dateFormatter =  DateFormatter()
     
     //arrays representing each day of the week, one being today, two being tomorrow etc
@@ -34,6 +68,8 @@ class PersonalisedTimeViewController: UIViewController {
         getEvents()
         printArray()
         fillInTimeTable()
+        determineWhatTimesHaveAlreadyPassed()
+        
     }
    
     func checkAuthorisation()
@@ -73,7 +109,6 @@ class PersonalisedTimeViewController: UIViewController {
             }
         })
     }
-
 
     func alertTheUser()
     {
@@ -163,9 +198,6 @@ class PersonalisedTimeViewController: UIViewController {
             
             let day = determineDay(date: components.day!, today: today.day!)
             
-            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-            print(day)
-           
             //if the event is during the Gym's opening hours
             //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
             if(hour >= 7 && hour <= 21)
@@ -240,6 +272,27 @@ class PersonalisedTimeViewController: UIViewController {
     {
         let x = date - today
         return x
+    }
+    
+    
+    //The part of "today" that has already passed cannot be considered for a suggestion
+    func determineWhatTimesHaveAlreadyPassed()
+    {
+        let today = NSDate()
+        let unitFlags = Set<Calendar.Component>([.hour])
+        var components =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
+        let hour = Int(components.hour!)
+        print(hour)
+        
+        if(hour > 7 && hour < 21)
+        {
+            for i in 7...hour
+            {
+                One[i-7] = "not available"
+            }
+        }
+        
+        printTimeTables(array: One)
     }
     
     func printTimeTables(array: [String])
