@@ -16,6 +16,8 @@ class PersonalisedTimeViewController: UIViewController {
     
     var includeToday = true
     var includeWeekend = true
+    var Saturday = 0
+    var Sunday = 0
     
     @IBOutlet weak var includeTodayLabel: UILabel!
     @IBOutlet weak var includeWeekendsLabel: UILabel!
@@ -69,7 +71,7 @@ class PersonalisedTimeViewController: UIViewController {
         printArray()
         fillInTimeTable()
         determineWhatTimesHaveAlreadyPassed()
-        
+        whenIsTheWeekend()
     }
    
     func checkAuthorisation()
@@ -304,9 +306,59 @@ class PersonalisedTimeViewController: UIViewController {
         
         print("*******************")
     }
+    
+    func whenIsTheWeekend()
+    {
+        let today = NSDate()
+        var day = NSDate()
+        let unitFlags = Set<Calendar.Component>([.day])
+        var todayDate =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
+        var weekend = NSCalendar.current.isDateInWeekend(day as Date)
+        print("********************************")
+        print(weekend)
+        
+        var weekendBool = true
+        
+        while(weekendBool)
+        {
+            weekend = NSCalendar.current.isDateInWeekend(day as Date)
+            var dayDate =  NSCalendar.current.dateComponents(unitFlags, from: day as Date)
+            
+            if(weekend == true)
+            {
+                let x = determineDay(date: dayDate.day!, today: todayDate.day!)
+                Saturday = x
+                Sunday = x + 1
+                weekendBool = false
+            }
+            else
+            {
+                day = day.addingTimeInterval(60*60*24)
+            }
+        }
+        
+    }
+    
+    func findBestTime()
+    {
+        if(includeToday) //if the user chooses to include today
+        {
+            
+        }
+        if(includeWeekend) //if the user chooses to include weekend ie Saturday and Sunday
+        {
+            switch(Saturday)
+            {
+              //  case 0:
+                default:
+                print(Saturday)
+                
+            }
+        }
+    }
   
 }
-    
+
     //TIMETABLE VISUALISATION
     //[  0   ][   1  ]
     //[7:00am][8:00am][9:00am][10:00am][11:00am][12:00pm][1:00pm][2:00pm][3:00pm][4:00pm][5:00pm][6:00pm][7:00pm][8:00pm][9:00pm]
