@@ -11,10 +11,12 @@ import UIKit
 import EventKit
 import Firebase
 
+@objc(PersonalisedTimeViewController)
 class PersonalisedTimeViewController: UIViewController {
     
     var dateFormatter =  DateFormatter()
     
+    //arrays representing each day of the week, one being today, two being tomorrow etc
     var One = [String](repeating: "free", count: 15)
     var Two = [String](repeating: "free", count: 15)
     var Three = [String](repeating: "free", count: 15)
@@ -23,119 +25,87 @@ class PersonalisedTimeViewController: UIViewController {
     var Six = [String](repeating: "free", count: 15)
     var Seven = [String](repeating: "free", count: 15)
     
-    
-    let oneHourInSeconds = 3600
-    
-    
-    struct EventDetails
-    {
-        var startDate = NSDate() as Date
-        var endDate = NSDate() as Date
-        var duration = 0
-    }
     let testEvent = EventDetails(startDate: NSDate() as Date, endDate: NSDate() as Date, duration: 0)
-    
     var EventArray = [EventDetails]()
-    
-    
-
-    
     
     override func viewDidAppear(_ animated: Bool)
     {
         checkAuthorisation()
         getEvents()
         printArray()
-        //getEventByTime()
         fillInTimeTable()
-        
     }
-    
-    
-    
+   
     func checkAuthorisation()
     {
             let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
             
             switch (status) {
             case EKAuthorizationStatus.notDetermined:
-                // This happens on first-run
                 print ("not Determined")
                 requestAccessToCalendar()
             case EKAuthorizationStatus.authorized:
-                // Things are in line with being able to show the calendars in the table view
                print("authorised")
             case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
-                // We need to help them give us permission
                 print("restricted")
                 alertTheUser()
             }
     }
 
-
-
-    func requestAccessToCalendar() {
+    func requestAccessToCalendar()
+    {
         EKEventStore().requestAccess(to: .event, completion: {
             (accessGranted: Bool, error: Error?) in
         
-            if accessGranted == true {
-                DispatchQueue.main.async(execute: {
-                //    self.loadCalendars()
-                 //   self.refreshTableView()
-                    print("request Access")
-                    
-            })
-            } else {
-                DispatchQueue.main.async(execute: {
-                   // self.needPermissionView.fadeIn()
-                    self.alertTheUser()
-                })
+            if accessGranted == true
+            {
+                DispatchQueue.main.async(execute:
+                    {
+                        print("request Access")
+                    })
+            }
+            else
+            {
+                DispatchQueue.main.async(execute:
+                    {
+                        self.alertTheUser()
+                    })
             }
         })
-}
+    }
 
 
-    func alertTheUser(){
-        /*let alert = UIAlertController(title: "We Need Permission", message: "GymTime needs access to your calendar in order to tell you the best time for you", preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "Go To Settings", style: UIAlertActionStyle.destructive, handler: { action in
-            
-            let openSettingsUrl = URL(string: UIApplicationOpenSettingsURLString)
-            UIApplication.shared.openURL(openSettingsUrl!)
-            
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-        
-        alert.show()*/
-        
+    func alertTheUser()
+    {
         let alert = UIAlertController(title: "GymTime needs permission",
                                       message: "GymTime needs access to your calendar in order to tell you the best time for you",
                                       preferredStyle: .alert)
+        
         alert.addAction(UIAlertAction(title: "Go To Settings", style: .default, handler: { action in
             let openSettingsUrl = URL(string: UIApplicationOpenSettingsURLString)
             UIApplication.shared.openURL(openSettingsUrl!)
-
         }))
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+        //TO DO use a label to notify the user that in order to use the best times feature access to calendar must be turned on
        present(alert, animated: true, completion: nil)
         
     
     }
-
+    //find all events from now until one week's time
+    //TODO alter to include all of 7th day? current is 7*24 from now. do 8 days and then just use the date in an if/else
     func getEvents()
     {
         let eventStore: EKEventStore = EKEventStore()
         
         let startDate = NSDate()
         let endDate = NSDate().addingTimeInterval(60*60*24*7)
+        
         print(dateFormatter.string(from: startDate as Date))
         
         var duration = endDate.timeIntervalSince(startDate as Date)
-        
-
         let predicate1 = eventStore.predicateForEvents(withStart: startDate as Date, end: endDate as Date, calendars: nil)
         
-        print("startDate:\(startDate) endDate:\(endDate)")
         
         let eventVar = eventStore.events(matching: predicate1) as [EKEvent]!
         
@@ -149,9 +119,6 @@ class PersonalisedTimeViewController: UIViewController {
                 
                 EventArray.append(EventDetails(startDate: i.startDate, endDate: i.endDate, duration: Int(duration)))
                 print(dateFormatter.string(from: i.startDate))
-                
-                
-                
             }
         }
     }
@@ -164,7 +131,7 @@ class PersonalisedTimeViewController: UIViewController {
         let minutes = second / 60
         return minutes
     }
-    
+    //ASSUMPTION: user needs one hour to work out therefore any event is rounded up to the nearest hour
     func durationConversionToHours(minute: Int) -> Int {
         
         var hour = minute/60
@@ -175,7 +142,7 @@ class PersonalisedTimeViewController: UIViewController {
         
         return hour
     }
-    
+    //uses the list of events to determine when the user is busy and when the user is free and stores the result in an array
     func fillInTimeTable()
     {
         let startDate = NSDate()
@@ -184,23 +151,26 @@ class PersonalisedTimeViewController: UIViewController {
         var components =  NSCalendar.current.dateComponents(unitFlags, from: startDate as Date)
         var today = NSCalendar.current.dateComponents(unitFlags, from: todaysDate as Date)
         
-        print(components.day!)
-        
         for i in 0..<EventArray.count
         {
             print(EventArray[i].startDate)
             components = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].startDate as Date)
             var hour = Int(components.hour!)
-            
+          //  let lastDay = NSDate().addingTimeInterval(60*60*24*7)
             
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
             let durationHours = durationConversionToHours(minute: durationMinutes)
             
-            let x = determineDay(date: components.day!, today: today.day!)
+            let day = determineDay(date: components.day!, today: today.day!)
+            
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print(day)
            
+            //if the event is during the Gym's opening hours
+            //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
             if(hour >= 7 && hour <= 21)
             {
-                switch(x)
+                switch(day) //CASE 0 represents today, CASE 1 represents tomorrow and so on
                 {
                     case 0:
                         for _ in 1...durationHours
@@ -244,19 +214,14 @@ class PersonalisedTimeViewController: UIViewController {
                             Seven[hour-7] = "busy"
                             hour = hour + 1
                         }
-                    
-                    
-                    
+                    case 7:
+                        print(day)
                     default:
                     print("ERROR ERROR ERROR")
                     print(hour-7)
-                    print(x)
-                    
+                    print(day)
                 }
-            
-            
             }
-            
         }
         
         print("TIMETABLES")
@@ -270,24 +235,11 @@ class PersonalisedTimeViewController: UIViewController {
         printTimeTables(array: Seven)
     }
     
-    func determineDay(date: Int, today: Int) -> Int {
-        
-        
+    //this function determines the days of the upcoming week
+    func determineDay(date: Int, today: Int) -> Int
+    {
         let x = date - today
         return x
-    }
-    
-    func determineBusyHours(array: [String], duration: Int, hour: Int) -> [String]
-    {
-        var tempHour = hour
-        
-        for _ in 1...duration
-        {
-      //      array[tempHour-7] = "busy"
-            tempHour = tempHour + 1
-        }
-        return array
-        
     }
     
     func printTimeTables(array: [String])
@@ -305,41 +257,8 @@ class PersonalisedTimeViewController: UIViewController {
     //TIMETABLE VISUALISATION
     //[  0   ][   1  ]
     //[7:00am][8:00am][9:00am][10:00am][11:00am][12:00pm][1:00pm][2:00pm][3:00pm][4:00pm][5:00pm][6:00pm][7:00pm][8:00pm][9:00pm]
-    /*
- switch(components.hour!){
- case 7:
- Monday[0] = "busy"
- case 8:
- Monday[1] = "busy"
- case 9:
- Monday[2] = "busy"
- case 10:
- Monday[3] = "busy"
- case 11:
- Monday[4] = "busy"
- case 12:
- Monday[5] = "busy"
- case 13:
- Monday[6] = "busy"
- case 14:
- Monday[7] = "busy"
- case 15:
- Monday[8] = "busy"
- case 16:
- Monday[9] = "busy"
- case 17:
- Monday[10] = "busy"
- case 18:
- Monday[11] = "busy"
- case 19:
- Monday[12] = "busy"
- case 20:
- Monday[13] = "busy"
- case 21:
- Monday[14] = "busy"
- default:
- print(components)
- break*/
+
+
  
  
 

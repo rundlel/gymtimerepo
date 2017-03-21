@@ -272,7 +272,7 @@
         <!--PersonalisedViewController-->
         <scene sceneID="sPp-Hp-bxF">
             <objects>
-                <viewController title="PersonalisedViewController" id="D7t-5Z-MiD" customClass="PersonalisedTimeViewController" customModule="GymTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="PersonalisedViewController" id="D7t-5Z-MiD" customClass="PersonalisedTimeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9gF-9C-vBP"/>
                         <viewControllerLayoutGuide type="bottom" id="Xmx-s0-Eod"/>
@@ -299,6 +299,6 @@
         <image name="my_logo-3" width="586" height="388"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jkE-52-A7B"/>
+        <segue reference="KnR-DN-STg"/>
     </inferredMetricsTieBreakers>
 </document>
