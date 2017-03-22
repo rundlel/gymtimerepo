@@ -14,6 +14,9 @@ import Firebase
 @objc(PersonalisedTimeViewController)
 class PersonalisedTimeViewController: UIViewController {
     
+    let ref = FIRDatabase.database().reference()
+    var personalisedTimesArray = [PersonalisedTimes]()
+    
     var includeToday = true
     var includeWeekend = true
     var Saturday = 0
@@ -22,7 +25,8 @@ class PersonalisedTimeViewController: UIViewController {
     @IBOutlet weak var includeTodayLabel: UILabel!
     @IBOutlet weak var includeWeekendsLabel: UILabel!
     
-    @IBAction func includeToday(_ sender: UISwitch) {
+    @IBAction func includeToday(_ sender: UISwitch)
+    {
         if(sender.isOn)
         {
             includeToday = true
@@ -34,19 +38,25 @@ class PersonalisedTimeViewController: UIViewController {
             print(" don't include today")
         }
     }
-    @IBAction func includeWeekend(_ sender: UISwitch) {if(sender.isOn)
+    
+    @IBAction func includeWeekend(_ sender: UISwitch)
     {
-        includeWeekend = true
-        print("include weekend")
-    }
-    else
-    {
-        includeWeekend = false
-        print(" don't include weekend")
-    }
+        if(sender.isOn)
+        {
+            includeWeekend = true
+            print("include weekend")
+        }
+        else
+        {
+            includeWeekend = false
+            print(" don't include weekend")
+        }
         
     }
     
+    let AverageMonthArray = [11,12,3,4]
+    let BusyMonthArray = [1,2,9,10]
+    var monthType = "null"
     
 
     
@@ -60,9 +70,12 @@ class PersonalisedTimeViewController: UIViewController {
     var Five = [String](repeating: "free", count: 15)
     var Six = [String](repeating: "free", count: 15)
     var Seven = [String](repeating: "free", count: 15)
+    var DaysOfTheWeek: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     let testEvent = EventDetails(startDate: NSDate() as Date, endDate: NSDate() as Date, duration: 0)
     var EventArray = [EventDetails]()
+    
+    
     
     override func viewDidAppear(_ animated: Bool)
     {
@@ -72,6 +85,8 @@ class PersonalisedTimeViewController: UIViewController {
         fillInTimeTable()
         determineWhatTimesHaveAlreadyPassed()
         whenIsTheWeekend()
+        findBestTime()
+       // testDatabase()
     }
    
     func checkAuthorisation()
@@ -129,6 +144,28 @@ class PersonalisedTimeViewController: UIViewController {
         
     
     }
+    
+    func getMonth()
+    {
+        let date = Date()
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: date)
+        
+        for index in 0...3
+        {
+            if (BusyMonthArray[index] == month)
+            {
+                monthType = "BusyWeek"
+            }
+            else //summer months are to be classified as average
+            {
+                monthType = "AverageWeek"
+            }
+            
+        }
+        
+    }
+
     //find all events from now until one week's time
     //TODO alter to include all of 7th day? current is 7*24 from now. do 8 days and then just use the date in an if/else
     func getEvents()
@@ -314,8 +351,6 @@ class PersonalisedTimeViewController: UIViewController {
         let unitFlags = Set<Calendar.Component>([.day])
         var todayDate =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
         var weekend = NSCalendar.current.isDateInWeekend(day as Date)
-        print("********************************")
-        print(weekend)
         
         var weekendBool = true
         
@@ -341,22 +376,127 @@ class PersonalisedTimeViewController: UIViewController {
     
     func findBestTime()
     {
-        if(includeToday) //if the user chooses to include today
+        
+        
+        let openingHour = 7
+       // var tempOpeningHour = openingHour
+        var start = NSDate()
+        let unitFlags = Set<Calendar.Component>([.weekday])
+        var day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+        var tempDay = DaysOfTheWeek[day.weekday!-1]
+        
+        var dayCounter = 1
+        
+        print(tempDay)
+        
+        
+        getMonth()
+        
+        while(dayCounter <= 7)
         {
+            //today = day 1
+            print(dayCounter)
+            switch(dayCounter)
+            {
+                case 1:
+                    testDatabase(todaysDay: tempDay, array: One)
+                    print(tempDay)
+                    print(dayCounter)                
+                case 2:
+                    testDatabase(todaysDay: tempDay, array: Two)
+                case 3:
+                    testDatabase(todaysDay: tempDay, array: Three)
+                case 4:
+                    testDatabase(todaysDay: tempDay, array: Four)
+                case 5:
+                    testDatabase(todaysDay: tempDay, array: Five)
+                case 6:
+                    testDatabase(todaysDay: tempDay, array: Six)
+                case 7:
+                    testDatabase(todaysDay: tempDay, array: Seven)
+                default:
+                    print(dayCounter)
+            }
+            
+            
+            
+            //dayCounter = 8
+        
+            start = start.addingTimeInterval(60*60*24)
+            day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+            tempDay = DaysOfTheWeek[day.weekday!-1]
+            dayCounter = dayCounter + 1
+            
+            
             
         }
-        if(includeWeekend) //if the user chooses to include weekend ie Saturday and Sunday
+        
+        
+        
+        
+                print(personalisedTimesArray)
+                print(personalisedTimesArray.count)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //for today
+      /*  for i in 0...One.count - 1
         {
-            switch(Saturday)
-            {
-              //  case 0:
-                default:
-                print(Saturday)
+            let temp = i + openingHour
+            let time = String(temp)
+            
+            ref.child(monthType).child(tempDay).child(time).observe(.value, with: {(FIRDataSnapshot) in
+                let tempStringFromDatabase = FIRDataSnapshot.value as? String ?? ""
+                    
+                if(self.One[i] == "free" && tempStringFromDatabase != "very-busy" && tempStringFromDatabase != "busy")
+                {
+                    self.personalisedTimesArray.append(PersonalisedTimes(day: tempDay, time: time, status: tempStringFromDatabase))
+                    
+                }
+            })
+        }*/
+        
+        
+    }
+    
+    func testDatabase(todaysDay: String, array: [String])
+    {
+        let ref = FIRDatabase.database().reference()
+        let openingHour = 7
+        print("in test database func")
+        print(todaysDay)
+        
+        for i in 0...array.count - 1
+        {
+            print(i)
+            let temp = i + openingHour
+            let time = String(temp)
+            
+            ref.child(monthType).child(todaysDay).child(time).observe(.value, with: { snapshot in
+                let tempStringFromDatabase = snapshot.value as? String ?? ""
+              //  print(tempStringFromDatabase)
+             //   print("...")
                 
-            }
+                if(array[i] == "free" && tempStringFromDatabase != "very-busy" && tempStringFromDatabase != "busy")
+                {
+                    self.personalisedTimesArray.append(PersonalisedTimes(day: todaysDay, time: time, status: tempStringFromDatabase))
+                    //print(array[i])
+                }
+            })
         }
     }
-  
+    
+    
+
 }
 
     //TIMETABLE VISUALISATION
