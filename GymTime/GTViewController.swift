@@ -16,7 +16,7 @@ class GTViewController: UIViewController{
     
     @IBAction func personalisedTimes(_ sender: UIButton) {
         
-        performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: nil)
+        performSegue(withIdentifier: Constants.Segues.goToPreferencesView, sender: nil)
 
     }
     

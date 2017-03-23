@@ -14,8 +14,10 @@ import Firebase
 @objc(PersonalisedTimeViewController)
 class PersonalisedTimeViewController: UIViewController {
     
-    let ref = FIRDatabase.database().reference()
-    var personalisedTimesArray = [PersonalisedTimes]()
+    //let ref = FIRDatabase.database().reference()
+   // var personalisedTimesArray = [PersonalisedTimes]()
+    
+    var reference = DatabaseReference()
     
     var includeToday = true
     var includeWeekend = true
@@ -399,21 +401,99 @@ class PersonalisedTimeViewController: UIViewController {
             switch(dayCounter)
             {
                 case 1:
-                    testDatabase(todaysDay: tempDay, array: One)
-                    print(tempDay)
-                    print(dayCounter)                
+                    for index in 0...One.count - 1
+                    {
+                        let tempTime = index + 7
+                        let tempTimeAsString = String(tempTime)
+                        getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                            
+                            print("complete 1")
+                            if(self.One[index] == "free" && stringToReturn != "busy" && stringToReturn != "very-busy")
+                            {
+                                print("????????????????")
+                                print(stringToReturn)
+                                
+                               self.reference.personalisedTimesArray.append(PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn))
+                            }
+                            
+                            print("complete")
+                            print(self.reference.personalisedTimesArray)
+                            
+                        })
+                    }
+                    print("complete")
+                    print(reference.personalisedTimesArray)
+                  /*  getStringFromDatabase(time: <#T##Int#>, todaysDay: tempDay, completion: { (stringToReturn) in
+                        <#code#>
+                    })
+                    testDatabase(todaysDay: tempDay, array: One, completion: { (arrayToReturn) in
+                        //code when its complete
+                        for i in 0...arrayToReturn.count
+                        {
+                            print(i)
+                            self.reference.personalisedTimesArray.append(arrayToReturn[i])
+                        }
+                        
+                        print("complete 1")
+                    })
+                                       print(tempDay)
+                    print(dayCounter)
                 case 2:
-                    testDatabase(todaysDay: tempDay, array: Two)
+                    testDatabase(todaysDay: tempDay, array: Two, completion: { (arrayToReturn) in
+                        for i in 0...arrayToReturn.count
+                        {
+                            self.reference.personalisedTimesArray.append(arrayToReturn[i])
+                        }
+                        print("complete 2")
+                    })
                 case 3:
-                    testDatabase(todaysDay: tempDay, array: Three)
+                    testDatabase(todaysDay: tempDay, array: Three, completion: { (arrayToReturn) in
+                        for i in 0...arrayToReturn.count
+                        {
+                            self.reference.personalisedTimesArray.append(arrayToReturn[i])
+                        }
+
+                        print("complete 3")
+                    })
                 case 4:
-                    testDatabase(todaysDay: tempDay, array: Four)
+                    testDatabase(todaysDay: tempDay, array: Four, completion: { (arrayToReturn) in
+                        for i in 0...arrayToReturn.count
+                        {
+                            self.reference.personalisedTimesArray.append(arrayToReturn[i])
+                        }
+
+                        print("complete 4")
+                    })
                 case 5:
-                    testDatabase(todaysDay: tempDay, array: Five)
+                    testDatabase(todaysDay: tempDay, array: Five, completion: { (arrayToReturn) in
+                        //code when its complete
+                        for i in 0...arrayToReturn.count
+                        {
+                            self.reference.personalisedTimesArray.append(arrayToReturn[i])
+                        }
+
+                        print("complete 5")
+                    })
                 case 6:
-                    testDatabase(todaysDay: tempDay, array: Six)
+                    testDatabase(todaysDay: tempDay, array: Six, completion: { (arrayToReturn) in
+                        //code when its complete
+                        for i in 0...arrayToReturn.count
+                        {
+                            self.reference.personalisedTimesArray.append(arrayToReturn[i])
+                        }
+
+                        print("complete 6")
+                    })
                 case 7:
-                    testDatabase(todaysDay: tempDay, array: Seven)
+                    testDatabase(todaysDay: tempDay, array: Seven, completion: { (arrayToReturn) in
+                        //code when its complete
+                        for i in 0...arrayToReturn.count
+                        {
+                            self.reference.personalisedTimesArray.append(arrayToReturn[i])
+                        }
+
+                        print("complete")
+                    })*/
                 default:
                     print(dayCounter)
             }
@@ -434,8 +514,8 @@ class PersonalisedTimeViewController: UIViewController {
         
         
         
-                print(personalisedTimesArray)
-                print(personalisedTimesArray.count)
+//print(reference.personalisedTimesArray)
+            //    print(reference.personalisedTimesArray.count)
         
         
         
@@ -468,12 +548,41 @@ class PersonalisedTimeViewController: UIViewController {
         
     }
     
-    func testDatabase(todaysDay: String, array: [String])
+    func getStringFromDatabase(time: String, todaysDay: String, completion: @escaping(_ stringToReturn: String)->())
     {
-        let ref = FIRDatabase.database().reference()
+        
+        let ref = reference.ref
+        let stringToReturn = ""
+       // let openingHour = 7
+       // let tempTime = time + openingHour
+     //   let timeAsString = String(tempTime)
+        
+        ref.child(monthType).child(todaysDay).child(time).observeSingleEvent(of: .value, with: { (snapshot) in
+            let stringToReturn = snapshot.value as? String ?? ""
+            print("___________________")
+            print(stringToReturn)
+            completion(stringToReturn)
+            
+        })
+      //  completion(stringToReturn)
+    }
+    
+    func testDatabase(todaysDay: String, array: [String], completion: @escaping (_ arrayToReturn: [PersonalisedTimes])->())
+    {
+        //let ref = FIRDatabase.database().reference()
+        let ref = reference.ref
         let openingHour = 7
         print("in test database func")
         print(todaysDay)
+        
+    //    var arrayReference = self.reference.personalisedTimesArray
+        var arrayToReturn = [PersonalisedTimes]()
+        
+        
+        if(todaysDay != "Saturday" && todaysDay != "Sunday")
+        {
+            
+        
         
         for i in 0...array.count - 1
         {
@@ -481,17 +590,27 @@ class PersonalisedTimeViewController: UIViewController {
             let temp = i + openingHour
             let time = String(temp)
             
-            ref.child(monthType).child(todaysDay).child(time).observe(.value, with: { snapshot in
-                let tempStringFromDatabase = snapshot.value as? String ?? ""
-              //  print(tempStringFromDatabase)
-             //   print("...")
+            
+            
+            ref.child(monthType).child(todaysDay).child(time).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let tempStringFromDatabase = snapshot.value as? String {
+                    //  print(tempStringFromDatabase)
+                    //   print("...")
+                    
+                    if(array[i] == "free" && tempStringFromDatabase != "very-busy" && tempStringFromDatabase != "busy")
+                    {
+                        arrayToReturn.append(PersonalisedTimes(day: todaysDay, time: time, status: tempStringFromDatabase))
+                       // arrayReference.append(PersonalisedTimes(day: todaysDay, time: time, status: tempStringFromDatabase))
+                        //print(array[i])
+                    }}
                 
-                if(array[i] == "free" && tempStringFromDatabase != "very-busy" && tempStringFromDatabase != "busy")
-                {
-                    self.personalisedTimesArray.append(PersonalisedTimes(day: todaysDay, time: time, status: tempStringFromDatabase))
-                    //print(array[i])
-                }
+                completion(arrayToReturn)
             })
+            
+            
+            
+            
+            }
         }
     }
     

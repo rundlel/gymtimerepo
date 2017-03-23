@@ -19,6 +19,7 @@ struct Constants {
         static let CreateAccountView = "CreateAccountView"
         static let PersonalisedTimesView = "PersonalisedTimesView"
         static let BackToSignInView = "BackToLaunchScreen"
+        static let goToPreferencesView = "PreferencesView"
     }
     
     struct MessageFields {
