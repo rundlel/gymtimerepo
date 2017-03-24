@@ -17,6 +17,30 @@ class PreferencesViewController: UIViewController{
     
     var EventArray = [EventDetails]()
     
+    @IBOutlet weak var mustGivePermissionLabel: UILabel!
+    
+    
+    var globalvariabletoday = NSDate()
+    let globalvariableunitFlags = Set<Calendar.Component>([.hour, .day])
+   
+    @IBAction func didTapContinue(_ sender: UIButton) {
+        
+        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        
+        if (status != EKAuthorizationStatus.authorized)
+        {
+            mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
+        }
+        else
+        {
+            mustGivePermissionLabel.text = "everything is good"
+            
+        }
+    }
+    
+    
+    
+    
     @IBAction func includeWeekendSwitch(_ sender: UISwitch) {
     }
     
@@ -95,14 +119,12 @@ class PreferencesViewController: UIViewController{
     {
         let eventStore: EKEventStore = EKEventStore()
         
-        let startDate = NSDate()
+       // let startDate = NSDate()
         let endDate = NSDate().addingTimeInterval(60*60*24*7)
         
-        print(dateFormatter.string(from: startDate as Date))
+        print(dateFormatter.string(from: globalvariabletoday as Date))
         
-        var duration = endDate.timeIntervalSince(startDate as Date)
-        let predicate1 = eventStore.predicateForEvents(withStart: startDate as Date, end: endDate as Date, calendars: nil)
-        
+        let predicate1 = eventStore.predicateForEvents(withStart: globalvariabletoday as Date, end: endDate as Date, calendars: nil)
         
         let eventVar = eventStore.events(matching: predicate1) as [EKEvent]!
         
@@ -112,10 +134,9 @@ class PreferencesViewController: UIViewController{
                 print("startDate: \(i.startDate)" )
                 print("endDate: \(i.endDate)" )
                 
-                duration = i.endDate.timeIntervalSince(i.startDate as Date)
+                let duration = i.endDate.timeIntervalSince(i.startDate as Date)
                 
                 EventArray.append(EventDetails(startDate: i.startDate, endDate: i.endDate, duration: Int(duration)))
-                print(dateFormatter.string(from: i.startDate))
             }
         }
     }
@@ -144,26 +165,26 @@ class PreferencesViewController: UIViewController{
     
     func fillInTimeTable()
     {
-        let startDate = NSDate()
-        let todaysDate = NSDate()
-        let unitFlags = Set<Calendar.Component>([.hour, .day])
-        var components =  NSCalendar.current.dateComponents(unitFlags, from: startDate as Date)
-        var today = NSCalendar.current.dateComponents(unitFlags, from: todaysDate as Date)
+        
+       
+        var components = NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
+        let todayComponent = NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
+       
         
         for i in 0..<EventArray.count
         {
             print(EventArray[i].startDate)
-            components = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].startDate as Date)
+            components = NSCalendar.current.dateComponents(globalvariableunitFlags, from: EventArray[i].startDate as Date)
             var hour = Int(components.hour!)
-            //  let lastDay = NSDate().addingTimeInterval(60*60*24*7)
             
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
             let durationHours = durationConversionToHours(minute: durationMinutes)
             
-            let day = determineDay(date: components.day!, today: today.day!)
+            let day = determineDay(date: components.day!, today: todayComponent.day!)
             
             //if the event is during the Gym's opening hours
             //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
+            
             if(hour >= 7 && hour <= 21)
             {
                 switch(day) //CASE 0 represents today, CASE 1 represents tomorrow and so on
@@ -233,9 +254,9 @@ class PreferencesViewController: UIViewController{
     
     func determineWhatTimesHaveAlreadyPassed()
     {
-        let today = NSDate()
-        let unitFlags = Set<Calendar.Component>([.hour])
-        var components =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
+        
+        var components =  NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
+        
         let hour = Int(components.hour!)
         print(hour)
         
@@ -246,11 +267,39 @@ class PreferencesViewController: UIViewController{
                 ThisWeek.Instance.One[i-7] = "not available"
             }
         }
-        
         printTimeTables(array: ThisWeek.Instance.One)
     }
     
+    func whenIsTheWeekend()
+    {
+        
+        var day = NSDate()
+        var todayDate =  NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
+        var weekendBool = true
+        
+        while(weekendBool)
+        {
+            let weekend = NSCalendar.current.isDateInWeekend(day as Date)
+            var dayDate =  NSCalendar.current.dateComponents(globalvariableunitFlags, from: day as Date)
+            
+            if(weekend == true)
+            {
+                let x = determineDay(date: dayDate.day!, today: todayDate.day!)
+                ThisWeek.Instance.Saturday = x
+                ThisWeek.Instance.Sunday = x + 1
+                weekendBool = false
+            }
+            else
+            {
+                day = day.addingTimeInterval(60*60*24)
+            }
+        }
+    }
     
+    func printArray()
+    {
+        print(EventArray)
+    }
     func printTimeTables(array: [String])
     {
         for index in 0...14

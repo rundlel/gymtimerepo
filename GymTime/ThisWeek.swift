@@ -35,6 +35,9 @@ class ThisWeek {
     var DaysOfTheWeek: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     
+    var Saturday = 0
+    var Sunday = 0
+    
     let AverageMonthArray = [11,12,3,4]
     let BusyMonthArray = [1,2,9,10]
     var monthType = "null"

@@ -417,12 +417,23 @@
                                     <color key="titleColor" red="0.90015918016433716" green="0.96070188283920288" blue="0.98171848058700562" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="didTapContinue:" destination="hBO-FV-H4r" eventType="touchUpInside" id="Fwt-Il-rjP"/>
                                     <segue destination="D7t-5Z-MiD" kind="show" identifier="PersonalisedTimesView" id="e5Q-Wa-FYh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15g-1j-cIM">
+                                <rect key="frame" x="16" y="441" width="343" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="18"/>
+                                <color key="textColor" red="0.97499999999999998" green="0.1114814069" blue="0.080578337250000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="mustGivePermissionLabel" destination="15g-1j-cIM" id="vzP-7t-VYJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bse-6s-5WW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
