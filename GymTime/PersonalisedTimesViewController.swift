@@ -88,6 +88,12 @@ class PersonalisedTimeViewController: UIViewController {
             
         }
         
+        let delay = 3.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+        {
+            print(self.personalisedTimesArray)
+        }
+        
     }
     
     func printTimeTables(array: [String])
@@ -252,7 +258,7 @@ class PersonalisedTimeViewController: UIViewController {
                             self.personalisedTimesArray.append(x)
                         }
                         print("case 7")
-                        print(self.personalisedTimesArray)
+                       // print(self.personalisedTimesArray)
                     })
                 }
             default:
