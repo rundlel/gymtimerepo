@@ -22,6 +22,16 @@ class PreferencesViewController: UIViewController{
     
     var globalvariabletoday = NSDate()
     let globalvariableunitFlags = Set<Calendar.Component>([.hour, .day])
+    
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "PersonalisedTimesView"
+        {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PersonalisedTimesView")
+            self.present(vc, animated: true, completion: nil)
+
+        }
+    }*/
    
     @IBAction func didTapContinue(_ sender: UIButton) {
         
@@ -30,10 +40,15 @@ class PreferencesViewController: UIViewController{
         if (status != EKAuthorizationStatus.authorized)
         {
             mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
+            
+            
         }
         else
         {
-            mustGivePermissionLabel.text = "everything is good"
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PersonalisedTimesView")
+            self.present(vc, animated: true, completion: nil)
+
+            //performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView)
             
         }
     }
