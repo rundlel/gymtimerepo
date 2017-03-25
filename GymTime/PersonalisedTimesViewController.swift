@@ -56,38 +56,17 @@ class PersonalisedTimeViewController: UIViewController {
             includeWeekend = false
             print(" don't include weekend")
         }
-        
     }
 
-    
     var dateFormatter =  DateFormatter()
-    
-    //arrays representing each day of the week, one being today, two being tomorrow etc
-    /*var One = [String](repeating: "free", count: 15)
-    var Two = [String](repeating: "free", count: 15)
-    var Three = [String](repeating: "free", count: 15)
-    var Four = [String](repeating: "free", count: 15)
-    var Five = [String](repeating: "free", count: 15)
-    var Six = [String](repeating: "free", count: 15)
-    var Seven = [String](repeating: "free", count: 15)
-    var DaysOfTheWeek: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]*/
-    
-    let testEvent = EventDetails(startDate: NSDate() as Date, endDate: NSDate() as Date, duration: 0)
     var EventArray = [EventDetails]()
-    
-    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         ThisWeek.Instance.getMonth()
         
-        findBestTime { (true) in
-            print("HEELO")
-            print(self.personalisedTimesArray)
-            
-        }
-        
+        findBestTime()
         let delay = 3.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
         {
@@ -107,7 +86,7 @@ class PersonalisedTimeViewController: UIViewController {
     }
     
     
-    func findBestTime(completion: @escaping (Bool) -> ())
+    func findBestTime()
     {
         var start = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday])
@@ -115,14 +94,8 @@ class PersonalisedTimeViewController: UIViewController {
         let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
         
         var dayCounter = 1
-        
-        print(tempDay)
-        
         while(dayCounter <= 7)
         {
-            //today = day 1
-            print("daycounter")
-            print(dayCounter)
             switch(dayCounter)
             {
                 case 1:
@@ -143,7 +116,6 @@ class PersonalisedTimeViewController: UIViewController {
                                 let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 self.personalisedTimesArray.append(x)
                             }
-                            print("case 1")
                         })
                     }
             case 2:
@@ -162,7 +134,6 @@ class PersonalisedTimeViewController: UIViewController {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             self.personalisedTimesArray.append(x)
                         }
-                        print("case 2")
                     })
                 }
             case 3:
@@ -181,7 +152,6 @@ class PersonalisedTimeViewController: UIViewController {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             self.personalisedTimesArray.append(x)
                         }
-                        print("case 3")
                     })
                 }
             case 4:
@@ -200,7 +170,6 @@ class PersonalisedTimeViewController: UIViewController {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             self.personalisedTimesArray.append(x)
                         }
-                        print("case 4")
                     })
                 }
             case 5:
@@ -219,7 +188,6 @@ class PersonalisedTimeViewController: UIViewController {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             self.personalisedTimesArray.append(x)
                         }
-                        print("case 5")
                     })
                 }
             case 6:
@@ -238,7 +206,6 @@ class PersonalisedTimeViewController: UIViewController {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             self.personalisedTimesArray.append(x)
                         }
-                        print("case 6")
                     })
                 }
             case 7:
@@ -252,25 +219,18 @@ class PersonalisedTimeViewController: UIViewController {
                     let tempTimeAsString = String(tempTime)
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
-                        if(ThisWeek.Instance.Seven[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        if(ThisWeek.Instance.Seven[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
                         {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             self.personalisedTimesArray.append(x)
                         }
-                        print("case 7")
-                       // print(self.personalisedTimesArray)
                     })
                 }
             default:
                 print(dayCounter)
             }
-            
-            print(tempDay)
             dayCounter = dayCounter + 1
-            
-    
         }
-        completion(true)
     }
     
     func getStringFromDatabase(time: String, todaysDay: String, completion: @escaping(_ stringToReturn: String)->())
@@ -279,10 +239,7 @@ class PersonalisedTimeViewController: UIViewController {
         let ref = reference.ref
         ref.child(ThisWeek.Instance.monthType).child(todaysDay).child(time).observeSingleEvent(of: .value, with: { (snapshot) in
             let stringToReturn = snapshot.value as? String ?? ""
-            
-            
             completion(stringToReturn)
-            
         })
     }
     
