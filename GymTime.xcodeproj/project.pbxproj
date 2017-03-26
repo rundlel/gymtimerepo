@@ -26,6 +26,7 @@
 		EE8C1B931E3E82970008F5AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */; };
 		EE9BA30D1E814D3200504E6B /* EventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BA30C1E814D3200504E6B /* EventDetails.swift */; };
 		EE9BA30F1E816A4B00504E6B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */; };
+		EEB113231E883CB400621A1B /* ButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB113221E883CB400621A1B /* ButtonDelegate.swift */; };
 		EEEB7D1C1E830D7800DD2AE9 /* PersonalisedTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEB7D1B1E830D7800DD2AE9 /* PersonalisedTimes.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		EE8C1B941E3E82970008F5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE9BA30C1E814D3200504E6B /* EventDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
 		EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		EEB113221E883CB400621A1B /* ButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonDelegate.swift; sourceTree = "<group>"; };
 		EEEB7D1B1E830D7800DD2AE9 /* PersonalisedTimes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalisedTimes.swift; sourceTree = "<group>"; };
 		F743C6A49BEC8D4C676A2E2E /* Pods-GymTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +128,7 @@
 				EE8C1B941E3E82970008F5AD /* Info.plist */,
 				EE6BC1391E8406E4001BD104 /* GoogleService-Info.plist */,
 				EE7849901E7C7190002CB355 /* PersonalisedTimesViewController.swift */,
+				EEB113221E883CB400621A1B /* ButtonDelegate.swift */,
 			);
 			path = GymTime;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				EE3252931E422353004761FC /* MeasurementHelper.swift in Sources */,
 				EE6BC13C1E8416C5001BD104 /* PreferencesViewController.swift in Sources */,
 				EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */,
+				EEB113231E883CB400621A1B /* ButtonDelegate.swift in Sources */,
 				EEEB7D1C1E830D7800DD2AE9 /* PersonalisedTimes.swift in Sources */,
 				EE6AFE401E420F6B00ECDCBB /* SignInViewController.swift in Sources */,
 				EE3252911E4218D3004761FC /* AppState.swift in Sources */,

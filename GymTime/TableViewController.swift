@@ -76,14 +76,75 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
        // button.titleLabel?.textColor = UIColor(red:0.19, green:0.48, blue:0.66, alpha:1.0)
         button.setTitle("ADD TO CALENDAR", for: .normal)
         button.setTitleColor(UIColor(red:0.19, green:0.47, blue:0.65, alpha:1.0), for: .normal)
+        button.tag = indexPath.row
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         cell.addSubview(button)
         
             
         return cell
     }
+    //func determineDay(date: Int, today: Int) -> Int
     func buttonClicked(sender : UIButton!) {
+        
+        //showAlertForRow(tableView.indexPathForCell(cell)!.row)
+        
         print("Clicked!")
+        
+        var arrayIndex = sender.tag
+        let temp = dataSourceArray[arrayIndex]
+        print(temp)
+        
+        var whileLoopVariable = true
+        var whileLoopVariable2 = true
+        var today = NSDate()
+        let unitFlags = Set<Calendar.Component>([.weekday, .hour])
+        var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
+        var dayString = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+        
+        
+        while(whileLoopVariable)
+        {
+            if(temp.range(of: dayString) != nil) //if exists
+            {
+                whileLoopVariable = false
+            }
+            else
+            {
+                today = today.addingTimeInterval(60*60*24)
+                day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
+                dayString = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+            }
+        }
+        let dayLength = dayString.characters.count + 1
+        
+       //var time = Array(temp)[dayLength]
+        var charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
+        let stringTest = String(charAtIndex)
+        print(charAtIndex)
+        var charAtIndexAsNumber:Int? = Int(stringTest)!
+        print(charAtIndexAsNumber ?? 0)
+        
+        while(whileLoopVariable2)
+        {
+            if(temp.range(of: "am") != nil) //leave as is
+            {
+                
+            }
+            else //add 12
+            {
+                
+            }
+        }
+        
+        print(dayString)
+        
+        var eventStore : EKEventStore = EKEventStore()
+        
+        var event:EKEvent = EKEvent(eventStore: eventStore)
+        event.title = "GymTime!"
+        
+        
+        
     }
     
     

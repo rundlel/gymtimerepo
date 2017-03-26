@@ -90,11 +90,12 @@ class PreferencesViewController: UIViewController{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        ThisWeek.Instance.getMonth()
         checkAuthorisation()
         getEvents()
         fillInTimeTable()
         determineWhatTimesHaveAlreadyPassed()
-        ThisWeek.Instance.getMonth()
+        
         
         findBestTime()
         let delay = 3.0
