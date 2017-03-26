@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -241,7 +242,7 @@
                                 <rect key="frame" x="50" y="449" width="275" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="18"/>
-                                <color key="textColor" red="0.21542701125144958" green="0.51453590393066406" blue="0.69762563705444336" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.19215686274509802" green="0.47450980392156861" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ez0-go-iQg">
@@ -275,33 +276,68 @@
             </objects>
             <point key="canvasLocation" x="-321" y="1100"/>
         </scene>
-        <!--PersonalisedViewController-->
-        <scene sceneID="sPp-Hp-bxF">
+        <!--Table View Controller-->
+        <scene sceneID="JeS-2D-Qvm">
             <objects>
-                <viewController storyboardIdentifier="PersonalisedTimesView" title="PersonalisedViewController" id="D7t-5Z-MiD" customClass="PersonalisedTimeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TableViewController" id="CRs-F9-tKe" customClass="TableViewController" customModule="GymTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9gF-9C-vBP"/>
-                        <viewControllerLayoutGuide type="bottom" id="Xmx-s0-Eod"/>
+                        <viewControllerLayoutGuide type="top" id="SZV-kd-jL7"/>
+                        <viewControllerLayoutGuide type="bottom" id="ihX-th-WMo"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zto-hN-nuW">
+                    <view key="view" contentMode="scaleToFill" id="o96-7R-JFK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Waves-geometric-vectors-background-material" translatesAutoresizingMaskIntoConstraints="NO" id="Gh2-xy-DoP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="682"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Waves-geometric-vectors-background-material" translatesAutoresizingMaskIntoConstraints="NO" id="FTE-m9-7Wh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="my_logo-3" translatesAutoresizingMaskIntoConstraints="NO" id="TP2-g3-KyI">
-                                <rect key="frame" x="0.0" y="28" width="307" height="191"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fmk-yT-eT7">
+                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicCell" textLabel="PEW-wo-9ZN" style="IBUITableViewCellStyleDefault" id="Qct-B1-NBT">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qct-B1-NBT" id="QQV-4a-ZCp">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PEW-wo-9ZN">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="CRs-F9-tKe" id="z44-r8-98M"/>
+                                    <outlet property="delegate" destination="CRs-F9-tKe" id="WBe-FF-Rye"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Fmk-yT-eT7" firstAttribute="top" secondItem="SZV-kd-jL7" secondAttribute="bottom" constant="8" id="3Iu-SF-HYO"/>
+                            <constraint firstItem="Fmk-yT-eT7" firstAttribute="top" secondItem="SZV-kd-jL7" secondAttribute="bottom" constant="8" id="4Ld-JU-xsD"/>
+                            <constraint firstItem="Fmk-yT-eT7" firstAttribute="top" secondItem="SZV-kd-jL7" secondAttribute="bottom" constant="8" id="Am2-es-2uT"/>
+                            <constraint firstItem="Fmk-yT-eT7" firstAttribute="centerX" secondItem="o96-7R-JFK" secondAttribute="centerX" id="DO7-5u-Ae3"/>
+                            <constraint firstItem="Fmk-yT-eT7" firstAttribute="centerY" secondItem="o96-7R-JFK" secondAttribute="centerY" id="Dyt-mh-gBv"/>
+                            <constraint firstItem="Fmk-yT-eT7" firstAttribute="width" secondItem="o96-7R-JFK" secondAttribute="width" id="hIg-Qr-VTJ"/>
+                            <constraint firstItem="Fmk-yT-eT7" firstAttribute="width" secondItem="o96-7R-JFK" secondAttribute="height" multiplier="375:667" id="hM1-oh-Kgl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Fmk-yT-eT7" id="my8-y2-Kvu"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xh6-ul-JGG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hB7-j7-JrM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="548" y="1889"/>
+            <point key="canvasLocation" x="1576.8" y="1888.6056971514245"/>
         </scene>
         <!--Preferences View Controller-->
         <scene sceneID="6xe-6b-BhP">
@@ -327,7 +363,7 @@
                                 <rect key="frame" x="16" y="194" width="343" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="22"/>
-                                <color key="textColor" red="0.1918379664" green="0.48330187800000002" blue="0.65806889530000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.19215686274509802" green="0.4823529411764706" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="INCLUDE TODAY?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-w6-hsi">

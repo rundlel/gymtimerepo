@@ -17,6 +17,8 @@ class ThisWeek {
     static var Instance: ThisWeek {
         return _instance
     }
+    var personalisedTimesArray = [PersonalisedTimes]()
+    
     
     var One = [String](repeating: "free", count: 15)
     
@@ -62,6 +64,9 @@ class ThisWeek {
         }
         
     }
+    
+    var includeWeekend = true
+    var includeToday = true
 
 
 }

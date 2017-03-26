@@ -19,6 +19,8 @@ class PreferencesViewController: UIViewController{
     
     @IBOutlet weak var mustGivePermissionLabel: UILabel!
     
+    let reference = FIRDatabase.database().reference()
+  //  var personalisedTimesArray = [PersonalisedTimes]()
     
     var globalvariabletoday = NSDate()
     let globalvariableunitFlags = Set<Calendar.Component>([.hour, .day])
@@ -35,21 +37,27 @@ class PreferencesViewController: UIViewController{
    
     @IBAction func didTapContinue(_ sender: UIButton) {
         
-        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        let delay = 3.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+        {
+            
         
-        if (status != EKAuthorizationStatus.authorized)
-        {
-            mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
+            let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        
+            if (status != EKAuthorizationStatus.authorized)
+            {
+                self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
             
             
-        }
-        else
-        {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PersonalisedTimesView")
-            self.present(vc, animated: true, completion: nil)
+            }
+            else
+            {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TableViewController")
+                self.present(vc, animated: true, completion: nil)
 
             //performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView)
             
+            }
         }
     }
     
@@ -57,20 +65,53 @@ class PreferencesViewController: UIViewController{
     
     
     @IBAction func includeWeekendSwitch(_ sender: UISwitch) {
+        
+        if(sender.isOn)
+        {
+            ThisWeek.Instance.includeWeekend = true
+        }
+        else
+        {
+            ThisWeek.Instance.includeWeekend = false
+        }
     }
     
     @IBAction func includeTodaySwitch(_ sender: UISwitch) {
+        
+        if(sender.isOn)
+        {
+            ThisWeek.Instance.includeToday = true
+        }
+        else
+        {
+            ThisWeek.Instance.includeToday = false
+        }
+
     }
     
     override func viewDidLoad() {
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
         checkAuthorisation()
         getEvents()
         fillInTimeTable()
         determineWhatTimesHaveAlreadyPassed()
+        ThisWeek.Instance.getMonth()
+        
+        findBestTime()
+        let delay = 3.0
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+        {
+            print(ThisWeek.Instance.personalisedTimesArray)
+        }
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+     //   checkAuthorisation()
+     //   getEvents()
+    //    fillInTimeTable()
+     //   determineWhatTimesHaveAlreadyPassed()
     }
     
     
@@ -324,6 +365,164 @@ class PreferencesViewController: UIViewController{
         
         print("*******************")
     }
+    
+    func findBestTime()
+    {
+        var start = NSDate()
+        let unitFlags = Set<Calendar.Component>([.weekday])
+        var day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+        let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+        
+        var dayCounter = 1
+        while(dayCounter <= 7)
+        {
+            switch(dayCounter)
+            {
+            case 1:
+                let start = NSDate()
+                let day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                
+                for index in 0...ThisWeek.Instance.One.count - 1
+                {
+                    let tempTime = index + 7
+                    let tempTimeAsString = String(tempTime)
+                    
+                    getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                        print(stringToReturn)
+                        
+                        if(ThisWeek.Instance.One[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        {
+                            let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                            ThisWeek.Instance.personalisedTimesArray.append(x)
+                        }
+                    })
+                }
+            case 2:
+                let start = start.addingTimeInterval(60*60*24)
+                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                
+                for index in 0...ThisWeek.Instance.Two.count - 1
+                {
+                    let tempTime = index + 7
+                    let tempTimeAsString = String(tempTime)
+                    getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                        
+                        if(ThisWeek.Instance.Two[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        {
+                            let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                            ThisWeek.Instance.personalisedTimesArray.append(x)
+                        }
+                    })
+                }
+            case 3:
+                let start = start.addingTimeInterval(60*60*24*2)
+                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                
+                for index in 0...ThisWeek.Instance.Three.count - 1
+                {
+                    let tempTime = index + 7
+                    let tempTimeAsString = String(tempTime)
+                    getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                        
+                        if(ThisWeek.Instance.Three[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        {
+                            let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                            ThisWeek.Instance.personalisedTimesArray.append(x)
+                        }
+                    })
+                }
+            case 4:
+                let start = start.addingTimeInterval(60*60*24*3)
+                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                
+                for index in 0...ThisWeek.Instance.Four.count - 1
+                {
+                    let tempTime = index + 7
+                    let tempTimeAsString = String(tempTime)
+                    getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                        
+                        if(ThisWeek.Instance.Four[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        {
+                            let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                           ThisWeek.Instance.personalisedTimesArray.append(x)
+                        }
+                    })
+                }
+            case 5:
+                let start = start.addingTimeInterval(60*60*24*4)
+                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                
+                for index in 0...ThisWeek.Instance.Five.count - 1
+                {
+                    let tempTime = index + 7
+                    let tempTimeAsString = String(tempTime)
+                    getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                        
+                        if(ThisWeek.Instance.Five[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        {
+                            let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                            ThisWeek.Instance.personalisedTimesArray.append(x)
+                        }
+                    })
+                }
+            case 6:
+                let start = start.addingTimeInterval(60*60*24*5)
+                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                
+                for index in 0...ThisWeek.Instance.Six.count - 1
+                {
+                    let tempTime = index + 7
+                    let tempTimeAsString = String(tempTime)
+                    getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                        
+                        if(ThisWeek.Instance.Six[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        {
+                            let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                            ThisWeek.Instance.personalisedTimesArray.append(x)
+                        }
+                    })
+                }
+            case 7:
+                let start = start.addingTimeInterval(60*60*24*6)
+                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                
+                for index in 0...ThisWeek.Instance.Seven.count - 1
+                {
+                    let tempTime = index + 7
+                    let tempTimeAsString = String(tempTime)
+                    getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
+                        
+                        if(ThisWeek.Instance.Seven[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
+                        {
+                            let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                            ThisWeek.Instance.personalisedTimesArray.append(x)
+                        }
+                    })
+                }
+            default:
+                print(dayCounter)
+            }
+            dayCounter = dayCounter + 1
+        }
+    }
+    
+    func getStringFromDatabase(time: String, todaysDay: String, completion: @escaping(_ stringToReturn: String)->())
+    {
+        
+        let ref = reference.ref
+        ref.child(ThisWeek.Instance.monthType).child(todaysDay).child(time).observeSingleEvent(of: .value, with: { (snapshot) in
+            let stringToReturn = snapshot.value as? String ?? ""
+            completion(stringToReturn)
+        })
+    }
+
 
 
 }

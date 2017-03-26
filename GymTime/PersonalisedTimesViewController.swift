@@ -19,6 +19,8 @@ class PersonalisedTimeViewController: UIViewController {
     
   //  var reference = DatabaseReference()
     
+    @IBAction func nextScreenButton(_ sender: UIButton) {
+    }
     let reference = FIRDatabase.database().reference()
     var personalisedTimesArray = [PersonalisedTimes]()
     

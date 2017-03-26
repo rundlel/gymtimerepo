@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C5C3ACDDF309F1580555828B /* Pods_GymTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E5911B6B736C5B306A18F3 /* Pods_GymTime.framework */; };
+		EE1AD1551E86C97300CECD98 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1AD1541E86C97300CECD98 /* TableViewController.swift */; };
 		EE3252911E4218D3004761FC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252901E4218D3004761FC /* AppState.swift */; };
 		EE3252931E422353004761FC /* MeasurementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252921E422353004761FC /* MeasurementHelper.swift */; };
 		EE3252951E422378004761FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3252941E422378004761FC /* Constants.swift */; };
@@ -26,12 +27,12 @@
 		EE9BA30D1E814D3200504E6B /* EventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BA30C1E814D3200504E6B /* EventDetails.swift */; };
 		EE9BA30F1E816A4B00504E6B /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */; };
 		EEEB7D1C1E830D7800DD2AE9 /* PersonalisedTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEB7D1B1E830D7800DD2AE9 /* PersonalisedTimes.swift */; };
-		EEEB7D1E1E8331CB00DD2AE9 /* DatabaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEB7D1D1E8331CB00DD2AE9 /* DatabaseReference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		988DAE269B8891CECFE35FA0 /* Pods-GymTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.debug.xcconfig"; sourceTree = "<group>"; };
 		B7E5911B6B736C5B306A18F3 /* Pods_GymTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE1AD1541E86C97300CECD98 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		EE3252901E4218D3004761FC /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		EE3252921E422353004761FC /* MeasurementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementHelper.swift; sourceTree = "<group>"; };
 		EE3252941E422378004761FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		EE9BA30C1E814D3200504E6B /* EventDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
 		EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		EEEB7D1B1E830D7800DD2AE9 /* PersonalisedTimes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalisedTimes.swift; sourceTree = "<group>"; };
-		EEEB7D1D1E8331CB00DD2AE9 /* DatabaseReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseReference.swift; sourceTree = "<group>"; };
 		F743C6A49BEC8D4C676A2E2E /* Pods-GymTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,14 +118,14 @@
 				EE9BA30E1E816A4B00504E6B /* UIViewExtensions.swift */,
 				EE7E002A1E84003100BE348D /* Main.storyboard */,
 				EEEB7D1B1E830D7800DD2AE9 /* PersonalisedTimes.swift */,
-				EEEB7D1D1E8331CB00DD2AE9 /* DatabaseReference.swift */,
 				EE6BC13D1E841C21001BD104 /* ThisWeek.swift */,
 				EE6BC13B1E8416C5001BD104 /* PreferencesViewController.swift */,
-				EE7849901E7C7190002CB355 /* PersonalisedTimesViewController.swift */,
+				EE1AD1541E86C97300CECD98 /* TableViewController.swift */,
 				EE8C1B8F1E3E82970008F5AD /* Assets.xcassets */,
 				EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */,
 				EE8C1B941E3E82970008F5AD /* Info.plist */,
 				EE6BC1391E8406E4001BD104 /* GoogleService-Info.plist */,
+				EE7849901E7C7190002CB355 /* PersonalisedTimesViewController.swift */,
 			);
 			path = GymTime;
 			sourceTree = "<group>";
@@ -257,7 +257,6 @@
 			files = (
 				EE9BA30F1E816A4B00504E6B /* UIViewExtensions.swift in Sources */,
 				EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */,
-				EEEB7D1E1E8331CB00DD2AE9 /* DatabaseReference.swift in Sources */,
 				EE9BA30D1E814D3200504E6B /* EventDetails.swift in Sources */,
 				EE3252931E422353004761FC /* MeasurementHelper.swift in Sources */,
 				EE6BC13C1E8416C5001BD104 /* PreferencesViewController.swift in Sources */,
@@ -266,6 +265,7 @@
 				EE6AFE401E420F6B00ECDCBB /* SignInViewController.swift in Sources */,
 				EE3252911E4218D3004761FC /* AppState.swift in Sources */,
 				EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */,
+				EE1AD1551E86C97300CECD98 /* TableViewController.swift in Sources */,
 				EE7849911E7C7190002CB355 /* PersonalisedTimesViewController.swift in Sources */,
 				EE5CE55C1E479D5F008D26F0 /* GTViewController.swift in Sources */,
 				EE3252951E422378004761FC /* Constants.swift in Sources */,
