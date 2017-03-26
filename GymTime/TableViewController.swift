@@ -86,77 +86,157 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         print("Clicked!")
     }
     
+    
+    
+    
+    
+    
+    
+    
     func prepareDataForDisplay()
     {
-        
-        var today = NSDate()
+        let today = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday])
         var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
-        var todayDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
-        
-        
+        let todayDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
         var todayIsInWeekend = false
-        if (day.weekday == ThisWeek.Instance.Saturday || day.weekday == ThisWeek.Instance.Sunday)
+        
+        if (todayDay == "Saturday" || todayDay == "Sunday")
         {
             todayIsInWeekend = true
         }
         
-        //
         if(ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == true)
         {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                    
+                if(Int(tempPersonalisedTime.time)! > 12)
+                {
+                    tempTime = tempTime! - 12
+                    timeToString = String(tempTime!) + "pm"
+                }
+                if(tempPersonalisedTime.status == "good")
+                {
+                    let tempString = tempPersonalisedTime.day + " " + timeToString
+                    dataSourceArray.append(tempString)
+                }
+            }
+        }
+        else if(ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == true)
+        {
+            
+            if(todayIsInWeekend) //includeToday
+            {
+                
                 for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
                 {
                     let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
-                  
+                    if(Int(tempPersonalisedTime.time)! > 12)
+                    {
+                        tempTime = tempTime! - 12
+                        timeToString = String(tempTime!) + "pm"
+                        
+                    }
                     
-                    if(tempPersonalisedTime.status == "good")
+                    if(tempPersonalisedTime.status == "good" && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    {
+                        let tempString = tempPersonalisedTime.day + " " + timeToString
+                        dataSourceArray.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "good" && todayDay == "Sunday")
                     {
                         print(todayDay)
                         if(Int(tempPersonalisedTime.time)! > 12)
                         {
                             tempTime = tempTime! - 12
                             timeToString = String(tempTime!) + "pm"
-
-                           // tempTime = String(tempTime)
                         }
-                        
-                        
-                        let tempString = tempPersonalisedTime.day + " " + timeToString
-                        print(tempString)
-                        dataSourceArray.append(tempString)
-                        print(dataSourceArray)
+                        if(tempPersonalisedTime.day != "Saturday")
+                        {
+                            let tempString = tempPersonalisedTime.day + " " + timeToString
+                            print(tempString)
+                            dataSourceArray.append(tempString)
+                            print(dataSourceArray)
+                        }
                     }
                 }
-            
-        }
-        else if(ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == true)
-        {
-            if(todayIsInWeekend)
+            }
+            else
             {
-                
+                for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+                {
+                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                    var timeToString = String(tempTime!) + "am"
+                    
+                    if(Int(tempPersonalisedTime.time)! > 12)
+                    {
+                        tempTime = tempTime! - 12
+                        timeToString = String(tempTime!) + "pm"
+                    }
+                    
+                    if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    {
+                        let tempString = tempPersonalisedTime.day + " " + timeToString
+                        dataSourceArray.append(tempString)
+                    }
+                }
             }
         }
         else if (ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == false)
         {
-            if(todayIsInWeekend)
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
             {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
                 
-            }
-        }
-        
-        
-        
-        
-        
-        
+                if(Int(tempPersonalisedTime.time)! > 12)
+                {
+                    tempTime = tempTime! - 12
+                    timeToString = String(tempTime!) + "pm"
+                }
                 
-            }
+                    if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay)
+                    {
+                            let tempString = tempPersonalisedTime.day + " " + timeToString
+                            dataSourceArray.append(tempString)
+                    }
+             }
         }
-        
-        
-    
+        else if (ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == false)
+        {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                
+                if(Int(tempPersonalisedTime.time)! > 12)
+                {
+                    tempTime = tempTime! - 12
+                    timeToString = String(tempTime!) + "pm"
+                }
+                
+                if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                {
+                        let tempString = tempPersonalisedTime.day + " " + timeToString
+                        dataSourceArray.append(tempString)
+                }
+            }
+
+        }
+    }
+}
+
+
+
     
 

@@ -40,8 +40,6 @@ class PreferencesViewController: UIViewController{
         let delay = 3.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
         {
-            
-        
             let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
         
             if (status != EKAuthorizationStatus.authorized)
