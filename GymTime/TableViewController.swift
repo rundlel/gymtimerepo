@@ -90,14 +90,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         print("Clicked!")
         
-        var arrayIndex = sender.tag
+        let arrayIndex = sender.tag
         let temp = dataSourceArray[arrayIndex]
         print(temp)
         
         var whileLoopVariable = true
-        var whileLoopVariable2 = true
         var today = NSDate()
-        let unitFlags = Set<Calendar.Component>([.weekday, .hour])
+        let unitFlags = Set<Calendar.Component>([.weekday, .hour, .year, .month, .day])
         var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
         var dayString = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
         
@@ -115,43 +114,108 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 dayString = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
             }
         }
+        let year = day.year
+        let month = day.month
+        let date = day.day
+        
+        var charAtIndexAsNumber:Int? = 0
+        
         let dayLength = dayString.characters.count + 1
-        
-       //var time = Array(temp)[dayLength]
-        var charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
-        let stringTest = String(charAtIndex)
-        print(charAtIndex)
-        var charAtIndexAsNumber:Int? = Int(stringTest)!
-        print(charAtIndexAsNumber ?? 0)
-        
-        while(whileLoopVariable2)
+        if((temp.range(of: "10") != nil) || temp.range(of: "11") != nil || temp.range(of: "12") != nil)
         {
-            if(temp.range(of: "am") != nil) //leave as is
+            let dayLength2 = dayString.characters.count + 2
+            let charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
+            let charAtIndex2 = temp[temp.index(temp.startIndex, offsetBy: dayLength2)]
+            var Stringtest = String(charAtIndex)
+            let Stringtest2 = String(charAtIndex2)
+            Stringtest = Stringtest + Stringtest2
+            print(Stringtest)
+            charAtIndexAsNumber = Int(Stringtest)!
+            print(charAtIndexAsNumber ?? 0)
+            
+        }
+        else
+        {
+            let charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
+            let stringTest = String(charAtIndex)
+            print(charAtIndex)
+            charAtIndexAsNumber = Int(stringTest)!
+            print(charAtIndexAsNumber ?? 0)
+        }
+        
+        if(temp.range(of: "pm") != nil)
+        {
+            if(charAtIndexAsNumber != 12)
             {
-                
-            }
-            else //add 12
-            {
-                
+                charAtIndexAsNumber = charAtIndexAsNumber! + 12
             }
         }
         
+        let yearAsString = String(year!)
+        let monthAsString = String(month!)
+        let dayAsString = String(date!)
+        let timeAsString = String(charAtIndexAsNumber!)
+        
+
+        
+        print(year ?? "")
+        print(month ?? "")
+        print(date ?? "")
+        print(charAtIndexAsNumber ?? "")
         print(dayString)
+        var dateAsString = ""
         
-        var eventStore : EKEventStore = EKEventStore()
+    
+        if(charAtIndexAsNumber! < 12)
+        {
+            dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
+        }
+        else{
+            dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
+        }
         
-        var event:EKEvent = EKEvent(eventStore: eventStore)
-        event.title = "GymTime!"
         
         
+        let ISO8601DateFormatter = DateFormatter()
+        ISO8601DateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        ISO8601DateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        ISO8601DateFormatter.timeZone = TimeZone(abbreviation: "BST")
+            
+            
+            //NSTimeZone(name: "UTC") as TimeZone!
+        let dateForGym = ISO8601DateFormatter.date(from: dateAsString)
+    
+        let eventStore : EKEventStore = EKEventStore()
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            
+            if(granted && error == nil)
+            {
+                print("granted \(granted)")
+                print("error \(error)")
+            
+                let event:EKEvent = EKEvent(eventStore: eventStore)
+                event.title = "GymTime!"
+                
+                event.startDate = dateForGym!
+                event.endDate = dateForGym!.addingTimeInterval(60*60*1)
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                do
+                {
+                    try eventStore.save(event, span: .thisEvent)
+                }catch let error as NSError
+                {
+                    print("save failed : \(error)")
+                }
+                print("event saved")
+            }
+            else
+            {
+                print("failed to save: \(error)")
+            }
+        
+        }
         
     }
-    
-    
-    
-    
-    
-    
     
     
     func prepareDataForDisplay()
@@ -175,9 +239,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                     
-                if(Int(tempPersonalisedTime.time)! > 12)
+                if(Int(tempPersonalisedTime.time)! >= 12)
                 {
-                    tempTime = tempTime! - 12
+                    if(Int(tempPersonalisedTime.time)! != 12)
+                    {
+                         tempTime = tempTime! - 12
+                    }
+                   
                     timeToString = String(tempTime!) + "pm"
                 }
                 if(tempPersonalisedTime.status == "good")
