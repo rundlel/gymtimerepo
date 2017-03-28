@@ -15,6 +15,10 @@ import Firebase
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
+    @IBAction func backButton(_ sender: UIBarButtonItem) {
+        print("back button clicked")
+    }
+    @IBOutlet weak var NavigationItem: UINavigationBar!
     let reference = FIRDatabase.database().reference()
     
     
@@ -31,7 +35,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         prepareDataForDisplay()
         
         ThisWeek.Instance.getMonth()
-
+        self.title = "Times"
+        
     }
     override func viewDidAppear(_ animated: Bool)
     {
@@ -181,8 +186,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ISO8601DateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         ISO8601DateFormatter.timeZone = TimeZone(abbreviation: "BST")
             
-            
-            //NSTimeZone(name: "UTC") as TimeZone!
+        
         let dateForGym = ISO8601DateFormatter.date(from: dateAsString)
     
         let eventStore : EKEventStore = EKEventStore()

@@ -15,6 +15,10 @@ class PreferencesViewController: UIViewController{
     
     var dateFormatter =  DateFormatter()
     
+    @IBOutlet weak var continueButton: UIButton!
+    
+    @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
+    
     var EventArray = [EventDetails]()
     
     @IBOutlet weak var mustGivePermissionLabel: UILabel!
@@ -50,10 +54,11 @@ class PreferencesViewController: UIViewController{
             }
             else
             {
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TableViewController")
-                self.present(vc, animated: true, completion: nil)
+               let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TableViewController")
+               self.present(vc, animated: true, completion: nil)
 
-            //performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView)
+               // performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: self)
+              // performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: self.didTapContinue(UIButton))
             
             }
         }
@@ -90,6 +95,10 @@ class PreferencesViewController: UIViewController{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        ActivityIndicator.hidesWhenStopped = true
+        continueButton.isEnabled = false
+        continueButton.setTitleColor(UIColor.gray, for: UIControlState.disabled)
+        ActivityIndicator.startAnimating()
         ThisWeek.Instance.getMonth()
         checkAuthorisation()
         getEvents()
@@ -102,6 +111,9 @@ class PreferencesViewController: UIViewController{
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
         {
             print(ThisWeek.Instance.personalisedTimesArray)
+            self.ActivityIndicator.stopAnimating()
+            self.continueButton.isEnabled = true
+            
         }
         
     }
