@@ -14,11 +14,7 @@ class GTViewController: UIViewController{
     
     @IBOutlet weak var welcomeLabel: UILabel!
     
-    @IBAction func personalisedTimes(_ sender: UIButton) {
-        
-        performSegue(withIdentifier: Constants.Segues.goToPreferencesView, sender: nil)
-
-    }
+    
     
     var monthType = "null"
     var switchButton = 0

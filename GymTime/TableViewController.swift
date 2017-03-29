@@ -23,7 +23,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     @IBOutlet weak var tableView: UITableView!
-    var dataSourceArray = [String]()
+    var listOfTimesArray = [String]()
     
     var dateFormatter =  DateFormatter()
     var EventArray = [EventDetails]()
@@ -60,14 +60,14 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return dataSourceArray.count // Most of the time my data source is an array of something...  will replace with the actual name of the data source
+        return  listOfTimesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")! as UITableViewCell
         
-        cell.textLabel?.text = dataSourceArray[indexPath.row]
+        cell.textLabel?.text =  listOfTimesArray[indexPath.row]
         cell.textLabel?.font = UIFont(name: "Tamil Sangam MN", size: 20)
         cell.textLabel?.textColor = UIColor(red:0.19, green:0.47, blue:0.65, alpha:1.0)
         cell.backgroundColor = .clear
@@ -88,22 +88,29 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         return cell
     }
-    //func determineDay(date: Int, today: Int) -> Int
+ 
     func buttonClicked(sender : UIButton!) {
         
-        //showAlertForRow(tableView.indexPathForCell(cell)!.row)
+        
         
         print("Clicked!")
         
         let arrayIndex = sender.tag
-        let temp = dataSourceArray[arrayIndex]
-        print(temp)
+        let temp =  listOfTimesArray[arrayIndex]
+    
         
         var whileLoopVariable = true
         var today = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday, .hour, .year, .month, .day])
         var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
         var dayString = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+        
+        var timezoneString = "GMT"
+        let timezone = NSTimeZone.local
+        if(timezone.isDaylightSavingTime(for: today as Date))
+        {
+            timezoneString = "BST"
+        }
         
         
         while(whileLoopVariable)
@@ -160,15 +167,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         let monthAsString = String(month!)
         let dayAsString = String(date!)
         let timeAsString = String(charAtIndexAsNumber!)
-        
-
-        
-        print(year ?? "")
-        print(month ?? "")
-        print(date ?? "")
-        print(charAtIndexAsNumber ?? "")
-        print(dayString)
-        var dateAsString = ""
+        /*var dateAsString = ""
         
     
         if(charAtIndexAsNumber! < 12)
@@ -177,14 +176,14 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         else{
             dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
-        }
+        }*/
         
-        
+        let dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
         
         let ISO8601DateFormatter = DateFormatter()
         ISO8601DateFormatter.locale = Locale(identifier: "en_US_POSIX")
         ISO8601DateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        ISO8601DateFormatter.timeZone = TimeZone(abbreviation: "BST")
+        ISO8601DateFormatter.timeZone = TimeZone(abbreviation: timezoneString)
             
         
         let dateForGym = ISO8601DateFormatter.date(from: dateAsString)
@@ -255,7 +254,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 if(tempPersonalisedTime.status == "good")
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
-                    dataSourceArray.append(tempString)
+                     listOfTimesArray.append(tempString)
                 }
             }
         }
@@ -281,7 +280,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     if(tempPersonalisedTime.status == "good" && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
-                        dataSourceArray.append(tempString)
+                         listOfTimesArray.append(tempString)
                     }
                     else if(tempPersonalisedTime.status == "good" && todayDay == "Sunday")
                     {
@@ -295,8 +294,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                         {
                             let tempString = tempPersonalisedTime.day + " " + timeToString
                             print(tempString)
-                            dataSourceArray.append(tempString)
-                            print(dataSourceArray)
+                             listOfTimesArray.append(tempString)
+                            print(listOfTimesArray)
                         }
                     }
                 }
@@ -318,7 +317,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
-                        dataSourceArray.append(tempString)
+                         listOfTimesArray.append(tempString)
                     }
                 }
             }
@@ -340,7 +339,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay)
                     {
                             let tempString = tempPersonalisedTime.day + " " + timeToString
-                            dataSourceArray.append(tempString)
+                            listOfTimesArray.append(tempString)
                     }
              }
         }
@@ -361,7 +360,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
                 {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
-                        dataSourceArray.append(tempString)
+                         listOfTimesArray.append(tempString)
                 }
             }
 

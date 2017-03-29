@@ -27,7 +27,9 @@ class PreferencesViewController: UIViewController{
   //  var personalisedTimesArray = [PersonalisedTimes]()
     
     var globalvariabletoday = NSDate()
-    let globalvariableunitFlags = Set<Calendar.Component>([.hour, .day])
+    let globalvariableunitFlags = Set<Calendar.Component>([.hour, .day, .weekday, .month])
+    var dayCounter = 0
+   
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -41,27 +43,29 @@ class PreferencesViewController: UIViewController{
    
     @IBAction func didTapContinue(_ sender: UIButton) {
         
-        let delay = 3.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
-        {
+      //  let delay = 3.0
+        //DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+       // {
             let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
         
             if (status != EKAuthorizationStatus.authorized)
             {
                 self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
-            
-            
             }
             else
             {
-               let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TableViewController")
-               self.present(vc, animated: true, completion: nil)
+                
+                self.ActivityIndicator.stopAnimating()
+                self.continueButton.isEnabled = true
+              // let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TableViewController")
+             //  self.present(vc, animated: true, completion: nil)
 
+              //  performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: UIButton())
                // performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: self)
               // performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: self.didTapContinue(UIButton))
             
             }
-        }
+       // }
     }
     
     
@@ -101,28 +105,35 @@ class PreferencesViewController: UIViewController{
         ActivityIndicator.startAnimating()
         ThisWeek.Instance.getMonth()
         checkAuthorisation()
-        getEvents()
-        fillInTimeTable()
-        determineWhatTimesHaveAlreadyPassed()
         
-        
-        findBestTime()
-        let delay = 3.0
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        if (status != EKAuthorizationStatus.authorized)
         {
-            print(ThisWeek.Instance.personalisedTimesArray)
+            self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
             self.ActivityIndicator.stopAnimating()
-            self.continueButton.isEnabled = true
             
         }
-        
+        else
+        {
+            getEvents()
+            fillInTimeTable()
+            determineWhatTimesHaveAlreadyPassed()
+            findBestTime()
+            
+            let delay = 3.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+            {
+                print(ThisWeek.Instance.personalisedTimesArray)
+                self.ActivityIndicator.stopAnimating()
+                self.continueButton.isEnabled = true
+            }
+            
+        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
-     //   checkAuthorisation()
-     //   getEvents()
-    //    fillInTimeTable()
-     //   determineWhatTimesHaveAlreadyPassed()
+
     }
     
     
@@ -226,6 +237,15 @@ class PreferencesViewController: UIViewController{
     
     func determineDay(date: Int, today: Int) -> Int
     {
+        if(date >= today)
+        {
+       //    x = date - today
+        }
+            
+        else if(date < today)
+        {
+            
+        }
         let x = date - today
         return x
     }
@@ -236,25 +256,41 @@ class PreferencesViewController: UIViewController{
        
         var components = NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
         let todayComponent = NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
-       
+        
         
         for i in 0..<EventArray.count
         {
             print(EventArray[i].startDate)
             components = NSCalendar.current.dateComponents(globalvariableunitFlags, from: EventArray[i].startDate as Date)
             var hour = Int(components.hour!)
+            var today = todayComponent.weekday!
+            let day = components.weekday!
+            
+            let flags = Set<Calendar.Component>([.day])
+            let date1 = NSCalendar.current.startOfDay(for: EventArray[i].startDate)
+         
+            let date2 = NSCalendar.current.startOfDay(for: NSDate() as Date)
+            
+            var numberOfDays = NSCalendar.current.dateComponents(flags, from: date2, to: date1)
+         //   components(flags, fromDate: date1, toDate: date2)
+            
+            
             
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
             let durationHours = durationConversionToHours(minute: durationMinutes)
+           
             
-            let day = determineDay(date: components.day!, today: todayComponent.day!)
+        //   let day = determineDay(date: day, today: today)
+            print("!!!!!!!!!!!!!!!!!")
+            print(numberOfDays)
+          //  print("day \(day)")
             
             //if the event is during the Gym's opening hours
             //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
             
             if(hour >= 7 && hour <= 21)
             {
-                switch(day) //CASE 0 represents today, CASE 1 represents tomorrow and so on
+                switch(numberOfDays.day!) //CASE 0 represents today, CASE 1 represents tomorrow and so on
                 {
                 case 0:
                     for _ in 1...durationHours
@@ -379,10 +415,10 @@ class PreferencesViewController: UIViewController{
     
     func findBestTime()
     {
-        var start = NSDate()
+        let start = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday])
         var day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-        let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+       
         
         var dayCounter = 1
         while(dayCounter <= 7)

@@ -35,7 +35,7 @@ class ThisWeek {
     var Seven = [String](repeating: "free", count: 15)
     
     var DaysOfTheWeek: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
+
     
     var Saturday = 0
     var Sunday = 0
