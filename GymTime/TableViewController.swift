@@ -83,15 +83,14 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         button.setTitleColor(UIColor(red:0.19, green:0.47, blue:0.65, alpha:1.0), for: .normal)
         button.tag = indexPath.row
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+      
         cell.addSubview(button)
-        
-            
         return cell
     }
  
     func buttonClicked(sender : UIButton!) {
         
-        
+        sender.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0),for: .normal)
         
         print("Clicked!")
         
@@ -217,6 +216,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         
         }
+        sender.isEnabled = false
         
     }
     
