@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/GTViewController.swift"
-            timestampString = "512490681.713055"
+            timestampString = "512504977.119529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "GTViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/TableViewController.swift"
-            timestampString = "512493893.994625"
+            timestampString = "512506387.813537"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "608"
@@ -40,7 +40,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/TableViewController.swift"
-            timestampString = "512493893.994625"
+            timestampString = "512506387.813537"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "609"
@@ -70,7 +70,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/TableViewController.swift"
-            timestampString = "512408490.078299"
+            timestampString = "512506387.813537"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
@@ -86,43 +86,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/PreferencesViewController.swift"
-            timestampString = "512501384.770938"
+            timestampString = "512506522.67035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "determineDay(date:today:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GymTime/PreferencesViewController.swift"
-            timestampString = "512501384.770938"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
-            landmarkName = "determineDay(date:today:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GymTime/PreferencesViewController.swift"
-            timestampString = "512502095.750915"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "fillInTimeTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -134,23 +102,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/PreferencesViewController.swift"
-            timestampString = "512502095.750915"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "fillInTimeTable()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GymTime/PreferencesViewController.swift"
-            timestampString = "512501401.124712"
+            timestampString = "512506522.67035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "269"
@@ -166,11 +118,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/PreferencesViewController.swift"
-            timestampString = "512502095.750915"
+            timestampString = "512506522.67035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "fillInTimeTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -182,11 +134,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/PreferencesViewController.swift"
-            timestampString = "512502095.750915"
+            timestampString = "512506522.67035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "fillInTimeTable()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GymTime/PreferencesViewController.swift"
+            timestampString = "512506522.67035"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "fillInTimeTable()"
             landmarkType = "7">
          </BreakpointContent>

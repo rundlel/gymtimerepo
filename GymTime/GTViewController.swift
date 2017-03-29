@@ -16,7 +16,7 @@ class GTViewController: UIViewController{
     
     
     
-    var monthType = "null"
+    
     var switchButton = 0
     
     var ref: FIRDatabaseReference!
@@ -24,8 +24,7 @@ class GTViewController: UIViewController{
     var msglength: NSNumber = 10
     fileprivate var _refHandle: FIRDatabaseHandle!
     
-    let AverageMonthArray = [11,12,3,4]
-    let BusyMonthArray = [1,2,9,10]
+    
 
     @IBOutlet var displayLabel: UILabel!
 
@@ -34,7 +33,7 @@ class GTViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
      //   welcomeUser()
         configureDatabase()
-        getMonth()
+        ThisWeek.Instance.getMonth()
         displayInitialData()
     }
     
@@ -57,28 +56,10 @@ class GTViewController: UIViewController{
         })
     }
     
-    func getMonth()
-    {
-        let date = Date()
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from: date)
-        
-        for index in 0...3
-        {
-            if (AverageMonthArray[index] == month)
-            {
-                monthType = "average"
-            }
-            else if (BusyMonthArray[index] == month)
-            {
-                monthType = "busy"
-            }
-        }
-
-    }
+    
     func displayInitialData()
     {
-        if (monthType == "busy")
+        if (ThisWeek.Instance.monthType == "busy")
         {
             displayLabel.text = "🗓✓ BEST DAYS: FRIDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: FRIDAY 7am - 12pm, 8am - 10am all week \n\n🕐✗WORST TIME: MONDAY 12pm-8pm, 4pm - 7pm all week"
         }
@@ -102,7 +83,7 @@ class GTViewController: UIViewController{
            // includeWeekends.text = "no, don't include weekends"
         }
         
-            if (monthType == "busy")
+            if (ThisWeek.Instance.monthType == "busy")
         {
             if(switchButton == 0)
             {

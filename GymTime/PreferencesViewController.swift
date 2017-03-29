@@ -28,7 +28,7 @@ class PreferencesViewController: UIViewController{
     
     var globalvariabletoday = NSDate()
     let globalvariableunitFlags = Set<Calendar.Component>([.hour, .day, .weekday, .month])
-    var dayCounter = 0
+    
    
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,17 +116,30 @@ class PreferencesViewController: UIViewController{
         else
         {
             getEvents()
+            
             fillInTimeTable()
             determineWhatTimesHaveAlreadyPassed()
-            findBestTime()
-            
-            let delay = 3.0
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+            if(ThisWeek.Instance.loadDatabase == true)
             {
-                print(ThisWeek.Instance.personalisedTimesArray)
+                 findBestTime()
+                 ThisWeek.Instance.loadDatabase = false
+                let delay = 3.0
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+                {
+                    print(ThisWeek.Instance.personalisedTimesArray)
+                    self.ActivityIndicator.stopAnimating()
+                    self.continueButton.isEnabled = true
+                    
+                }
+            }
+            else
+            {
                 self.ActivityIndicator.stopAnimating()
                 self.continueButton.isEnabled = true
             }
+           
+            
+            
             
         }
 
@@ -235,20 +248,6 @@ class PreferencesViewController: UIViewController{
         return hour
     }
     
-    func determineDay(date: Int, today: Int) -> Int
-    {
-        if(date >= today)
-        {
-       //    x = date - today
-        }
-            
-        else if(date < today)
-        {
-            
-        }
-        let x = date - today
-        return x
-    }
     
     func fillInTimeTable()
     {
@@ -263,27 +262,16 @@ class PreferencesViewController: UIViewController{
             print(EventArray[i].startDate)
             components = NSCalendar.current.dateComponents(globalvariableunitFlags, from: EventArray[i].startDate as Date)
             var hour = Int(components.hour!)
-            var today = todayComponent.weekday!
-            let day = components.weekday!
             
             let flags = Set<Calendar.Component>([.day])
             let date1 = NSCalendar.current.startOfDay(for: EventArray[i].startDate)
-         
             let date2 = NSCalendar.current.startOfDay(for: NSDate() as Date)
-            
             var numberOfDays = NSCalendar.current.dateComponents(flags, from: date2, to: date1)
-         //   components(flags, fromDate: date1, toDate: date2)
-            
-            
-            
+      
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
             let durationHours = durationConversionToHours(minute: durationMinutes)
            
-            
-        //   let day = determineDay(date: day, today: today)
-            print("!!!!!!!!!!!!!!!!!")
-            print(numberOfDays)
-          //  print("day \(day)")
+   
             
             //if the event is during the Gym's opening hours
             //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
@@ -335,11 +323,11 @@ class PreferencesViewController: UIViewController{
                         hour = hour + 1
                     }
                 case 7:
-                    print(day)
+                    print(numberOfDays.day!)
                 default:
                     print("ERROR ERROR ERROR")
                     print(hour-7)
-                    print(day)
+                    print(numberOfDays.day!)
                 }
             }
         }
@@ -373,32 +361,6 @@ class PreferencesViewController: UIViewController{
         printTimeTables(array: ThisWeek.Instance.One)
     }
     
-    func whenIsTheWeekend()
-    {
-        
-        var day = NSDate()
-        var todayDate =  NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
-        var weekendBool = true
-        
-        while(weekendBool)
-        {
-            let weekend = NSCalendar.current.isDateInWeekend(day as Date)
-            var dayDate =  NSCalendar.current.dateComponents(globalvariableunitFlags, from: day as Date)
-            
-            if(weekend == true)
-            {
-                let x = determineDay(date: dayDate.day!, today: todayDate.day!)
-                ThisWeek.Instance.Saturday = x
-                ThisWeek.Instance.Sunday = x + 1
-                weekendBool = false
-            }
-            else
-            {
-                day = day.addingTimeInterval(60*60*24)
-            }
-        }
-    }
-    
     func printArray()
     {
         print(EventArray)
@@ -427,7 +389,7 @@ class PreferencesViewController: UIViewController{
             {
             case 1:
                 let start = NSDate()
-                let day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
                 let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.One.count - 1
@@ -447,7 +409,7 @@ class PreferencesViewController: UIViewController{
                 }
             case 2:
                 let start = start.addingTimeInterval(60*60*24)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
                 let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Two.count - 1
@@ -465,7 +427,7 @@ class PreferencesViewController: UIViewController{
                 }
             case 3:
                 let start = start.addingTimeInterval(60*60*24*2)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
                 let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Three.count - 1
@@ -483,7 +445,7 @@ class PreferencesViewController: UIViewController{
                 }
             case 4:
                 let start = start.addingTimeInterval(60*60*24*3)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
                 let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Four.count - 1
@@ -501,7 +463,7 @@ class PreferencesViewController: UIViewController{
                 }
             case 5:
                 let start = start.addingTimeInterval(60*60*24*4)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
                 let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Five.count - 1
@@ -519,7 +481,7 @@ class PreferencesViewController: UIViewController{
                 }
             case 6:
                 let start = start.addingTimeInterval(60*60*24*5)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
                 let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Six.count - 1
@@ -537,7 +499,7 @@ class PreferencesViewController: UIViewController{
                 }
             case 7:
                 let start = start.addingTimeInterval(60*60*24*6)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
                 let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Seven.count - 1

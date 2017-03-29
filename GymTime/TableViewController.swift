@@ -32,10 +32,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = .clear
+        self.title = "Best Times For You"
         prepareDataForDisplay()
         
         ThisWeek.Instance.getMonth()
-        self.title = "Times"
         
     }
     override func viewDidAppear(_ animated: Bool)
@@ -49,7 +50,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         tableView.tableFooterView = UIView(frame: CGRect.zero)*/
         
-        self.tableView.backgroundColor = .clear
         
 
     }
