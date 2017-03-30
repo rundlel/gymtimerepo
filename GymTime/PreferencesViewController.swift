@@ -41,35 +41,20 @@ class PreferencesViewController: UIViewController{
         }
     }*/
    
-    @IBAction func didTapContinue(_ sender: UIButton) {
-        
-      //  let delay = 3.0
-        //DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
-       // {
-            let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        
-            if (status != EKAuthorizationStatus.authorized)
-            {
-                self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
-            }
-            else
-            {
-                
-                self.ActivityIndicator.stopAnimating()
-                self.continueButton.isEnabled = true
-              // let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TableViewController")
-             //  self.present(vc, animated: true, completion: nil)
+    @IBAction func didTapContinue(_ sender: UIButton)
+    {
+        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        if (status != EKAuthorizationStatus.authorized)
+        {
+            self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
+        }
+        else
+        {
+            self.ActivityIndicator.stopAnimating()
+            self.continueButton.isEnabled = true
+        }
 
-              //  performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: UIButton())
-               // performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: self)
-              // performSegue(withIdentifier: Constants.Segues.PersonalisedTimesView, sender: self.didTapContinue(UIButton))
-            
-            }
-       // }
     }
-    
-    
-    
     
     @IBAction func includeWeekendSwitch(_ sender: UISwitch) {
         
@@ -96,8 +81,8 @@ class PreferencesViewController: UIViewController{
 
     }
     
-    override func viewDidLoad() {
-        
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         ActivityIndicator.hidesWhenStopped = true
         continueButton.isEnabled = false
@@ -111,11 +96,9 @@ class PreferencesViewController: UIViewController{
         {
             self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
             self.ActivityIndicator.stopAnimating()
-            
         }
         else
         {
-            
             if(ThisWeek.Instance.loadDatabase == true)
             {
                 getEvents()
@@ -129,7 +112,6 @@ class PreferencesViewController: UIViewController{
                     print(ThisWeek.Instance.personalisedTimesArray)
                     self.ActivityIndicator.stopAnimating()
                     self.continueButton.isEnabled = true
-                    
                 }
             }
             else
@@ -205,8 +187,6 @@ class PreferencesViewController: UIViewController{
     func getEvents()
     {
         let eventStore: EKEventStore = EKEventStore()
-        
-       // let startDate = NSDate()
         let endDate = NSDate().addingTimeInterval(60*60*24*7)
         
         print(dateFormatter.string(from: todayDate as Date))
@@ -240,18 +220,13 @@ class PreferencesViewController: UIViewController{
         {
             hour = hour + 1
         }
-        
         return hour
     }
     
     
     func fillInTimeTable()
     {
-        
-       
         var components = NSCalendar.current.dateComponents(unitFlags, from: todayDate as Date)
-        
-        
         
         for i in 0..<EventArray.count
         {

@@ -15,17 +15,12 @@ struct Constants {
     struct Segues {
         static let SignInToGT = "SignInToGT"
         static let FpToSignIn = "FPToSignIn"
-        static let CalendarViewLoad = "CalendarViewLoad"
+     //   static let CalendarViewLoad = "CalendarViewLoad"
         static let CreateAccountView = "CreateAccountView"
         static let PersonalisedTimesView = "PersonalisedTimesView"
         static let BackToSignInView = "BackToLaunchScreen"
         static let goToPreferencesView = "PreferencesView"
     }
     
-    struct MessageFields {
-        static let name = "name"
-        static let text = "text"
-        static let photoURL = "photoURL"
-        static let imageURL = "imageURL"
-    }
+    
 }

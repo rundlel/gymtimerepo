@@ -10,9 +10,7 @@ import EventKit
 import UIKit
 
 struct EventDetails
-{
-   // static let event = EventDetails()
-   
+{  
     var startDate = NSDate() as Date
     var endDate = NSDate() as Date
     var duration = 0

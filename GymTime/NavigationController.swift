@@ -12,6 +12,8 @@ import UIKit
 class NavigationController: UINavigationController
 {
     override func viewDidLoad() {
+        
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red:0.20, green:0.49, blue:0.66, alpha:1.0)]
+        
     }
 }

@@ -17,6 +17,7 @@ class ThisWeek {
     static var Instance: ThisWeek {
         return _instance
     }
+    //ARRAYS
     var personalisedTimesArray = [PersonalisedTimes]()
     
     
@@ -35,10 +36,15 @@ class ThisWeek {
     var Seven = [String](repeating: "free", count: 15)
     
     var DaysOfTheWeek: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
+   
+    //BOOLEANS
     var loadDatabase = true
     var seeMoreTimes = false
     
+    var includeWeekend = true
+    var includeToday = true
+
+    //DETERMINING MONTH
     let AverageMonthArray = [11,12,3,4]
     let BusyMonthArray = [1,2,9,10]
     var monthType = "null"
@@ -64,8 +70,6 @@ class ThisWeek {
         
     }
     
-    var includeWeekend = true
-    var includeToday = true
-
+   
 
 }

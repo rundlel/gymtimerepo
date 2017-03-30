@@ -30,15 +30,6 @@ class SignInViewController: UIViewController {
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
                 if let error = error {
                     print(error.localizedDescription)
-                   // if (error.localizedDescription.range(of: "identifier") != nil)
-                   // {
-                   //     self.signInErrorMessage.text = "There is no account associated with this email address"
-                   // }
-                   // else if (error.localizedDescription.range(of:"password") != nil)
-                   // {
-                   //     self.signInErrorMessage.text = "Invalid username or password"
-                   // }
-                    
                     self.signInErrorMessage.text = "Invalid username or password"
                     return
             }

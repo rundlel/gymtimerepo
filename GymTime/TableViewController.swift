@@ -24,10 +24,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.tableView.backgroundColor = .clear
-        self.title = "Best Times For You"
+        self.title = "BEST TIMES FOR YOU"
         
         if(ThisWeek.Instance.seeMoreTimes == false)
         {
@@ -73,14 +74,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.textLabel?.font = UIFont(name: "Tamil Sangam MN", size: 20)
         cell.textLabel?.textColor = UIColor(red:0.19, green:0.47, blue:0.65, alpha:1.0)
         cell.backgroundColor = .clear
-      //  cell.backgroundColor = UIColor(white: 1, alpha: 0.3)
         
         let button = UIButton()
         button.frame = (frame: CGRect(x: cell.frame.size.width - 150, y: 1, width: 150, height: 50))
         button.backgroundColor = UIColor.clear
         button.titleLabel?.font = UIFont(name: "Tamil Sangam MN", size: 13)
-        
-       // button.titleLabel?.textColor = UIColor(red:0.19, green:0.48, blue:0.66, alpha:1.0)
         button.setTitle("ADD TO CALENDAR", for: .normal)
         button.setTitleColor(UIColor(red:0.19, green:0.47, blue:0.65, alpha:1.0), for: .normal)
         button.tag = indexPath.row
@@ -255,6 +253,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
     }
+    
+    
     func seeMoreAvailableTimes(){
         let today = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday])
