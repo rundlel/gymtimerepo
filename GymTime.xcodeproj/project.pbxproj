@@ -34,7 +34,6 @@
 		EE6BC13A1E8406E4001BD104 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE6BC1391E8406E4001BD104 /* GoogleService-Info.plist */; };
 		EE6BC13C1E8416C5001BD104 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6BC13B1E8416C5001BD104 /* PreferencesViewController.swift */; };
 		EE6BC13E1E841C21001BD104 /* ThisWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6BC13D1E841C21001BD104 /* ThisWeek.swift */; };
-		EE7849911E7C7190002CB355 /* PersonalisedTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7849901E7C7190002CB355 /* PersonalisedTimesViewController.swift */; };
 		EE7C53561E8D4A5C00BA10E5 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7C53551E8D4A5C00BA10E5 /* NavigationController.swift */; };
 		EE7E002C1E84003100BE348D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7E002A1E84003100BE348D /* Main.storyboard */; };
 		EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */; };
@@ -76,7 +75,6 @@
 		EE6BC1391E8406E4001BD104 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE6BC13B1E8416C5001BD104 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		EE6BC13D1E841C21001BD104 /* ThisWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThisWeek.swift; sourceTree = "<group>"; };
-		EE7849901E7C7190002CB355 /* PersonalisedTimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalisedTimesViewController.swift; sourceTree = "<group>"; };
 		EE7C53551E8D4A5C00BA10E5 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		EE7E002B1E84003100BE348D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 				EE8C1B911E3E82970008F5AD /* LaunchScreen.storyboard */,
 				EE8C1B941E3E82970008F5AD /* Info.plist */,
 				EE6BC1391E8406E4001BD104 /* GoogleService-Info.plist */,
-				EE7849901E7C7190002CB355 /* PersonalisedTimesViewController.swift */,
 			);
 			path = GymTime;
 			sourceTree = "<group>";
@@ -383,7 +380,6 @@
 				EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */,
 				EE1AD1551E86C97300CECD98 /* TableViewController.swift in Sources */,
 				EE2195D21E899BE200FDFE2B /* IQPreviousNextView.swift in Sources */,
-				EE7849911E7C7190002CB355 /* PersonalisedTimesViewController.swift in Sources */,
 				EE5CE55C1E479D5F008D26F0 /* GTViewController.swift in Sources */,
 				EE3252951E422378004761FC /* Constants.swift in Sources */,
 				EE6BC13E1E841C21001BD104 /* ThisWeek.swift in Sources */,

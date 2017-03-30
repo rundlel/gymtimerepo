@@ -547,11 +547,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         }
         sender.isEnabled = false
-        
     }
-    
-    
-    
+ 
 }
 
 
