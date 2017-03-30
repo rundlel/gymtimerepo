@@ -310,7 +310,7 @@
                                     <constraint firstAttribute="height" constant="43" id="09a-na-ybt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="18"/>
-                                <color key="textColor" red="0.19215686274509802" green="0.47450980392156861" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.19590064883232117" green="0.48723131418228149" blue="0.66200435161590576" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaW-PS-OrF">
@@ -415,9 +415,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvW-RM-dh3">
                                 <rect key="frame" x="26" y="617" width="323" height="30"/>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="18"/>
-                                <state key="normal" title="WANT TO SEE MORE TIMES? CLICK HERE">
+                                <state key="normal" title="CLICK TO SEE MORE ">
                                     <color key="titleColor" red="0.92996127945901874" green="0.95972897785443045" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="seeMoreTimes:" destination="CRs-F9-tKe" eventType="touchUpInside" id="gmE-ob-4Tm"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -572,7 +575,7 @@
         <!--Navigation Controller-->
         <scene sceneID="h1s-za-k9J">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mXo-Hr-pG4" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mXo-Hr-pG4" customClass="NavigationController" customModule="GymTime" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v9e-8B-cVn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

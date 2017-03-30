@@ -26,8 +26,8 @@ class PreferencesViewController: UIViewController{
     let reference = FIRDatabase.database().reference()
   //  var personalisedTimesArray = [PersonalisedTimes]()
     
-    var globalvariabletoday = NSDate()
-    let globalvariableunitFlags = Set<Calendar.Component>([.hour, .day, .weekday, .month])
+    var todayDate = NSDate()
+    let unitFlags = Set<Calendar.Component>([.hour, .day, .weekday, .month])
     
    
     
@@ -115,14 +115,14 @@ class PreferencesViewController: UIViewController{
         }
         else
         {
-            getEvents()
             
-            fillInTimeTable()
-            determineWhatTimesHaveAlreadyPassed()
             if(ThisWeek.Instance.loadDatabase == true)
             {
-                 findBestTime()
-                 ThisWeek.Instance.loadDatabase = false
+                getEvents()
+                fillInTimeTable()
+                determineWhatTimesHaveAlreadyPassed()
+                findBestTime()
+                ThisWeek.Instance.loadDatabase = false
                 let delay = 3.0
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
                 {
@@ -137,10 +137,6 @@ class PreferencesViewController: UIViewController{
                 self.ActivityIndicator.stopAnimating()
                 self.continueButton.isEnabled = true
             }
-           
-            
-            
-            
         }
 
     }
@@ -213,9 +209,9 @@ class PreferencesViewController: UIViewController{
        // let startDate = NSDate()
         let endDate = NSDate().addingTimeInterval(60*60*24*7)
         
-        print(dateFormatter.string(from: globalvariabletoday as Date))
+        print(dateFormatter.string(from: todayDate as Date))
         
-        let predicate1 = eventStore.predicateForEvents(withStart: globalvariabletoday as Date, end: endDate as Date, calendars: nil)
+        let predicate1 = eventStore.predicateForEvents(withStart: todayDate as Date, end: endDate as Date, calendars: nil)
         
         let eventVar = eventStore.events(matching: predicate1) as [EKEvent]!
         
@@ -253,14 +249,14 @@ class PreferencesViewController: UIViewController{
     {
         
        
-        var components = NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
-        let todayComponent = NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
+        var components = NSCalendar.current.dateComponents(unitFlags, from: todayDate as Date)
+        
         
         
         for i in 0..<EventArray.count
         {
             print(EventArray[i].startDate)
-            components = NSCalendar.current.dateComponents(globalvariableunitFlags, from: EventArray[i].startDate as Date)
+            components = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].startDate as Date)
             var hour = Int(components.hour!)
             
             let flags = Set<Calendar.Component>([.day])
@@ -346,7 +342,7 @@ class PreferencesViewController: UIViewController{
     func determineWhatTimesHaveAlreadyPassed()
     {
         
-        var components =  NSCalendar.current.dateComponents(globalvariableunitFlags, from: globalvariabletoday as Date)
+        var components =  NSCalendar.current.dateComponents(unitFlags, from: todayDate as Date)
         
         let hour = Int(components.hour!)
         print(hour)
@@ -378,7 +374,7 @@ class PreferencesViewController: UIViewController{
     func findBestTime()
     {
         let start = NSDate()
-        let unitFlags = Set<Calendar.Component>([.weekday])
+        //let unitFlags = Set<Calendar.Component>([.weekday])
         var day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
        
         
@@ -400,7 +396,7 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         print(stringToReturn)
                         
-                        if(ThisWeek.Instance.One[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        if(ThisWeek.Instance.One[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
                         {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -418,7 +414,7 @@ class PreferencesViewController: UIViewController{
                     let tempTimeAsString = String(tempTime)
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
-                        if(ThisWeek.Instance.Two[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        if(ThisWeek.Instance.Two[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
                         {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -436,7 +432,7 @@ class PreferencesViewController: UIViewController{
                     let tempTimeAsString = String(tempTime)
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
-                        if(ThisWeek.Instance.Three[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        if(ThisWeek.Instance.Three[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
                         {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -454,7 +450,7 @@ class PreferencesViewController: UIViewController{
                     let tempTimeAsString = String(tempTime)
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
-                        if(ThisWeek.Instance.Four[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        if(ThisWeek.Instance.Four[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
                         {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                            ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -472,7 +468,7 @@ class PreferencesViewController: UIViewController{
                     let tempTimeAsString = String(tempTime)
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
-                        if(ThisWeek.Instance.Five[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        if(ThisWeek.Instance.Five[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
                         {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -490,7 +486,7 @@ class PreferencesViewController: UIViewController{
                     let tempTimeAsString = String(tempTime)
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
-                        if(ThisWeek.Instance.Six[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium"))
+                        if(ThisWeek.Instance.Six[index] == "free" && (stringToReturn == "good" || stringToReturn == "medium" || stringToReturn == "busy"))
                         {
                             let x = PersonalisedTimes(day: tempDay, time: tempTimeAsString, status: stringToReturn)
                             ThisWeek.Instance.personalisedTimesArray.append(x)

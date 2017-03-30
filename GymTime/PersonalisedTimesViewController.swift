@@ -93,7 +93,7 @@ class PersonalisedTimeViewController: UIViewController {
         var start = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday])
         var day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-        let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+        var tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
         
         var dayCounter = 1
         while(dayCounter <= 7)
@@ -101,9 +101,9 @@ class PersonalisedTimeViewController: UIViewController {
             switch(dayCounter)
             {
                 case 1:
-                    let start = NSDate()
-                    let day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-                    let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                    start = NSDate()
+                    day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                    tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                     for index in 0...ThisWeek.Instance.One.count - 1
                     {
@@ -121,9 +121,9 @@ class PersonalisedTimeViewController: UIViewController {
                         })
                     }
             case 2:
-                let start = start.addingTimeInterval(60*60*24)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                start = start.addingTimeInterval(60*60*24)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Two.count - 1
                 {
@@ -139,9 +139,9 @@ class PersonalisedTimeViewController: UIViewController {
                     })
                 }
             case 3:
-                let start = start.addingTimeInterval(60*60*24*2)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                start = start.addingTimeInterval(60*60*24*2)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Three.count - 1
                 {
@@ -157,9 +157,9 @@ class PersonalisedTimeViewController: UIViewController {
                     })
                 }
             case 4:
-                let start = start.addingTimeInterval(60*60*24*3)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                start = start.addingTimeInterval(60*60*24*3)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Four.count - 1
                 {
@@ -175,9 +175,9 @@ class PersonalisedTimeViewController: UIViewController {
                     })
                 }
             case 5:
-                let start = start.addingTimeInterval(60*60*24*4)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                start = start.addingTimeInterval(60*60*24*4)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Five.count - 1
                 {
@@ -193,9 +193,9 @@ class PersonalisedTimeViewController: UIViewController {
                     })
                 }
             case 6:
-                let start = start.addingTimeInterval(60*60*24*5)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                start = start.addingTimeInterval(60*60*24*5)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Six.count - 1
                 {
@@ -211,9 +211,9 @@ class PersonalisedTimeViewController: UIViewController {
                     })
                 }
             case 7:
-                let start = start.addingTimeInterval(60*60*24*6)
-                let day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
-                let tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+                start = start.addingTimeInterval(60*60*24*6)
+                day = NSCalendar.current.dateComponents(unitFlags, from: start as Date)
+                tempDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
                 
                 for index in 0...ThisWeek.Instance.Seven.count - 1
                 {

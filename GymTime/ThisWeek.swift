@@ -37,6 +37,7 @@ class ThisWeek {
     var DaysOfTheWeek: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var loadDatabase = true
+    var seeMoreTimes = false
     
     let AverageMonthArray = [11,12,3,4]
     let BusyMonthArray = [1,2,9,10]

@@ -14,13 +14,7 @@ import Firebase
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
-    @IBAction func backButton(_ sender: UIBarButtonItem) {
-        print("back button clicked")
-    }
-    @IBOutlet weak var NavigationItem: UINavigationBar!
     let reference = FIRDatabase.database().reference()
-    
     
     @IBOutlet weak var tableView: UITableView!
     var listOfTimesArray = [String]()
@@ -34,9 +28,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         self.tableView.backgroundColor = .clear
         self.title = "Best Times For You"
-        prepareDataForDisplay()
         
-        ThisWeek.Instance.getMonth()
+        if(ThisWeek.Instance.seeMoreTimes == false)
+        {
+            prepareDataForDisplay()
+        }
+        else
+        {
+            seeMoreAvailableTimes()
+        }
+        
+        tableView.reloadData()
+        
+       // ThisWeek.Instance.getMonth()
         
     }
     override func viewDidAppear(_ animated: Bool)
@@ -50,8 +54,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         tableView.tableFooterView = UIView(frame: CGRect.zero)*/
         
-        
-
     }
     
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -87,6 +89,306 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.addSubview(button)
         return cell
     }
+    
+    func prepareDataForDisplay()
+    {
+        let today = NSDate()
+        let unitFlags = Set<Calendar.Component>([.weekday])
+        var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
+        let todayDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+        var todayIsInWeekend = false
+        
+        if (todayDay == "Saturday" || todayDay == "Sunday")
+        {
+            todayIsInWeekend = true
+        }
+        
+        if(ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == true)
+        {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                
+                if(Int(tempPersonalisedTime.time)! >= 12)
+                {
+                    if(Int(tempPersonalisedTime.time)! != 12)
+                    {
+                        tempTime = tempTime! - 12
+                    }
+                    
+                    timeToString = String(tempTime!) + "pm"
+                }
+                if(tempPersonalisedTime.status == "good")
+                {
+                    let tempString = tempPersonalisedTime.day + " " + timeToString
+                    listOfTimesArray.append(tempString)
+                }
+            }
+        }
+        else if(ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == true)
+        {
+            
+            if(todayIsInWeekend) //includeToday
+            {
+                
+                for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+                {
+                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                    var timeToString = String(tempTime!) + "am"
+                    
+                    if(Int(tempPersonalisedTime.time)! > 12)
+                    {
+                        tempTime = tempTime! - 12
+                        timeToString = String(tempTime!) + "pm"
+                        
+                    }
+                    
+                    if(tempPersonalisedTime.status == "good" && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    {
+                        let tempString = tempPersonalisedTime.day + " " + timeToString
+                        listOfTimesArray.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "good" && todayDay == "Sunday")
+                    {
+                        print(todayDay)
+                        if(Int(tempPersonalisedTime.time)! > 12)
+                        {
+                            tempTime = tempTime! - 12
+                            timeToString = String(tempTime!) + "pm"
+                        }
+                        if(tempPersonalisedTime.day != "Saturday")
+                        {
+                            let tempString = tempPersonalisedTime.day + " " + timeToString
+                            print(tempString)
+                            listOfTimesArray.append(tempString)
+                            print(listOfTimesArray)
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+                {
+                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                    var timeToString = String(tempTime!) + "am"
+                    
+                    if(Int(tempPersonalisedTime.time)! > 12)
+                    {
+                        tempTime = tempTime! - 12
+                        timeToString = String(tempTime!) + "pm"
+                    }
+                    
+                    if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    {
+                        let tempString = tempPersonalisedTime.day + " " + timeToString
+                        listOfTimesArray.append(tempString)
+                    }
+                }
+            }
+        }
+        else if (ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == false)
+        {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                
+                if(Int(tempPersonalisedTime.time)! > 12)
+                {
+                    tempTime = tempTime! - 12
+                    timeToString = String(tempTime!) + "pm"
+                }
+                
+                if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay)
+                {
+                    let tempString = tempPersonalisedTime.day + " " + timeToString
+                    listOfTimesArray.append(tempString)
+                }
+            }
+        }
+        else if (ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == false)
+        {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                
+                if(Int(tempPersonalisedTime.time)! > 12)
+                {
+                    tempTime = tempTime! - 12
+                    timeToString = String(tempTime!) + "pm"
+                }
+                
+                if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                {
+                    let tempString = tempPersonalisedTime.day + " " + timeToString
+                    listOfTimesArray.append(tempString)
+                }
+            }
+            
+        }
+    }
+    func seeMoreAvailableTimes(){
+        let today = NSDate()
+        let unitFlags = Set<Calendar.Component>([.weekday])
+        var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
+        let todayDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
+        var todayIsInWeekend = false
+        
+        if (todayDay == "Saturday" || todayDay == "Sunday")
+        {
+            todayIsInWeekend = true
+        }
+        
+        if(ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == true)
+        {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                
+                if(Int(tempPersonalisedTime.time)! >= 12)
+                {
+                    if(Int(tempPersonalisedTime.time)! != 12)
+                    {
+                        tempTime = tempTime! - 12
+                    }
+                    
+                    timeToString = String(tempTime!) + "pm"
+                }
+                if(tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy")
+                {
+                    let tempString = tempPersonalisedTime.day + " " + timeToString
+                    listOfTimesArray.append(tempString)
+                }
+            }
+        }
+        else if(ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == true)
+        {
+            
+            if(todayIsInWeekend) //includeToday
+            {
+                
+                for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+                {
+                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                    var timeToString = String(tempTime!) + "am"
+                    
+                    if(Int(tempPersonalisedTime.time)! > 12)
+                    {
+                        tempTime = tempTime! - 12
+                        timeToString = String(tempTime!) + "pm"
+                        
+                    }
+                    
+                    if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy") && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    {
+                        let tempString = tempPersonalisedTime.day + " " + timeToString
+                        listOfTimesArray.append(tempString)
+                    }
+                    else if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy")  && todayDay == "Sunday")
+                    {
+                        print(todayDay)
+                        if(Int(tempPersonalisedTime.time)! > 12)
+                        {
+                            tempTime = tempTime! - 12
+                            timeToString = String(tempTime!) + "pm"
+                        }
+                        if(tempPersonalisedTime.day != "Saturday")
+                        {
+                            let tempString = tempPersonalisedTime.day + " " + timeToString
+                            print(tempString)
+                            listOfTimesArray.append(tempString)
+                            print(listOfTimesArray)
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+                {
+                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                    var timeToString = String(tempTime!) + "am"
+                    
+                    if(Int(tempPersonalisedTime.time)! > 12)
+                    {
+                        tempTime = tempTime! - 12
+                        timeToString = String(tempTime!) + "pm"
+                    }
+                    
+                    if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy") && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    {
+                        let tempString = tempPersonalisedTime.day + " " + timeToString
+                        listOfTimesArray.append(tempString)
+                    }
+                }
+            }
+        }
+        else if (ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == false)
+        {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                
+                if(Int(tempPersonalisedTime.time)! > 12)
+                {
+                    tempTime = tempTime! - 12
+                    timeToString = String(tempTime!) + "pm"
+                }
+                
+                if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy") && tempPersonalisedTime.day != todayDay)
+                {
+                    let tempString = tempPersonalisedTime.day + " " + timeToString
+                    listOfTimesArray.append(tempString)
+                }
+            }
+        }
+        else if (ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == false)
+        {
+            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
+            {
+                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempTime:Int? = Int(tempPersonalisedTime.time)!
+                var timeToString = String(tempTime!) + "am"
+                
+                if(Int(tempPersonalisedTime.time)! > 12)
+                {
+                    tempTime = tempTime! - 12
+                    timeToString = String(tempTime!) + "pm"
+                }
+                
+                if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy") && tempPersonalisedTime.day != todayDay && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                {
+                    let tempString = tempPersonalisedTime.day + " " + timeToString
+                    listOfTimesArray.append(tempString)
+                }
+            }
+            
+        }
+        
+    }
+    
+    @IBAction func seeMoreTimes(_ sender: Any) {
+        print("reload")
+        listOfTimesArray.removeAll()
+        seeMoreAvailableTimes()
+        ThisWeek.Instance.seeMoreTimes = true
+        tableView.reloadData()
+    }
+    
  
     func buttonClicked(sender : UIButton!) {
         
@@ -166,16 +468,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         let monthAsString = String(month!)
         let dayAsString = String(date!)
         let timeAsString = String(charAtIndexAsNumber!)
-        /*var dateAsString = ""
         
-    
-        if(charAtIndexAsNumber! < 12)
-        {
-            dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
-        }
-        else{
-            dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
-        }*/
         
         let dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
         
@@ -221,151 +514,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     
-    func prepareDataForDisplay()
-    {
-        let today = NSDate()
-        let unitFlags = Set<Calendar.Component>([.weekday])
-        var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
-        let todayDay = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
-        var todayIsInWeekend = false
-        
-        if (todayDay == "Saturday" || todayDay == "Sunday")
-        {
-            todayIsInWeekend = true
-        }
-        
-        if(ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == true)
-        {
-            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
-            {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
-                var tempTime:Int? = Int(tempPersonalisedTime.time)!
-                var timeToString = String(tempTime!) + "am"
-                    
-                if(Int(tempPersonalisedTime.time)! >= 12)
-                {
-                    if(Int(tempPersonalisedTime.time)! != 12)
-                    {
-                         tempTime = tempTime! - 12
-                    }
-                   
-                    timeToString = String(tempTime!) + "pm"
-                }
-                if(tempPersonalisedTime.status == "good")
-                {
-                    let tempString = tempPersonalisedTime.day + " " + timeToString
-                     listOfTimesArray.append(tempString)
-                }
-            }
-        }
-        else if(ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == true)
-        {
-            
-            if(todayIsInWeekend) //includeToday
-            {
-                
-                for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
-                {
-                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
-                    var tempTime:Int? = Int(tempPersonalisedTime.time)!
-                    var timeToString = String(tempTime!) + "am"
-                    
-                    if(Int(tempPersonalisedTime.time)! > 12)
-                    {
-                        tempTime = tempTime! - 12
-                        timeToString = String(tempTime!) + "pm"
-                        
-                    }
-                    
-                    if(tempPersonalisedTime.status == "good" && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
-                    {
-                        let tempString = tempPersonalisedTime.day + " " + timeToString
-                         listOfTimesArray.append(tempString)
-                    }
-                    else if(tempPersonalisedTime.status == "good" && todayDay == "Sunday")
-                    {
-                        print(todayDay)
-                        if(Int(tempPersonalisedTime.time)! > 12)
-                        {
-                            tempTime = tempTime! - 12
-                            timeToString = String(tempTime!) + "pm"
-                        }
-                        if(tempPersonalisedTime.day != "Saturday")
-                        {
-                            let tempString = tempPersonalisedTime.day + " " + timeToString
-                            print(tempString)
-                             listOfTimesArray.append(tempString)
-                            print(listOfTimesArray)
-                        }
-                    }
-                }
-            }
-            else
-            {
-                for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
-                {
-                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
-                    var tempTime:Int? = Int(tempPersonalisedTime.time)!
-                    var timeToString = String(tempTime!) + "am"
-                    
-                    if(Int(tempPersonalisedTime.time)! > 12)
-                    {
-                        tempTime = tempTime! - 12
-                        timeToString = String(tempTime!) + "pm"
-                    }
-                    
-                    if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
-                    {
-                        let tempString = tempPersonalisedTime.day + " " + timeToString
-                         listOfTimesArray.append(tempString)
-                    }
-                }
-            }
-        }
-        else if (ThisWeek.Instance.includeWeekend == true && ThisWeek.Instance.includeToday == false)
-        {
-            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
-            {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
-                var tempTime:Int? = Int(tempPersonalisedTime.time)!
-                var timeToString = String(tempTime!) + "am"
-                
-                if(Int(tempPersonalisedTime.time)! > 12)
-                {
-                    tempTime = tempTime! - 12
-                    timeToString = String(tempTime!) + "pm"
-                }
-                
-                    if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay)
-                    {
-                            let tempString = tempPersonalisedTime.day + " " + timeToString
-                            listOfTimesArray.append(tempString)
-                    }
-             }
-        }
-        else if (ThisWeek.Instance.includeWeekend == false && ThisWeek.Instance.includeToday == false)
-        {
-            for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
-            {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
-                var tempTime:Int? = Int(tempPersonalisedTime.time)!
-                var timeToString = String(tempTime!) + "am"
-                
-                if(Int(tempPersonalisedTime.time)! > 12)
-                {
-                    tempTime = tempTime! - 12
-                    timeToString = String(tempTime!) + "pm"
-                }
-                
-                if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
-                {
-                        let tempString = tempPersonalisedTime.day + " " + timeToString
-                         listOfTimesArray.append(tempString)
-                }
-            }
-
-        }
-    }
+    
 }
 
 
