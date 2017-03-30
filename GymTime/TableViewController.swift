@@ -120,7 +120,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     
                     timeToString = String(tempTime!) + "pm"
                 }
-                if(tempPersonalisedTime.status == "good")
+                if(tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium")
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
@@ -139,24 +139,31 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
-                    if(Int(tempPersonalisedTime.time)! > 12)
+                    if(Int(tempPersonalisedTime.time)! >= 12)
                     {
-                        tempTime = tempTime! - 12
-                        timeToString = String(tempTime!) + "pm"
+                        if(Int(tempPersonalisedTime.time)! != 12)
+                        {
+                            tempTime = tempTime! - 12
+                        }
                         
+                        timeToString = String(tempTime!) + "pm"
                     }
                     
-                    if(tempPersonalisedTime.status == "good" && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium") && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
                         listOfTimesArray.append(tempString)
                     }
-                    else if(tempPersonalisedTime.status == "good" && todayDay == "Sunday")
+                    else if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium") && todayDay == "Sunday")
                     {
                         print(todayDay)
-                        if(Int(tempPersonalisedTime.time)! > 12)
+                        if(Int(tempPersonalisedTime.time)! >= 12)
                         {
-                            tempTime = tempTime! - 12
+                            if(Int(tempPersonalisedTime.time)! != 12)
+                            {
+                                tempTime = tempTime! - 12
+                            }
+                            
                             timeToString = String(tempTime!) + "pm"
                         }
                         if(tempPersonalisedTime.day != "Saturday")
@@ -177,13 +184,17 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
-                    if(Int(tempPersonalisedTime.time)! > 12)
+                    if(Int(tempPersonalisedTime.time)! >= 12)
                     {
-                        tempTime = tempTime! - 12
+                        if(Int(tempPersonalisedTime.time)! != 12)
+                        {
+                            tempTime = tempTime! - 12
+                        }
+                        
                         timeToString = String(tempTime!) + "pm"
                     }
                     
-                    if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                    if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium") && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
                         listOfTimesArray.append(tempString)
@@ -199,13 +210,17 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
-                if(Int(tempPersonalisedTime.time)! > 12)
+                if(Int(tempPersonalisedTime.time)! >= 12)
                 {
-                    tempTime = tempTime! - 12
+                    if(Int(tempPersonalisedTime.time)! != 12)
+                    {
+                        tempTime = tempTime! - 12
+                    }
+                    
                     timeToString = String(tempTime!) + "pm"
                 }
                 
-                if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay)
+                if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium") && tempPersonalisedTime.day != todayDay)
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
@@ -220,13 +235,18 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
-                if(Int(tempPersonalisedTime.time)! > 12)
+                
+                if(Int(tempPersonalisedTime.time)! >= 12)
                 {
-                    tempTime = tempTime! - 12
+                    if(Int(tempPersonalisedTime.time)! != 12)
+                    {
+                        tempTime = tempTime! - 12
+                    }
+                    
                     timeToString = String(tempTime!) + "pm"
                 }
                 
-                if(tempPersonalisedTime.status == "good" && tempPersonalisedTime.day != todayDay && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
+                if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium") && tempPersonalisedTime.day != todayDay && tempPersonalisedTime.day != "Saturday" && tempPersonalisedTime.day != "Sunday")
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
@@ -283,13 +303,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
-                    if(Int(tempPersonalisedTime.time)! > 12)
+                    if(Int(tempPersonalisedTime.time)! >= 12)
                     {
-                        tempTime = tempTime! - 12
-                        timeToString = String(tempTime!) + "pm"
+                        if(Int(tempPersonalisedTime.time)! != 12)
+                        {
+                            tempTime = tempTime! - 12
+                        }
                         
+                        timeToString = String(tempTime!) + "pm"
                     }
-                    
                     if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy") && todayDay == "Saturday" && tempPersonalisedTime.day != "Sunday")
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
@@ -298,9 +320,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     else if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy")  && todayDay == "Sunday")
                     {
                         print(todayDay)
-                        if(Int(tempPersonalisedTime.time)! > 12)
+                        if(Int(tempPersonalisedTime.time)! >= 12)
                         {
-                            tempTime = tempTime! - 12
+                            if(Int(tempPersonalisedTime.time)! != 12)
+                            {
+                                tempTime = tempTime! - 12
+                            }
+                            
                             timeToString = String(tempTime!) + "pm"
                         }
                         if(tempPersonalisedTime.day != "Saturday")
@@ -321,9 +347,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
-                    if(Int(tempPersonalisedTime.time)! > 12)
+                    if(Int(tempPersonalisedTime.time)! >= 12)
                     {
-                        tempTime = tempTime! - 12
+                        if(Int(tempPersonalisedTime.time)! != 12)
+                        {
+                            tempTime = tempTime! - 12
+                        }
+                        
                         timeToString = String(tempTime!) + "pm"
                     }
                     
@@ -343,12 +373,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
-                if(Int(tempPersonalisedTime.time)! > 12)
+                if(Int(tempPersonalisedTime.time)! >= 12)
                 {
-                    tempTime = tempTime! - 12
+                    if(Int(tempPersonalisedTime.time)! != 12)
+                    {
+                        tempTime = tempTime! - 12
+                    }
+                    
                     timeToString = String(tempTime!) + "pm"
                 }
-                
                 if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy") && tempPersonalisedTime.day != todayDay)
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
@@ -364,9 +397,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
-                if(Int(tempPersonalisedTime.time)! > 12)
+                if(Int(tempPersonalisedTime.time)! >= 12)
                 {
-                    tempTime = tempTime! - 12
+                    if(Int(tempPersonalisedTime.time)! != 12)
+                    {
+                        tempTime = tempTime! - 12
+                    }
+                    
                     timeToString = String(tempTime!) + "pm"
                 }
                 
