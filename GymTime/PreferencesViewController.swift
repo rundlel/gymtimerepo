@@ -316,17 +316,23 @@ class PreferencesViewController: UIViewController{
     
     func determineWhatTimesHaveAlreadyPassed()
     {
+        print("HERE")
         
         var components =  NSCalendar.current.dateComponents(unitFlags, from: todayDate as Date)
         
         let hour = Int(components.hour!)
         print(hour)
         
-        if(hour > 7 && hour < 21)
+        if(hour >= 7)
         {
             for i in 7...hour
             {
-                ThisWeek.Instance.One[i-7] = "not available"
+                
+                if(i <= 21 )
+                {
+                    ThisWeek.Instance.One[i-7] = "not available"
+                }
+ 
             }
         }
         printTimeTables(array: ThisWeek.Instance.One)

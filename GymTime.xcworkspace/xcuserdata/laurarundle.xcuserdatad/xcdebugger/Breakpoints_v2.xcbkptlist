@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/TableViewController.swift"
-            timestampString = "512583493.126165"
+            timestampString = "512599829.916059"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "794"
-            endingLineNumber = "794">
+            startingLineNumber = "801"
+            endingLineNumber = "801">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymTime/TableViewController.swift"
-            timestampString = "512583493.126165"
+            timestampString = "512599829.916059"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "795"
-            endingLineNumber = "795">
+            startingLineNumber = "802"
+            endingLineNumber = "802">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

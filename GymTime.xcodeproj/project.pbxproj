@@ -35,6 +35,7 @@
 		EE6BC13C1E8416C5001BD104 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6BC13B1E8416C5001BD104 /* PreferencesViewController.swift */; };
 		EE6BC13E1E841C21001BD104 /* ThisWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6BC13D1E841C21001BD104 /* ThisWeek.swift */; };
 		EE7C53561E8D4A5C00BA10E5 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7C53551E8D4A5C00BA10E5 /* NavigationController.swift */; };
+		EE7C53581E8D9EF800BA10E5 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE7C53571E8D9EF800BA10E5 /* TimeCell.swift */; };
 		EE7E002C1E84003100BE348D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE7E002A1E84003100BE348D /* Main.storyboard */; };
 		EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */; };
 		EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8C1B881E3E82970008F5AD /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 		EE6BC13B1E8416C5001BD104 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		EE6BC13D1E841C21001BD104 /* ThisWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThisWeek.swift; sourceTree = "<group>"; };
 		EE7C53551E8D4A5C00BA10E5 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		EE7C53571E8D9EF800BA10E5 /* TimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		EE7E002B1E84003100BE348D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE8A76EF1E50C4A000C827B6 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		EE8C1B851E3E82970008F5AD /* GymTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +216,7 @@
 				EE3252921E422353004761FC /* MeasurementHelper.swift */,
 				EE9BA30C1E814D3200504E6B /* EventDetails.swift */,
 				EE7C53551E8D4A5C00BA10E5 /* NavigationController.swift */,
+				EE7C53571E8D9EF800BA10E5 /* TimeCell.swift */,
 				EE3252941E422378004761FC /* Constants.swift */,
 				EE7E002A1E84003100BE348D /* Main.storyboard */,
 				EEEB7D1B1E830D7800DD2AE9 /* PersonalisedTimes.swift */,
@@ -368,6 +371,7 @@
 				EE6BC13C1E8416C5001BD104 /* PreferencesViewController.swift in Sources */,
 				EE8C1B891E3E82970008F5AD /* AppDelegate.swift in Sources */,
 				EE2195D51E899BE200FDFE2B /* IQUIView+IQKeyboardToolbar.swift in Sources */,
+				EE7C53581E8D9EF800BA10E5 /* TimeCell.swift in Sources */,
 				EE2195D01E899BE200FDFE2B /* IQTextView.swift in Sources */,
 				EE2195CD1E899BE200FDFE2B /* IQKeyboardManagerConstantsInternal.swift in Sources */,
 				EE2195C91E899BE200FDFE2B /* IQUIView+Hierarchy.swift in Sources */,

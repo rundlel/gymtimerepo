@@ -22,6 +22,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     var dateFormatter =  DateFormatter()
     var EventArray = [EventDetails]()
 
+   
     
     
     override func viewDidLoad()
@@ -68,13 +69,17 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")! as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TimeCell") as! TimeCell
         
-        cell.textLabel?.text =  listOfTimesArray[indexPath.row]
-        cell.textLabel?.font = UIFont(name: "Tamil Sangam MN", size: 20)
-        cell.textLabel?.textColor = UIColor(red:0.19, green:0.47, blue:0.65, alpha:1.0)
+        cell.cellLabel.text =  listOfTimesArray[indexPath.row]
         cell.backgroundColor = .clear
         
+        cell.cellButton.tag = indexPath.row
+        cell.cellButton.contentHorizontalAlignment = .right
+         //   .contentHorizontalAlignment = .left
+        cell.cellButton.addTarget(self, action: #selector(addToCalendarButton), for: .touchUpInside)
+        
+     /*
         let button = UIButton()
         button.frame = (frame: CGRect(x: cell.frame.size.width - 150, y: 1, width: 150, height: 50))
         button.backgroundColor = UIColor.clear
@@ -84,7 +89,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         button.tag = indexPath.row
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
       
-        cell.addSubview(button)
+        cell.addSubview(button)*/
         return cell
     }
     
@@ -425,17 +430,16 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ThisWeek.Instance.seeMoreTimes = true
         tableView.reloadData()
     }
-    
- 
-    func buttonClicked(sender : UIButton!) {
-        
-        sender.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0),for: .normal)
+    @IBAction func addToCalendarButton(_ sender: UIButton)
+    {
+  //  @IBAction func addToCalendarButton(_ sender: UIButton) {
+       sender.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0),for: .normal)
         
         print("Clicked!")
         
         let arrayIndex = sender.tag
         let temp =  listOfTimesArray[arrayIndex]
-    
+        
         
         var whileLoopVariable = true
         var today = NSDate()
@@ -513,10 +517,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ISO8601DateFormatter.locale = Locale(identifier: "en_US_POSIX")
         ISO8601DateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         ISO8601DateFormatter.timeZone = TimeZone(abbreviation: timezoneString)
-            
+        
         
         let dateForGym = ISO8601DateFormatter.date(from: dateAsString)
-    
+        
         let eventStore : EKEventStore = EKEventStore()
         eventStore.requestAccess(to: .event) { (granted, error) in
             
@@ -524,7 +528,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             {
                 print("granted \(granted)")
                 print("error \(error)")
-            
+                
                 let event:EKEvent = EKEvent(eventStore: eventStore)
                 event.title = "GymTime!"
                 
@@ -544,13 +548,16 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             {
                 print("failed to save: \(error)")
             }
-        
+            
         }
         sender.isEnabled = false
     }
- 
-}
 
+        
+        
+    }
+ 
+    
 
 
     
