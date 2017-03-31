@@ -17,8 +17,22 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     
     @IBOutlet weak var passwordField: UITextField!
+    
     override func viewDidAppear(_ animated: Bool) {
-       // if let user = FIRAuth.auth()?.currentUser {
+        
+        let user = FIRAuth.auth()?.currentUser
+        if user != nil
+        {
+            print("here")
+            print(user?.email)
+            print(FIRAuth.auth()?.currentUser ?? "nil")
+            performSegue(withIdentifier: Constants.Segues.SignInToGT, sender: nil)
+        }
+        else
+        {
+            
+        }
+        
            // self.signedIn(user)
         
     }

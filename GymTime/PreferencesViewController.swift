@@ -30,6 +30,19 @@ class PreferencesViewController: UIViewController{
     let unitFlags = Set<Calendar.Component>([.hour, .day, .weekday, .month])
     
    
+    @IBAction func logoutButton(_ sender: Any) {
+        
+        var user = FIRAuth.auth()?.currentUser
+        print("logout pressed")
+        print(user?.email! ?? "none")
+        try! FIRAuth.auth()!.signOut()
+        user = FIRAuth.auth()?.currentUser
+        print(user?.email! ?? "none")
+        
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInVC")
+        self.present(vc, animated: true, completion: nil)
+    }
     
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
