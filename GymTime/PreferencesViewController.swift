@@ -15,19 +15,95 @@ class PreferencesViewController: UIViewController{
     
     var dateFormatter =  DateFormatter()
     
+    @IBOutlet weak var todayPreferenceSwitch: UISwitch!
+   
+    @IBOutlet weak var weekendPreferenceSwitch: UISwitch!
+    
     @IBOutlet weak var continueButton: UIButton!
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
+    
     
     var EventArray = [EventDetails]()
     
     @IBOutlet weak var mustGivePermissionLabel: UILabel!
     
     let reference = FIRDatabase.database().reference()
-  //  var personalisedTimesArray = [PersonalisedTimes]()
+  
     
     var todayDate = NSDate()
     let unitFlags = Set<Calendar.Component>([.hour, .day, .weekday, .month])
+    
+    
+    @IBAction func savePreferencesButton(_ sender: Any) {
+        
+        if(todayPreferenceSwitch.isOn == true)
+        {
+            ThisWeek.Instance.includeToday = true
+            
+        }
+        else
+        {
+            ThisWeek.Instance.includeToday = false
+        }
+        if(weekendPreferenceSwitch.isOn == true)
+        {
+            ThisWeek.Instance.includeWeekend = true
+        }
+        else
+        {
+            ThisWeek.Instance.includeWeekend = false
+        }
+        let user = FIRAuth.auth()?.currentUser
+        
+        let ref = FIRDatabase.database().reference()
+        ref.child("Preferences").child((user?.uid)!).setValue(["today" : ThisWeek.Instance.includeToday, "weekend" : ThisWeek.Instance.includeWeekend])
+        
+        
+    }
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        initialisePreferenceSwitch()
+        ActivityIndicator.hidesWhenStopped = true
+        continueButton.isEnabled = false
+        continueButton.setTitleColor(UIColor.gray, for: UIControlState.disabled)
+        ActivityIndicator.startAnimating()
+        ThisWeek.Instance.getMonth()
+        checkAuthorisation()
+        
+        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+        if (status != EKAuthorizationStatus.authorized)
+        {
+            self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
+            self.ActivityIndicator.stopAnimating()
+        }
+        else
+        {
+            if(ThisWeek.Instance.loadDatabase == true)
+            {
+                getEvents()
+                fillInTimeTable()
+                determineWhatTimesHaveAlreadyPassed()
+                findBestTime()
+                ThisWeek.Instance.loadDatabase = false
+                let delay = 3.0
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+                {
+                    print(ThisWeek.Instance.personalisedTimesArray)
+                    self.ActivityIndicator.stopAnimating()
+                    self.continueButton.isEnabled = true
+                }
+            }
+            else
+            {
+                self.ActivityIndicator.stopAnimating()
+                self.continueButton.isEnabled = true
+            }
+        }
+        
+    }
     
    
     @IBAction func logoutButton(_ sender: Any) {
@@ -94,52 +170,29 @@ class PreferencesViewController: UIViewController{
 
     }
     
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        ActivityIndicator.hidesWhenStopped = true
-        continueButton.isEnabled = false
-        continueButton.setTitleColor(UIColor.gray, for: UIControlState.disabled)
-        ActivityIndicator.startAnimating()
-        ThisWeek.Instance.getMonth()
-        checkAuthorisation()
-        
-        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        if (status != EKAuthorizationStatus.authorized)
-        {
-            self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
-            self.ActivityIndicator.stopAnimating()
-        }
-        else
-        {
-            if(ThisWeek.Instance.loadDatabase == true)
-            {
-                getEvents()
-                fillInTimeTable()
-                determineWhatTimesHaveAlreadyPassed()
-                findBestTime()
-                ThisWeek.Instance.loadDatabase = false
-                let delay = 3.0
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
-                {
-                    print(ThisWeek.Instance.personalisedTimesArray)
-                    self.ActivityIndicator.stopAnimating()
-                    self.continueButton.isEnabled = true
-                }
-            }
-            else
-            {
-                self.ActivityIndicator.stopAnimating()
-                self.continueButton.isEnabled = true
-            }
-        }
-
-    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
 
     }
     
+    func initialisePreferenceSwitch()
+    {
+        let user = FIRAuth.auth()?.currentUser
+        let ref = reference.ref
+        
+        ref.child("Preferences").child((user?.uid)!).child("today").observeSingleEvent(of: .value, with: { (snapshot) in
+            let boolToReturn = snapshot.value as? Bool ?? true
+            ThisWeek.Instance.includeToday = boolToReturn
+            self.todayPreferenceSwitch.isOn = boolToReturn
+        })
+        
+        ref.child("Preferences").child((user?.uid)!).child("weekend").observeSingleEvent(of: .value, with: { (snapshot) in
+            let boolToReturn = snapshot.value as? Bool ?? true
+            ThisWeek.Instance.includeWeekend = boolToReturn
+            self.weekendPreferenceSwitch.isOn = boolToReturn
+        })
+    }
     
     func checkAuthorisation()
     {

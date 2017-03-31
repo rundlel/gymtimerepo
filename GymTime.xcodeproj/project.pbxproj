@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C5C3ACDDF309F1580555828B /* Pods_GymTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E5911B6B736C5B306A18F3 /* Pods_GymTime.framework */; };
 		EE1AD1551E86C97300CECD98 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1AD1541E86C97300CECD98 /* TableViewController.swift */; };
+		EE20DECA1E8E9B7400DF26A8 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE20DEC91E8E9B7400DF26A8 /* UserPreferences.swift */; };
+		EE20DECC1E8EA6CB00DF26A8 /* WelcomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE20DECB1E8EA6CB00DF26A8 /* WelcomeScreenViewController.swift */; };
 		EE2195C61E899BE200FDFE2B /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2195B01E899BE200FDFE2B /* IQNSArray+Sort.swift */; };
 		EE2195C71E899BE200FDFE2B /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2195B11E899BE200FDFE2B /* IQUIScrollView+Additions.swift */; };
 		EE2195C81E899BE200FDFE2B /* IQUITextFieldView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2195B21E899BE200FDFE2B /* IQUITextFieldView+Additions.swift */; };
@@ -50,6 +52,8 @@
 		988DAE269B8891CECFE35FA0 /* Pods-GymTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymTime/Pods-GymTime.debug.xcconfig"; sourceTree = "<group>"; };
 		B7E5911B6B736C5B306A18F3 /* Pods_GymTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE1AD1541E86C97300CECD98 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		EE20DEC91E8E9B7400DF26A8 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		EE20DECB1E8EA6CB00DF26A8 /* WelcomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreenViewController.swift; sourceTree = "<group>"; };
 		EE2195B01E899BE200FDFE2B /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		EE2195B11E899BE200FDFE2B /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
 		EE2195B21E899BE200FDFE2B /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
@@ -215,10 +219,12 @@
 				EE3252901E4218D3004761FC /* AppState.swift */,
 				EE3252921E422353004761FC /* MeasurementHelper.swift */,
 				EE9BA30C1E814D3200504E6B /* EventDetails.swift */,
+				EE20DEC91E8E9B7400DF26A8 /* UserPreferences.swift */,
 				EE7C53551E8D4A5C00BA10E5 /* NavigationController.swift */,
 				EE7C53571E8D9EF800BA10E5 /* TimeCell.swift */,
 				EE3252941E422378004761FC /* Constants.swift */,
 				EE7E002A1E84003100BE348D /* Main.storyboard */,
+				EE20DECB1E8EA6CB00DF26A8 /* WelcomeScreenViewController.swift */,
 				EEEB7D1B1E830D7800DD2AE9 /* PersonalisedTimes.swift */,
 				EE6BC13D1E841C21001BD104 /* ThisWeek.swift */,
 				EE6BC13B1E8416C5001BD104 /* PreferencesViewController.swift */,
@@ -358,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE2195CF1E899BE200FDFE2B /* IQKeyboardReturnKeyHandler.swift in Sources */,
+				EE20DECA1E8E9B7400DF26A8 /* UserPreferences.swift in Sources */,
 				EE2195CC1E899BE200FDFE2B /* IQKeyboardManagerConstants.swift in Sources */,
 				EE2195D11E899BE200FDFE2B /* IQBarButtonItem.swift in Sources */,
 				EE8C1B8B1E3E82970008F5AD /* ViewController.swift in Sources */,
@@ -382,6 +389,7 @@
 				EE3252911E4218D3004761FC /* AppState.swift in Sources */,
 				EE7C53561E8D4A5C00BA10E5 /* NavigationController.swift in Sources */,
 				EE8A76F01E50C4A000C827B6 /* CreateAccountViewController.swift in Sources */,
+				EE20DECC1E8EA6CB00DF26A8 /* WelcomeScreenViewController.swift in Sources */,
 				EE1AD1551E86C97300CECD98 /* TableViewController.swift in Sources */,
 				EE2195D21E899BE200FDFE2B /* IQPreviousNextView.swift in Sources */,
 				EE5CE55C1E479D5F008D26F0 /* GTViewController.swift in Sources */,

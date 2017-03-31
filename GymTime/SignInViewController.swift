@@ -23,18 +23,9 @@ class SignInViewController: UIViewController {
         let user = FIRAuth.auth()?.currentUser
         if user != nil
         {
-            print("here")
-            print(user?.email)
-            print(FIRAuth.auth()?.currentUser ?? "nil")
             performSegue(withIdentifier: Constants.Segues.SignInToGT, sender: nil)
         }
-        else
-        {
-            
-        }
-        
-           // self.signedIn(user)
-        
+
     }
 
     @IBOutlet var signInErrorMessage: UILabel!
@@ -93,10 +84,6 @@ class SignInViewController: UIViewController {
 
     }
     
-
-
-
-
     func signedIn(_ user: FIRUser?) {
         MeasurementHelper.sendLoginEvent()
         

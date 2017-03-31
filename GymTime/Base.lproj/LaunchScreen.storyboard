@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,16 +22,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Waves-geometric-vectors-background-material" translatesAutoresizingMaskIntoConstraints="NO" id="C5L-Y9-SHM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Waves-geometric-vectors-background-material" translatesAutoresizingMaskIntoConstraints="NO" id="C5L-Y9-SHM">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="my_logo-3" translatesAutoresizingMaskIntoConstraints="NO" id="FL2-Vk-Ecl">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_logo-3" translatesAutoresizingMaskIntoConstraints="NO" id="FL2-Vk-Ecl">
+                                <rect key="frame" x="0.0" y="269" width="343" height="128"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="leading" secondItem="FL2-Vk-Ecl" secondAttribute="leading" id="ALJ-Ew-l0D"/>
+                            <constraint firstItem="FL2-Vk-Ecl" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="249" id="I6b-5n-VT1"/>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="centerY" secondItem="FL2-Vk-Ecl" secondAttribute="centerY" id="pEe-7R-hek"/>
+                            <constraint firstAttribute="trailing" secondItem="C5L-Y9-SHM" secondAttribute="trailing" id="pcA-Bs-xHD"/>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="r1P-Bk-0i6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FL2-Vk-Ecl" secondAttribute="trailing" constant="16" id="tQZ-Zr-Of6"/>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="tbq-4C-X4B"/>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ypq-sv-sBZ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

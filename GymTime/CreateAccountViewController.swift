@@ -12,6 +12,7 @@ import Firebase
 @objc(CreateAccountViewController)
 class CreateAccountViewController: UIViewController {
     
+   
     
     @IBOutlet weak var createAccEmailField: UITextField!
     
@@ -69,10 +70,11 @@ class CreateAccountViewController: UIViewController {
     AppState.sharedInstance.displayName = user?.displayName ?? user?.email
     AppState.sharedInstance.photoURL = user?.photoURL
     AppState.sharedInstance.signedIn = true
+        
     let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
     NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
-    performSegue(withIdentifier: Constants.Segues.SignInToGT, sender: nil)
+    performSegue(withIdentifier: Constants.Segues.goToWelcomeScreen, sender: nil)
     }
-
-
+    
+    
 }

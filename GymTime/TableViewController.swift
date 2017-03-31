@@ -77,6 +77,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.cellButton.tag = indexPath.row
         cell.cellButton.contentHorizontalAlignment = .right
          //   .contentHorizontalAlignment = .left
+        cell.cellButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.cellButton.addTarget(self, action: #selector(addToCalendarButton), for: .touchUpInside)
         
      /*

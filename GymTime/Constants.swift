@@ -20,6 +20,7 @@ struct Constants {
         static let PersonalisedTimesView = "PersonalisedTimesView"
         static let BackToSignInView = "BackToLaunchScreen"
         static let goToPreferencesView = "PreferencesView"
+        static let goToWelcomeScreen = "WelcomeScreen"
     }
     
     

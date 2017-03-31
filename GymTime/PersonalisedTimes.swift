@@ -10,7 +10,7 @@ import Foundation
 
 struct PersonalisedTimes
 {
-    var day = ""
-    var time = ""
-    var status = ""
+    var day: String
+    var time: String
+    var status: String
 }
