@@ -26,6 +26,7 @@ class GTViewController: UIViewController{
     override func viewDidLoad() {
         configureDatabase()
         segmentSwitch.tintColor = UIColor(red:0.33, green:0.59, blue:0.91, alpha:1.0)
+       
         ThisWeek.Instance.getMonth()
         displayInitialData()
     }

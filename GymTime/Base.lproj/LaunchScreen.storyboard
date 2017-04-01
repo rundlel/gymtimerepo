@@ -23,22 +23,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Waves-geometric-vectors-background-material" translatesAutoresizingMaskIntoConstraints="NO" id="C5L-Y9-SHM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="-8" width="375" height="675"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_logo-3" translatesAutoresizingMaskIntoConstraints="NO" id="FL2-Vk-Ecl">
-                                <rect key="frame" x="0.0" y="269" width="343" height="128"/>
+                                <rect key="frame" x="0.0" y="269" width="343" height="129"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="leading" secondItem="FL2-Vk-Ecl" secondAttribute="leading" id="ALJ-Ew-l0D"/>
-                            <constraint firstItem="FL2-Vk-Ecl" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="249" id="I6b-5n-VT1"/>
-                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="centerY" secondItem="FL2-Vk-Ecl" secondAttribute="centerY" id="pEe-7R-hek"/>
-                            <constraint firstAttribute="trailing" secondItem="C5L-Y9-SHM" secondAttribute="trailing" id="pcA-Bs-xHD"/>
-                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="r1P-Bk-0i6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FL2-Vk-Ecl" secondAttribute="trailing" constant="16" id="tQZ-Zr-Of6"/>
-                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="tbq-4C-X4B"/>
-                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ypq-sv-sBZ"/>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="Fqa-Ct-wI9"/>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-8" id="QtQ-R9-PS3"/>
+                            <constraint firstItem="FL2-Vk-Ecl" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="249" id="Ug1-fb-1vT"/>
+                            <constraint firstItem="C5L-Y9-SHM" firstAttribute="leading" secondItem="FL2-Vk-Ecl" secondAttribute="leading" id="itw-uC-3Ge"/>
+                            <constraint firstItem="FL2-Vk-Ecl" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="nZC-LO-TXB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FL2-Vk-Ecl" secondAttribute="trailing" constant="16" id="osn-Wr-FFq"/>
+                            <constraint firstItem="FL2-Vk-Ecl" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="v4K-Pb-0HD"/>
+                            <constraint firstAttribute="trailing" secondItem="C5L-Y9-SHM" secondAttribute="trailing" id="vcW-3Y-ySz"/>
                         </constraints>
                     </view>
                 </viewController>
