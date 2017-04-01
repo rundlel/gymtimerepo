@@ -16,6 +16,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     let reference = FIRDatabase.database().reference()
     
+    var ref: FIRDatabaseReference!
+    
     @IBOutlet weak var tableView: UITableView!
     var listOfTimesArray = [String]()
     
@@ -76,21 +78,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         cell.cellButton.tag = indexPath.row
         cell.cellButton.contentHorizontalAlignment = .right
-         //   .contentHorizontalAlignment = .left
         cell.cellButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.cellButton.addTarget(self, action: #selector(addToCalendarButton), for: .touchUpInside)
-        
-     /*
-        let button = UIButton()
-        button.frame = (frame: CGRect(x: cell.frame.size.width - 150, y: 1, width: 150, height: 50))
-        button.backgroundColor = UIColor.clear
-        button.titleLabel?.font = UIFont(name: "Tamil Sangam MN", size: 13)
-        button.setTitle("ADD TO CALENDAR", for: .normal)
-        button.setTitleColor(UIColor(red:0.19, green:0.47, blue:0.65, alpha:1.0), for: .normal)
-        button.tag = indexPath.row
-        button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
-      
-        cell.addSubview(button)*/
+     
         return cell
     }
     
@@ -431,12 +421,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         ThisWeek.Instance.seeMoreTimes = true
         tableView.reloadData()
     }
+    
+    
     @IBAction func addToCalendarButton(_ sender: UIButton)
     {
-  //  @IBAction func addToCalendarButton(_ sender: UIButton) {
-       sender.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0),for: .normal)
-        
-        print("Clicked!")
+     //  sender.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0),for: .normal)
         
         let arrayIndex = sender.tag
         let temp =  listOfTimesArray[arrayIndex]
@@ -472,27 +461,28 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         let year = day.year
         let month = day.month
         let date = day.day
-        
+        var charAtIndex: Character = "a"
+        var stringTest = ""
         var charAtIndexAsNumber:Int? = 0
         
         let dayLength = dayString.characters.count + 1
         if((temp.range(of: "10") != nil) || temp.range(of: "11") != nil || temp.range(of: "12") != nil)
         {
             let dayLength2 = dayString.characters.count + 2
-            let charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
+            charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
             let charAtIndex2 = temp[temp.index(temp.startIndex, offsetBy: dayLength2)]
-            var Stringtest = String(charAtIndex)
+            stringTest = String(charAtIndex)
             let Stringtest2 = String(charAtIndex2)
-            Stringtest = Stringtest + Stringtest2
-            print(Stringtest)
-            charAtIndexAsNumber = Int(Stringtest)!
+            stringTest = stringTest + Stringtest2
+            print(stringTest)
+            charAtIndexAsNumber = Int(stringTest)!
             print(charAtIndexAsNumber ?? 0)
             
         }
         else
         {
-            let charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
-            let stringTest = String(charAtIndex)
+            charAtIndex = temp[temp.index(temp.startIndex, offsetBy: dayLength)]
+            stringTest = String(charAtIndex)
             print(charAtIndex)
             charAtIndexAsNumber = Int(stringTest)!
             print(charAtIndexAsNumber ?? 0)
@@ -505,7 +495,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 charAtIndexAsNumber = charAtIndexAsNumber! + 12
             }
         }
-        
+        let databaseTimeString = String(charAtIndexAsNumber!)
         let yearAsString = String(year!)
         let monthAsString = String(month!)
         let dayAsString = String(date!)
@@ -551,12 +541,53 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
             
         }
+        
+        
+        ref = FIRDatabase.database().reference()
+        let tempToday = NSDate()
+        let tempTodayComponents = NSCalendar.current.dateComponents(unitFlags, from: tempToday as Date)
+        var tempTodayDay = tempTodayComponents.day
+        if(tempTodayDay != 1)
+        {
+            tempTodayDay = tempTodayDay! - 1
+            
+          //  let tempTime =
+           for i in 7...21
+           {
+                let tempTime = String(i)
+                ref.child("Tracking").child(String(tempTodayDay!)).child(tempTime).setValue(0)
+           }
+        }
+        else
+        {
+            for i in 7...21
+            {
+                let tempTime = String(i)
+                ref.child("Tracking").child("30").child(tempTime).setValue(0)
+                ref.child("Tracking").child("31").child(tempTime).setValue(0)
+            }
+
+        }
+        
+       // let user = FIRAuth.auth()?.currentUser
+        
+        
+        ref.child("Tracking").child(dayAsString).child(databaseTimeString).observeSingleEvent(of: .value, with: { (snapshot) in
+            var intToReturn = snapshot.value as? Int ?? 0
+            intToReturn = intToReturn + 1
+            var chld = stringTest
+            
+            self.ref.child("Tracking").child(dayAsString).child(databaseTimeString).setValue(intToReturn)
+        })
+        
+        
+        
         sender.isEnabled = false
     }
 
         
         
-    }
+}
  
     
 
