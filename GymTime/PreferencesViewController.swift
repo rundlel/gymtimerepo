@@ -23,6 +23,9 @@ class PreferencesViewController: UIViewController{
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     
+    let good = 30
+    let medium = 23
+    let busy = 10
     
     var EventArray = [EventDetails]()
     
@@ -448,7 +451,7 @@ class PreferencesViewController: UIViewController{
                             
                             print("number of people \(intToReturn)")
                         
-                            if(ThisWeek.Instance.One[index] == "free" && ((stringToReturn == "good" && intToReturn <= 30) || (stringToReturn == "medium" && intToReturn <= 23) || (stringToReturn == "busy" && intToReturn <= 10)))
+                            if(ThisWeek.Instance.One[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
                                 let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -475,7 +478,7 @@ class PreferencesViewController: UIViewController{
                             print("number of people \(intToReturn)")
 
                         
-                            if(ThisWeek.Instance.Two[index] == "free" && ((stringToReturn == "good" && intToReturn <= 30) || (stringToReturn == "medium" && intToReturn <= 23) || (stringToReturn == "busy" && intToReturn <= 10)))
+                            if(ThisWeek.Instance.Two[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
                                 let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -500,7 +503,7 @@ class PreferencesViewController: UIViewController{
                             
                             print("number of people \(intToReturn)")
                         
-                            if(ThisWeek.Instance.Three[index] == "free" && ((stringToReturn == "good" && intToReturn <= 30) || (stringToReturn == "medium" && intToReturn <= 23) || (stringToReturn == "busy" && intToReturn <= 10)))
+                            if(ThisWeek.Instance.Three[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
                                 let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -525,7 +528,7 @@ class PreferencesViewController: UIViewController{
                             
                             print("number of people \(intToReturn)")
                         
-                            if(ThisWeek.Instance.Four[index] == "free" && ((stringToReturn == "good" && intToReturn <= 30) || (stringToReturn == "medium" && intToReturn <= 23) || (stringToReturn == "busy" && intToReturn <= 10)))
+                            if(ThisWeek.Instance.Four[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
                                 let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -550,7 +553,7 @@ class PreferencesViewController: UIViewController{
                             
                             print("number of people \(intToReturn)")
                         
-                            if(ThisWeek.Instance.Five[index] == "free" && ((stringToReturn == "good" && intToReturn <= 30) || (stringToReturn == "medium" && intToReturn <= 23) || (stringToReturn == "busy" && intToReturn <= 10)))
+                            if(ThisWeek.Instance.Five[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
                                 let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -577,7 +580,7 @@ class PreferencesViewController: UIViewController{
                             print("number of people \(intToReturn)")
                        
                         
-                            if(ThisWeek.Instance.Six[index] == "free" && ((stringToReturn == "good" && intToReturn <= 30) || (stringToReturn == "medium" && intToReturn <= 23) || (stringToReturn == "busy" && intToReturn <= 10)))
+                            if(ThisWeek.Instance.Six[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
                                 let x = PersonalisedTimes(date: day.day!,day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
@@ -604,7 +607,7 @@ class PreferencesViewController: UIViewController{
                             
                         print("number of people \(intToReturn)")
                             
-                            if(ThisWeek.Instance.Seven[index] == "free" && ((stringToReturn == "good" && intToReturn <= 30) || (stringToReturn == "medium" && intToReturn <= 23) || (stringToReturn == "busy" && intToReturn <= 10)))
+                            if(ThisWeek.Instance.Seven[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
                                 let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
