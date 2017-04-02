@@ -301,7 +301,9 @@ class PreferencesViewController: UIViewController{
         {
             print(EventArray[i].startDate)
             components = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].startDate as Date)
+            let endComponents = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].endDate as Date)
             var hour = Int(components.hour!)
+            var hour2 = Int(endComponents.hour!)
             
             let flags = Set<Calendar.Component>([.day])
             let date1 = NSCalendar.current.startOfDay(for: EventArray[i].startDate)
@@ -311,55 +313,82 @@ class PreferencesViewController: UIViewController{
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
             let durationHours = durationConversionToHours(minute: durationMinutes)
            
-   
+            if(hour < 7 && hour2 > 7)
+            {
+                
+            }
             
             //if the event is during the Gym's opening hours
             //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
             
-            if(hour >= 7 && hour <= 21)
+            if(hour <= 21)
             {
                 switch(numberOfDays.day!) //CASE 0 represents today, CASE 1 represents tomorrow and so on
                 {
                 case 0:
                     for _ in 1...durationHours
                     {
-                        ThisWeek.Instance.One[hour-7] = "busy"
+                        if(hour - 7 >= 0)
+                        {
+                            ThisWeek.Instance.One[hour-7] = "busy"
+                        }
                         hour = hour + 1
                     }
                 case 1:
                     for _ in 1...durationHours
                     {
-                        ThisWeek.Instance.Two[hour-7] = "busy"
+                        if(hour - 7 >= 0)
+                        {
+                            ThisWeek.Instance.Two[hour-7] = "busy"
+                        }
                         hour = hour + 1
                     }
                 case 2:
                     for _ in 1...durationHours
                     {
-                        ThisWeek.Instance.Three[hour-7] = "busy"
+                        if(hour - 7 >= 0)
+                        {
+                             ThisWeek.Instance.Three[hour-7] = "busy"
+                        }
                         hour = hour + 1
                     }
                 case 3:
                     for _ in 1...durationHours
                     {
-                        ThisWeek.Instance.Four[hour-7] = "busy"
+                        if(hour - 7 >= 0)
+                        {
+                            ThisWeek.Instance.Four[hour-7] = "busy"
+
+                        }
                         hour = hour + 1
                     }
                 case 4:
                     for _ in 1...durationHours
                     {
-                        ThisWeek.Instance.Five[hour-7] = "busy"
+                        if(hour - 7 >= 0)
+                        {
+                            ThisWeek.Instance.Five[hour-7] = "busy"
+                        }
+                        
                         hour = hour + 1
                     }
                 case 5:
                     for _ in 1...durationHours
                     {
-                        ThisWeek.Instance.Six[hour-7] = "busy"
+                        if(hour - 7 >= 0)
+                        {
+                            ThisWeek.Instance.Six[hour-7] = "busy"
+                        }
                         hour = hour + 1
                     }
                 case 6:
                     for _ in 1...durationHours
                     {
-                        ThisWeek.Instance.Seven[hour-7] = "busy"
+                        if(hour - 7 >= 0)
+                        {
+                            ThisWeek.Instance.Seven[hour-7] = "busy"
+                        }
+                        
                         hour = hour + 1
                     }
                 case 7:
@@ -385,8 +414,6 @@ class PreferencesViewController: UIViewController{
     
     func determineWhatTimesHaveAlreadyPassed()
     {
-        print("HERE")
-        
         var components =  NSCalendar.current.dateComponents(unitFlags, from: todayDate as Date)
         
         let hour = Int(components.hour!)
@@ -424,10 +451,7 @@ class PreferencesViewController: UIViewController{
     func findBestTime()
     {
         let start = NSDate()
-        //let unitFlags = Set<Calendar.Component>([.weekday])
-        let day =  NSCalendar.current.dateComponents(unitFlags, from: start as Date)
        
-        
         var dayCounter = 1
         while(dayCounter <= 7)
         {
@@ -448,8 +472,6 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
                         self.numPeopleGoing(date: dateVar, time: tempTimeAsString, completion: { (intToReturn) in
-                            
-                            print("number of people \(intToReturn)")
                         
                             if(ThisWeek.Instance.One[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
@@ -474,9 +496,6 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
                         self.numPeopleGoing(date: dateVar, time: tempTimeAsString, completion: { (intToReturn) in
-                            
-                            print("number of people \(intToReturn)")
-
                         
                             if(ThisWeek.Instance.Two[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
@@ -500,8 +519,6 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
                         self.numPeopleGoing(date: dateVar, time: tempTimeAsString, completion: { (intToReturn) in
-                            
-                            print("number of people \(intToReturn)")
                         
                             if(ThisWeek.Instance.Three[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
@@ -525,8 +542,6 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
                         self.numPeopleGoing(date: dateVar, time: tempTimeAsString, completion: { (intToReturn) in
-                            
-                            print("number of people \(intToReturn)")
                         
                             if(ThisWeek.Instance.Four[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
@@ -550,8 +565,6 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
                         self.numPeopleGoing(date: dateVar, time: tempTimeAsString, completion: { (intToReturn) in
-                            
-                            print("number of people \(intToReturn)")
                         
                             if(ThisWeek.Instance.Five[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
@@ -576,8 +589,6 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
                         self.numPeopleGoing(date: dateVar, time: tempTimeAsString, completion: { (intToReturn) in
-                            
-                            print("number of people \(intToReturn)")
                        
                         
                             if(ThisWeek.Instance.Six[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
@@ -604,8 +615,6 @@ class PreferencesViewController: UIViewController{
                     getStringFromDatabase(time: tempTimeAsString, todaysDay: tempDay, completion: { (stringToReturn) in
                         
                         self.numPeopleGoing(date: dateVar, time: tempTimeAsString, completion: { (intToReturn) in
-                            
-                        print("number of people \(intToReturn)")
                             
                             if(ThisWeek.Instance.Seven[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {

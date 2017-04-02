@@ -17,6 +17,7 @@ class ThisWeek {
     static var Instance: ThisWeek {
         return _instance
     }
+    
     //ARRAYS
     var personalisedTimesArray = [PersonalisedTimes]()
     

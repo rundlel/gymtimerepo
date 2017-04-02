@@ -10,10 +10,6 @@ import Foundation
 
 struct UserPreferences
 {
-    
     var today: Bool
     var weekend: Bool
-    
-    
-    
 }

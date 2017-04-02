@@ -15,7 +15,6 @@ struct Constants {
     struct Segues {
         static let SignInToGT = "SignInToGT"
         static let FpToSignIn = "FPToSignIn"
-     //   static let CalendarViewLoad = "CalendarViewLoad"
         static let CreateAccountView = "CreateAccountView"
         static let PersonalisedTimesView = "PersonalisedTimesView"
         static let BackToSignInView = "BackToLaunchScreen"

@@ -55,7 +55,6 @@ class WelcomeScreenViewController: UIViewController {
             print("authorised")
         case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
             print("restricted")
-            //alertTheUser()
         }
     }
     
@@ -75,7 +74,7 @@ class WelcomeScreenViewController: UIViewController {
             {
                 DispatchQueue.main.async(execute:
                     {
-                       // self.alertTheUser()
+
                 })
             }
         })

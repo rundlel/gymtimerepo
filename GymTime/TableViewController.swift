@@ -78,11 +78,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         
         cell.cellButton.contentHorizontalAlignment = .right
-        //cell.cellButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.cellButton.tag = indexPath.row
-               // cell.cellButton.addTarget(self, action: #selector(addToCalendarButton), for: .touchUpInside)
-        
-    
         cell.cellButton.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0), for: .disabled)
         
         if tappedButtons.contains(indexPath.row)
@@ -439,25 +435,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func addToCalendarButton(_ sender: UIButton)
     {
-     //  sender.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0),for: .normal)
-       // sender.isHidden = true
         let arrayIndex = sender.tag
         tappedButtons.append(sender.tag)
         let temp =  listOfTimesArray[arrayIndex]
-        
-       // let indexPath = NSIndexPath(row: sender.tag, section: 0)
-        
-       /// let currentCell = tableView.cellForRow(at: indexPath as IndexPath) as! TimeCell
-       // currentCell.cellButton.isEnabled = false
-        
-                
-        
-        
-       
-       // cell.cellButton.
-       // cell.cellButton.viewWithTag(arrayIndex)?.isHidden = true
-       //  .isEnabled = false
-        
+
         var whileLoopVariable = true
         var today = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday, .hour, .year, .month, .day])
@@ -569,7 +550,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         
-        
         ref = FIRDatabase.database().reference()
         let tempToday = NSDate()
         let tempTodayComponents = NSCalendar.current.dateComponents(unitFlags, from: tempToday as Date)
@@ -577,8 +557,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         if(tempTodayDay != 1)
         {
             tempTodayDay = tempTodayDay! - 1
-            
-          //  let tempTime =
            for i in 7...21
            {
                 let tempTime = String(i)
@@ -596,13 +574,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         }
         
-       // let user = FIRAuth.auth()?.currentUser
-        
-        
         ref.child("Tracking").child(dayAsString).child(databaseTimeString).observeSingleEvent(of: .value, with: { (snapshot) in
             var intToReturn = snapshot.value as? Int ?? 0
             intToReturn = intToReturn + 1
-            var chld = stringTest
             
             self.ref.child("Tracking").child(dayAsString).child(databaseTimeString).setValue(intToReturn)
         })
