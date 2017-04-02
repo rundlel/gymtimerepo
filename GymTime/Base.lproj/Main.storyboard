@@ -485,11 +485,11 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TimeCell" id="Qct-B1-NBT" customClass="TimeCell" customModule="GymTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="Qct-B1-NBT" id="QQV-4a-ZCp">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qct-B1-NBT" id="QQV-4a-ZCp">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlA-Td-SWX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlA-Td-SWX">
                                                     <rect key="frame" x="8" y="2" width="238" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="238" id="x4o-kD-hce"/>
@@ -498,7 +498,7 @@
                                                     <color key="textColor" red="0.19590064879999999" green="0.48723131419999999" blue="0.66200435160000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="6rE-aA-x0W">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="6rE-aA-x0W">
                                                     <rect key="frame" x="266" y="-4" width="128" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="128" id="I6d-sx-UuK"/>
@@ -513,7 +513,6 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6rE-aA-x0W" firstAttribute="trailing" secondItem="QQV-4a-ZCp" secondAttribute="trailingMargin" id="5ue-i9-luM"/>
                                                 <constraint firstItem="TlA-Td-SWX" firstAttribute="top" secondItem="QQV-4a-ZCp" secondAttribute="topMargin" constant="-6" id="FL4-qL-aIl"/>
                                                 <constraint firstItem="6rE-aA-x0W" firstAttribute="leading" secondItem="TlA-Td-SWX" secondAttribute="trailing" constant="20" id="S1Y-mY-R6j"/>
                                                 <constraint firstItem="TlA-Td-SWX" firstAttribute="leading" secondItem="QQV-4a-ZCp" secondAttribute="leadingMargin" id="YjF-XW-k3Q"/>

@@ -9,6 +9,11 @@
 import UIKit
 
 class TimeCell: UITableViewCell {
+    
+    @IBOutlet weak var cellButton: UIButton!
+    @IBOutlet weak var cellLabel: UILabel!
+
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,8 +22,6 @@ class TimeCell: UITableViewCell {
 
     
     
-    @IBOutlet weak var cellButton: UIButton!
-    @IBOutlet weak var cellLabel: UILabel!
     
 
     
