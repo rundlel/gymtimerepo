@@ -61,7 +61,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1 // This was put in mainly for my own unit testing
+        return 1 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -436,10 +436,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func addToCalendarButton(_ sender: UIButton)
     {
         let arrayIndex = sender.tag
-       // tappedButtons.append(sender.tag)
        
         let temp =  listOfTimesArray[arrayIndex]
         tappedButtons.append(temp)
+        alertTheUser(event: temp)
 
         var whileLoopVariable = true
         var today = NSDate()
@@ -587,6 +587,18 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.reloadData()
        
     }
+    
+    func alertTheUser(event: String)
+    {
+        let alert = UIAlertController(title: "Added To Calendar",
+                                      message: "Event added in your calendar at: " + event,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Okay", style: .default))
+        
+        present(alert, animated: true, completion: nil)
+    }
+
 
         
         

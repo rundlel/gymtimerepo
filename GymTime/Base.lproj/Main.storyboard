@@ -372,7 +372,7 @@
                                     <constraint firstAttribute="height" constant="71" id="wAC-bt-WTF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="18"/>
-                                <color key="textColor" red="0.76144921779632568" green="0.86603587865829468" blue="0.92464715242385864" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.92020422220230103" green="0.96448987722396851" blue="0.98954778909683228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_logo-3" translatesAutoresizingMaskIntoConstraints="NO" id="LCQ-6m-WnZ">
@@ -585,7 +585,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_logo-3" translatesAutoresizingMaskIntoConstraints="NO" id="Arn-sP-Vqo">
                                 <rect key="frame" x="0.0" y="48" width="342" height="226"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCLUDE TODAY?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-w6-hsi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCLUDE TODAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-w6-hsi">
                                 <rect key="frame" x="20" y="358" width="263" height="21"/>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="20"/>
                                 <color key="textColor" red="0.1918379664" green="0.48330187800000002" blue="0.65806889530000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -597,7 +597,7 @@
                                     <action selector="includeTodaySwitch:" destination="hBO-FV-H4r" eventType="valueChanged" id="KS0-aH-N0x"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCLUDE WEEKEND?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYC-ap-9eJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCLUDE WEEKEND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYC-ap-9eJ">
                                 <rect key="frame" x="20" y="395" width="277" height="21"/>
                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="20"/>
                                 <color key="textColor" red="0.1918379664" green="0.48330187800000002" blue="0.65806889530000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -616,7 +616,7 @@
                                     <segue destination="CRs-F9-tKe" kind="show" identifier="PersonalisedTimesView" id="JUy-Lw-q9j"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SET YOUR PREFERENCES USING THE SWITCHES BELOW " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO2-EM-TJx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SET YOUR PREFERENCES " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO2-EM-TJx">
                                 <rect key="frame" x="33" y="232" width="348" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="ckZ-73-9Qu"/>
