@@ -24,7 +24,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     var dateFormatter =  DateFormatter()
     var EventArray = [EventDetails]()
 
-    var tappedButtons = [Int]()
+    var tappedButtons = [String]()
     
     
     override func viewDidLoad()
@@ -81,7 +81,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.cellButton.tag = indexPath.row
         cell.cellButton.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0), for: .disabled)
         
-        if tappedButtons.contains(indexPath.row)
+        if tappedButtons.contains(cell.cellLabel.text!)
         {
             cell.cellButton.isEnabled = false
         }
@@ -436,8 +436,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func addToCalendarButton(_ sender: UIButton)
     {
         let arrayIndex = sender.tag
-        tappedButtons.append(sender.tag)
+       // tappedButtons.append(sender.tag)
+       
         let temp =  listOfTimesArray[arrayIndex]
+        tappedButtons.append(temp)
 
         var whileLoopVariable = true
         var today = NSDate()
