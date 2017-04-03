@@ -27,6 +27,10 @@ class SignInViewController: UIViewController {
         }
 
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
 
     @IBOutlet var signInErrorMessage: UILabel!
     
@@ -94,6 +98,8 @@ class SignInViewController: UIViewController {
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
         performSegue(withIdentifier: Constants.Segues.SignInToGT, sender: nil)
     }
+    
+    
 
 
 
