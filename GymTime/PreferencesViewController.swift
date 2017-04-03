@@ -265,14 +265,18 @@ class PreferencesViewController: UIViewController{
         let eventVar = eventStore.events(matching: predicate1) as [EKEvent]!
         
         if eventVar != nil {
+            
             for i in eventVar! {
                 print("Title  \(i.title)" )
                 print("startDate: \(i.startDate)" )
                 print("endDate: \(i.endDate)" )
                 
                 let duration = i.endDate.timeIntervalSince(i.startDate as Date)
+                if(i.isAllDay == false)
+                {
+                    EventArray.append(EventDetails(startDate: i.startDate, endDate: i.endDate, duration: Int(duration)))
+                }
                 
-                EventArray.append(EventDetails(startDate: i.startDate, endDate: i.endDate, duration: Int(duration)))
             }
         }
     }
@@ -322,7 +326,7 @@ class PreferencesViewController: UIViewController{
                 case 0:
                     for _ in 1...durationHours
                     {
-                        if(hour - 7 >= 0)
+                        if(hour - 7 >= 0 && hour < 22)
                         {
                             ThisWeek.Instance.One[hour-7] = "busy"
                         }
@@ -331,7 +335,7 @@ class PreferencesViewController: UIViewController{
                 case 1:
                     for _ in 1...durationHours
                     {
-                        if(hour - 7 >= 0)
+                        if(hour - 7 >= 0 && hour < 22)
                         {
                             ThisWeek.Instance.Two[hour-7] = "busy"
                         }
@@ -340,7 +344,7 @@ class PreferencesViewController: UIViewController{
                 case 2:
                     for _ in 1...durationHours
                     {
-                        if(hour - 7 >= 0)
+                        if(hour - 7 >= 0 && hour < 22)
                         {
                              ThisWeek.Instance.Three[hour-7] = "busy"
                         }
@@ -349,7 +353,7 @@ class PreferencesViewController: UIViewController{
                 case 3:
                     for _ in 1...durationHours
                     {
-                        if(hour - 7 >= 0)
+                        if(hour - 7 >= 0 && hour < 22)
                         {
                             ThisWeek.Instance.Four[hour-7] = "busy"
 
@@ -359,7 +363,7 @@ class PreferencesViewController: UIViewController{
                 case 4:
                     for _ in 1...durationHours
                     {
-                        if(hour - 7 >= 0)
+                        if(hour - 7 >= 0 && hour < 22)
                         {
                             ThisWeek.Instance.Five[hour-7] = "busy"
                         }
@@ -369,7 +373,7 @@ class PreferencesViewController: UIViewController{
                 case 5:
                     for _ in 1...durationHours
                     {
-                        if(hour - 7 >= 0)
+                        if(hour - 7 >= 0 && hour < 22)
                         {
                             ThisWeek.Instance.Six[hour-7] = "busy"
                         }
@@ -378,7 +382,7 @@ class PreferencesViewController: UIViewController{
                 case 6:
                     for _ in 1...durationHours
                     {
-                        if(hour - 7 >= 0)
+                        if(hour - 7 >= 0 && hour < 22)
                         {
                             ThisWeek.Instance.Seven[hour-7] = "busy"
                         }
