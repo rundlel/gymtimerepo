@@ -301,9 +301,7 @@ class PreferencesViewController: UIViewController{
         {
             print(EventArray[i].startDate)
             components = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].startDate as Date)
-            let endComponents = NSCalendar.current.dateComponents(unitFlags, from: EventArray[i].endDate as Date)
             var hour = Int(components.hour!)
-            var hour2 = Int(endComponents.hour!)
             
             let flags = Set<Calendar.Component>([.day])
             let date1 = NSCalendar.current.startOfDay(for: EventArray[i].startDate)
@@ -313,10 +311,6 @@ class PreferencesViewController: UIViewController{
             let durationMinutes = durationConversionToMinutes(second: EventArray[i].duration)
             let durationHours = durationConversionToHours(minute: durationMinutes)
            
-            if(hour < 7 && hour2 > 7)
-            {
-                
-            }
             
             //if the event is during the Gym's opening hours
             //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00

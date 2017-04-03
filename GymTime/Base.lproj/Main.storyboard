@@ -230,7 +230,6 @@
                                 </state>
                                 <connections>
                                     <action selector="didTapcreateAccount:" destination="btf-0m-YYM" eventType="touchUpInside" id="gE0-xJ-njw"/>
-                                    <segue destination="bjw-YP-QvL" kind="show" identifier="WelcomeScreen" id="Pyi-EC-AaS"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENTER YOUR EMAIL ADDRESS AND A PASSWORD BELOW TO CREATE YOUR ACCOUNT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6F-aD-Wks">
@@ -278,6 +277,7 @@
                         <outlet property="createAccEmailField" destination="3of-72-KHY" id="Nj8-Aa-SIV"/>
                         <outlet property="createAccPasswordField" destination="wUM-M3-dlk" id="LHU-do-fed"/>
                         <outlet property="errorMessage" destination="PZL-fg-Hqs" id="fvx-if-cHh"/>
+                        <segue destination="bjw-YP-QvL" kind="show" identifier="WelcomeScreen" id="FFj-GO-6rU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PI1-tt-sT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
