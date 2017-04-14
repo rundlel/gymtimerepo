@@ -9,14 +9,35 @@
 import UIKit
 
 import Firebase
+import CoreGraphics
 
 @objc(SignInViewController)
 class SignInViewController: UIViewController {
     
+    
+    @IBOutlet weak var signInButton: UIButton!
    
     @IBOutlet weak var emailField: UITextField!
     
     @IBOutlet weak var passwordField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+      //  signInButton.layer.borderWidth = 1.0
+        //let borderColour = (UIColor(red: 0.22, green: 0.47, blue: 0.60, alpha: 1.0))
+        
+      //  let color : CGColor! = (red: CGFloat(0.22), green: CGFloat(0.47), blue: CGFloat(0.60), alpha: CGFloat(1.0))
+        
+       // signInButton?.layer.borderColor = UIColor(red: 0.22, green: 0.47, blue: 0.60, alpha: 1.0).cgColor
+      //  print("Here")
+            
+            //CGColor.init(red: CGFloat(0.22), green: CGFloat(0.47), blue: CGFloat(0.60), alpha: CGFloat(1.0))
+        
+      //  init(red: CGFloat(0.22), green: CGFloat(0.47), blue: CGFloat(0.60), alpha: CGFloat(1.0))
+        
+        
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         

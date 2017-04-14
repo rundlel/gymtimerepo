@@ -18,6 +18,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var ref: FIRDatabaseReference!
     
+    
+    
     @IBOutlet weak var tableView: UITableView!
     var listOfTimesArray = [String]()
     
@@ -25,7 +27,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     var EventArray = [EventDetails]()
 
     var tappedButtons = [String]()
-    
+    var cellsThatAreGood = [String]()
+    var cellsThatAreMedium = [String]()
+    var cellsThatAreBusy = [String]()
     
     override func viewDidLoad()
     {
@@ -77,9 +81,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.backgroundColor = .clear
         
         
-        cell.cellButton.contentHorizontalAlignment = .right
+     //   cell.cellButton.contentHorizontalAlignment = .right
         cell.cellButton.tag = indexPath.row
-        cell.cellButton.setTitleColor(UIColor(red:0.93, green:0.96, blue:0.98, alpha:1.0), for: .disabled)
+        cell.cellButton.setTitleColor(UIColor(red:0.24, green:0.51, blue:0.68, alpha:1.0), for: .disabled)
         
         if tappedButtons.contains(cell.cellLabel.text!)
         {
@@ -89,6 +93,18 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             cell.cellButton.addTarget(self, action: #selector(addToCalendarButton(_:)), for: .touchUpInside)
             cell.cellButton.isEnabled = true
 
+        }
+        if(cellsThatAreGood.contains(cell.cellLabel.text!))
+        {
+            cell.cellStatusIndicator.backgroundColor = UIColor(red:0.73, green:0.90, blue:0.40, alpha:1.0)
+        }
+        else if(cellsThatAreMedium.contains(cell.cellLabel.text!))
+        {
+            cell.cellStatusIndicator.backgroundColor = UIColor(red:1.00, green:0.50, blue:0.00, alpha:1.0)
+        }
+        else if(cellsThatAreBusy.contains(cell.cellLabel.text!))
+        {
+            cell.cellStatusIndicator.backgroundColor = UIColor(red:0.94, green:0.21, blue:0.16, alpha:1.0)
         }
      
         return cell
@@ -111,7 +127,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         {
             for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
             {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
@@ -128,6 +144,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
+                    tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                    if(tempPersonalisedTime.status == "good")
+                    {
+                        cellsThatAreGood.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "medium")
+                    {
+                        cellsThatAreMedium.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "busy")
+                    {
+                        cellsThatAreBusy.append(tempString)
+                    }
                 }
             }
         }
@@ -139,7 +168,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 
                 for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
                 {
-                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
@@ -157,6 +186,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
                         listOfTimesArray.append(tempString)
+                        tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                        if(tempPersonalisedTime.status == "good")
+                        {
+                            cellsThatAreGood.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "medium")
+                        {
+                            cellsThatAreMedium.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "busy")
+                        {
+                            cellsThatAreBusy.append(tempString)
+                        }
                     }
                     else if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium") && todayDay == "Sunday")
                     {
@@ -176,6 +218,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                             print(tempString)
                             listOfTimesArray.append(tempString)
                             print(listOfTimesArray)
+                            tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                            if(tempPersonalisedTime.status == "good")
+                            {
+                                cellsThatAreGood.append(tempString)
+                            }
+                            else if(tempPersonalisedTime.status == "medium")
+                            {
+                                cellsThatAreMedium.append(tempString)
+                            }
+                            else if(tempPersonalisedTime.status == "busy")
+                            {
+                                cellsThatAreBusy.append(tempString)
+                            }
                         }
                     }
                 }
@@ -184,7 +239,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             {
                 for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
                 {
-                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
@@ -202,6 +257,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
                         listOfTimesArray.append(tempString)
+                        tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                        if(tempPersonalisedTime.status == "good")
+                        {
+                            cellsThatAreGood.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "medium")
+                        {
+                            cellsThatAreMedium.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "busy")
+                        {
+                            cellsThatAreBusy.append(tempString)
+                        }
                     }
                 }
             }
@@ -210,7 +278,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         {
             for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
             {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
@@ -228,6 +296,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
+                    tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                    if(tempPersonalisedTime.status == "good")
+                    {
+                        cellsThatAreGood.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "medium")
+                    {
+                        cellsThatAreMedium.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "busy")
+                    {
+                        cellsThatAreBusy.append(tempString)
+                    }
                 }
             }
         }
@@ -235,7 +316,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         {
             for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
             {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
@@ -254,6 +335,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
+                    tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                    if(tempPersonalisedTime.status == "good")
+                    {
+                        cellsThatAreGood.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "medium")
+                    {
+                        cellsThatAreMedium.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "busy")
+                    {
+                        cellsThatAreBusy.append(tempString)
+                    }
                 }
             }
             
@@ -277,7 +371,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         {
             for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
             {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
@@ -294,6 +388,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
+                    tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                    if(tempPersonalisedTime.status == "good")
+                    {
+                        cellsThatAreGood.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "medium")
+                    {
+                        cellsThatAreMedium.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "busy")
+                    {
+                        cellsThatAreBusy.append(tempString)
+                    }
                 }
             }
         }
@@ -305,7 +412,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 
                 for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
                 {
-                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
@@ -322,6 +429,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
                         listOfTimesArray.append(tempString)
+                        tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                        if(tempPersonalisedTime.status == "good")
+                        {
+                            cellsThatAreGood.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "medium")
+                        {
+                            cellsThatAreMedium.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "busy")
+                        {
+                            cellsThatAreBusy.append(tempString)
+                        }
                     }
                     else if((tempPersonalisedTime.status == "good" || tempPersonalisedTime.status == "medium" || tempPersonalisedTime.status == "busy")  && todayDay == "Sunday")
                     {
@@ -341,6 +461,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                             print(tempString)
                             listOfTimesArray.append(tempString)
                             print(listOfTimesArray)
+                            tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                            if(tempPersonalisedTime.status == "good")
+                            {
+                                cellsThatAreGood.append(tempString)
+                            }
+                            else if(tempPersonalisedTime.status == "medium")
+                            {
+                                cellsThatAreMedium.append(tempString)
+                            }
+                            else if(tempPersonalisedTime.status == "busy")
+                            {
+                                cellsThatAreBusy.append(tempString)
+                            }
                         }
                     }
                 }
@@ -349,7 +482,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             {
                 for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
                 {
-                    let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                    var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                     var tempTime:Int? = Int(tempPersonalisedTime.time)!
                     var timeToString = String(tempTime!) + "am"
                     
@@ -367,6 +500,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                     {
                         let tempString = tempPersonalisedTime.day + " " + timeToString
                         listOfTimesArray.append(tempString)
+                        tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                        if(tempPersonalisedTime.status == "good")
+                        {
+                            cellsThatAreGood.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "medium")
+                        {
+                            cellsThatAreMedium.append(tempString)
+                        }
+                        else if(tempPersonalisedTime.status == "busy")
+                        {
+                            cellsThatAreBusy.append(tempString)
+                        }
                     }
                 }
             }
@@ -375,7 +521,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         {
             for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
             {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
@@ -392,6 +538,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
+                    tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                    if(tempPersonalisedTime.status == "good")
+                    {
+                        cellsThatAreGood.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "medium")
+                    {
+                        cellsThatAreMedium.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "busy")
+                    {
+                        cellsThatAreBusy.append(tempString)
+                    }
                 }
             }
         }
@@ -399,7 +558,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         {
             for i in 0...ThisWeek.Instance.personalisedTimesArray.count - 1
             {
-                let tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
+                var tempPersonalisedTime = ThisWeek.Instance.personalisedTimesArray[i]
                 var tempTime:Int? = Int(tempPersonalisedTime.time)!
                 var timeToString = String(tempTime!) + "am"
                 
@@ -417,6 +576,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 {
                     let tempString = tempPersonalisedTime.day + " " + timeToString
                     listOfTimesArray.append(tempString)
+                    tempPersonalisedTime.status = determineStatus(status: tempPersonalisedTime.status, tracker: tempPersonalisedTime.tracker)
+                    if(tempPersonalisedTime.status == "good")
+                    {
+                        cellsThatAreGood.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "medium")
+                    {
+                        cellsThatAreMedium.append(tempString)
+                    }
+                    else if(tempPersonalisedTime.status == "busy")
+                    {
+                        cellsThatAreBusy.append(tempString)
+                    }
                 }
             }
             
@@ -601,9 +773,31 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
 
         
+    func determineStatus(status: String, tracker: Int) -> String
+    {
+        var returnString = ""
         
+        if(status == "good" && tracker > 8)
+        {
+            returnString = "medium"
+        }
+        else if(status == "good" && tracker > 18)
+        {
+            returnString = "busy"
+        }
+        else if (status == "medium" && tracker > 8)
+        {
+            returnString = "busy"
+        }
+        else
+        {
+            returnString = status
+        }
+        
+        return returnString
+    }
 }
- 
+
     
 
 

@@ -28,7 +28,7 @@ class CreateAccountViewController: UIViewController {
                 print(error.localizedDescription)
                 if (error.localizedDescription.range(of:"badly formatted") != nil)
                 {
-                    self.errorMessage.text = "This is not a valid email address"
+                    self.errorMessage.text = "Please enter a valid email address"
                 }
                 else if (error.localizedDescription.range(of: "6") != nil)
                 {

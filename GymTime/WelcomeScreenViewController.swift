@@ -14,9 +14,11 @@ class WelcomeScreenViewController: UIViewController {
 
     var ref: FIRDatabaseReference!
     
+    @IBOutlet weak var informationLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.informationLabel.text = "Gym Time tells you the best times for you to work out in Trinity Gym this week. \n\n\n\nAll you need to do is make sure you have all your lectures, meetings and coffee breaks scehduled in your Calendar and we'll look after the rest!"
         checkAuthorisation()
         let delay = 2.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)

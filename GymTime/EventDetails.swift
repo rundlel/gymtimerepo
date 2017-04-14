@@ -7,7 +7,6 @@
 //
 
 import EventKit
-import UIKit
 
 struct EventDetails
 {  

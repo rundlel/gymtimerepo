@@ -23,7 +23,7 @@ class PreferencesViewController: UIViewController{
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     
-    let good = 30
+    let good = 35
     let medium = 23
     let busy = 10
     
@@ -79,7 +79,7 @@ class PreferencesViewController: UIViewController{
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
         if (status != EKAuthorizationStatus.authorized)
         {
-            self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
+            self.mustGivePermissionLabel.text = "GymTime needs access to your calendar to get the best times for you. Go to Settings -> GymTime and enable the Calendar switch."
             self.ActivityIndicator.stopAnimating()
         }
         else
@@ -473,7 +473,7 @@ class PreferencesViewController: UIViewController{
                         
                             if(ThisWeek.Instance.One[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
-                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn, tracker: intToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
                             }
                         })
@@ -497,7 +497,7 @@ class PreferencesViewController: UIViewController{
                         
                             if(ThisWeek.Instance.Two[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
-                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn,tracker: intToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
                             }
                         })
@@ -520,7 +520,7 @@ class PreferencesViewController: UIViewController{
                         
                             if(ThisWeek.Instance.Three[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
-                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn, tracker: intToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
                             }
                         })
@@ -543,7 +543,7 @@ class PreferencesViewController: UIViewController{
                         
                             if(ThisWeek.Instance.Four[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
-                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn, tracker: intToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
                             }
                         })
@@ -566,7 +566,7 @@ class PreferencesViewController: UIViewController{
                         
                             if(ThisWeek.Instance.Five[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
-                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn, tracker: intToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
                             }
                         })
@@ -591,7 +591,7 @@ class PreferencesViewController: UIViewController{
                         
                             if(ThisWeek.Instance.Six[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
-                                let x = PersonalisedTimes(date: day.day!,day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                                let x = PersonalisedTimes(date: day.day!,day: tempDay, time: tempTimeAsString, status: stringToReturn, tracker: intToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
                             }
                         })
@@ -616,7 +616,7 @@ class PreferencesViewController: UIViewController{
                             
                             if(ThisWeek.Instance.Seven[index] == "free" && ((stringToReturn == "good" && intToReturn <= self.good) || (stringToReturn == "medium" && intToReturn <= self.medium) || (stringToReturn == "busy" && intToReturn <= self.busy)))
                             {
-                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn)
+                                let x = PersonalisedTimes(date: day.day!, day: tempDay, time: tempTimeAsString, status: stringToReturn, tracker: intToReturn)
                                 ThisWeek.Instance.personalisedTimesArray.append(x)
                             }
                         })

@@ -10,8 +10,9 @@ import Foundation
 
 struct PersonalisedTimes
 {
-    var date : Int
+    var date: Int
     var day: String
     var time: String
     var status: String
+    var tracker: Int
 }
