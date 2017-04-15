@@ -15,10 +15,6 @@ class GTViewController: UIViewController{
     
     
     var ref: FIRDatabaseReference!
-    var messages: [FIRDataSnapshot]! = []
-
-    
-    fileprivate var _refHandle: FIRDatabaseHandle!
     
     @IBOutlet var displayLabel: UILabel!
     @IBOutlet weak var segmentSwitch: UISegmentedControl!
@@ -33,29 +29,25 @@ class GTViewController: UIViewController{
 
     
     override func viewDidAppear(_ animated: Bool) {
-     
+     ThisWeek.Instance.loadDatabase = true
         
         
     }
     
   
-    
     func configureDatabase() {
         ref = FIRDatabase.database().reference()
       
     }
+    
     @IBAction func logoutButton(_ sender: Any)
     {
         var user = FIRAuth.auth()?.currentUser
-        print("logout pressed")
-        print(user?.email! ?? "none")
         try! FIRAuth.auth()!.signOut()
         user = FIRAuth.auth()?.currentUser
-        print(user?.email! ?? "none")
-        
-           
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInVC")
-            self.present(vc, animated: true, completion: nil)
+
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInVC")
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func displayData(_ sender: UISegmentedControl) {

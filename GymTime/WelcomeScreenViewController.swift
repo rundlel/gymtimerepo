@@ -65,37 +65,22 @@ class WelcomeScreenViewController: UIViewController {
         EKEventStore().requestAccess(to: .event, completion: {
             (accessGranted: Bool, error: Error?) in
             
-            if accessGranted == true
-            {
+           if accessGranted == true
+           {
                 DispatchQueue.main.async(execute:
-                    {
-                        print("request Access")
+                {
+                        print("access granted")
                 })
             }
             else
             {
                 DispatchQueue.main.async(execute:
-                    {
-
+                {
+                    print("access denied")
                 })
             }
         })
     }
-    func alertTheUser()
-    {
-        let alert = UIAlertController(title: "GymTime needs permission",
-                                      message: "GymTime needs access to your calendar in order to tell you the best time for you",
-                                      preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Go To Settings", style: .default, handler: { action in
-            let openSettingsUrl = URL(string: UIApplicationOpenSettingsURLString)
-            UIApplication.shared.openURL(openSettingsUrl!)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
-        
-        present(alert, animated: true, completion: nil)
-    }
-
-
+    
+   
 }

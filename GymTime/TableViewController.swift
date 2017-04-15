@@ -19,6 +19,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     var ref: FIRDatabaseReference!
     
     
+    @IBOutlet weak var seeMoreTimesButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     var listOfTimesArray = [String]()
@@ -53,19 +54,11 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     override func viewDidAppear(_ animated: Bool)
     {
-       /* let backgroundImage = UIImage(named: "Waves-geometric-vectors-background-material")
-        let imageView = UIImageView(image: backgroundImage!)
-        imageView.contentMode = .scaleAspectFill
-        
-        
-        self.tableView.backgroundView = imageView
-        
-        tableView.tableFooterView = UIView(frame: CGRect.zero)*/
-        
+
     }
     
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1 
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,6 +102,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
      
         return cell
     }
+    
+    
     
     func prepareDataForDisplay()
     {
@@ -601,6 +596,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         listOfTimesArray.removeAll()
         seeMoreAvailableTimes()
         ThisWeek.Instance.seeMoreTimes = true
+        self.seeMoreTimesButton.isHidden = true
         tableView.reloadData()
     }
     
@@ -796,6 +792,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return returnString
     }
+    
+   
 }
 
     

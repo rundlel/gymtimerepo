@@ -35,8 +35,6 @@ class SignInViewController: UIViewController {
         
       //  init(red: CGFloat(0.22), green: CGFloat(0.47), blue: CGFloat(0.60), alpha: CGFloat(1.0))
         
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
