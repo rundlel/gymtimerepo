@@ -17,6 +17,8 @@ class PreferencesViewController: UIViewController{
     
     @IBOutlet weak var todayPreferenceSwitch: UISwitch!
    
+    @IBOutlet weak var saveFeedback: UILabel!
+    
     @IBOutlet weak var weekendPreferenceSwitch: UISwitch!
     
     @IBOutlet weak var continueButton: UIButton!
@@ -40,6 +42,8 @@ class PreferencesViewController: UIViewController{
     
     @IBAction func savePreferencesButton(_ sender: Any) {
         
+        saveFeedback.isHidden = false
+        
         if(todayPreferenceSwitch.isOn == true)
         {
             ThisWeek.Instance.includeToday = true
@@ -62,12 +66,21 @@ class PreferencesViewController: UIViewController{
         let ref = FIRDatabase.database().reference()
         ref.child("Preferences").child((user?.uid)!).setValue(["today" : ThisWeek.Instance.includeToday, "weekend" : ThisWeek.Instance.includeWeekend])
         
+        let delay = 0.5
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
+        {
+            self.saveFeedback.isHidden = true
+        }
+        
+        
+        
         
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        saveFeedback.isHidden = true
         initialisePreferenceSwitch()
         ActivityIndicator.hidesWhenStopped = true
         continueButton.isEnabled = false
