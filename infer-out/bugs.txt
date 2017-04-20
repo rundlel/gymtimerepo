@@ -1,0 +1,585 @@
+Found 72 issues
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:888: warning: PARAMETER_NOT_NULL_CHECKED
+  Parameter `testResponse` is not checked for null, there could be a null pointer dereference: pointer `testResponse` could be null and is dereferenced at line 888, column 5
+  886.     service.testBlock = ^(GTMSessionFetcher *fetcherToTest,
+  887.                           GTMSessionFetcherTestResponse testResponse) {
+  888. >     testResponse(fakedResponse, fakedDataOrNil, fakedErrorOrNil);
+  889.     };
+  890.     return service;
+
+Pods/GTMSessionFetcher/Source/GTMSessionUploadFetcher.m:826: error: RETAIN_CYCLE
+  Retain cycle involving the following objects:  (1) object self retaining `self._fetcherInFlight`,   at line 826, column 3
+  824.   
+  825.     self.fetcherInFlight = self;
+  826. >   [super beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
+  827.       self.fetcherInFlight = nil;
+  828.       // callback
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:461: error: RETAIN_CYCLE
+  Retain cycle involving the following objects:  (1) an object of `GTMSessionFetcherSessionDelegateDispatcher` retaining another object via instance variable `_discardTimer`,  (2) an object of `NSTimer` retaining another object via instance variable `_target`,   at line 461, column 3
+  459.     GTMSessionFetcherSessionDelegateDispatcher *delegateDispatcher =
+  460.         [self delegateDispatcherForFetcher:fetcher];
+  461. >   [delegateDispatcher removeFetcher:fetcher];
+  462.   
+  463.     NSMutableArray *fetchersToStart;
+
+Pods/GTMSessionFetcher/Source/GTMSessionUploadFetcher.m:630: warning: PARAMETER_NOT_NULL_CHECKED
+  Parameter `response` is not checked for null, there could be a null pointer dereference: pointer `response` could be null and is dereferenced at line 630, column 3
+  628.     }
+  629.     // The response always re-dispatches to the main thread, so we skip doing that here.
+  630. >   response(resultData, error);
+  631.   }
+  632.   
+
+Pods/GTMSessionFetcher/Source/GTMSessionUploadFetcher.m:586: warning: PARAMETER_NOT_NULL_CHECKED
+  Parameter `response` is not checked for null, there could be a null pointer dereference: pointer `response` could be null and is dereferenced at line 586, column 9
+  584.                                     offset, length, dataLength];
+  585.           GTMSESSION_ASSERT_DEBUG(NO, @"%@", errorMessage);
+  586. >         response(nil, [self uploadChunkUnavailableErrorWithDescription:errorMessage]);
+  587.           return;
+  588.         }
+
+Pods/GTMSessionFetcher/Source/GTMSessionUploadFetcher.m:592: warning: PARAMETER_NOT_NULL_CHECKED
+  Parameter `response` is not checked for null, there could be a null pointer dereference: pointer `response` could be null and is dereferenced at line 592, column 5
+  590.         resultData = [uploadData subdataWithRange:range];
+  591.       }
+  592. >     response(resultData, nil);
+  593.       return;
+  594.     }
+
+Pods/GTMSessionFetcher/Source/GTMSessionUploadFetcher.h:118: warning: STRONG_DELEGATE_WARNING
+  Property or ivar `delegateCompletionHandler` declared strong at line 118, column 1. In general delegates should be declared weak or assign
+  116.   // Exposed for testing only.
+  117.   @property(atomic, readonly, GTM_NULLABLE) dispatch_queue_t delegateCallbackQueue;
+  118. > @property(atomic, readonly, GTM_NULLABLE) GTMSessionFetcherCompletionHandler delegateCompletionHandler;
+  119.   
+  120.   @end
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherLogging.m:48: warning: ASSIGN_POINTER_WARNING
+  Property `readDelegate` is a pointer type marked with the `assign` attribute at line 48, column 1. Use a different attribute like `strong` or `weak`.
+  46.   + (instancetype)inputStreamWithStream:(NSInputStream *)input;
+  47.   
+  48. > @property (assign) id readDelegate;
+  49.   @property (assign) SEL readSelector;
+  50.   
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:918: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_testBlock` of an atomic property at line 918, column 9. Accessing an ivar of an atomic property makes the property nonatomic
+  916.         if (response == nil && responseData == nil && error == nil) {
+  917.           // Assume the fetcher should execute rather than be tested.
+  918. >         _testBlock = nil;
+  919.           _isUsingTestBlock = NO;
+  920.           [_sessionTask resume];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:920: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_sessionTask` of an atomic property at line 920, column 10. Accessing an ivar of an atomic property makes the property nonatomic
+  918.           _testBlock = nil;
+  919.           _isUsingTestBlock = NO;
+  920. >         [_sessionTask resume];
+  921.           return;
+  922.         }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:950: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 950, column 11. Accessing an ivar of an atomic property makes the property nonatomic
+  948.           if (bodyFileURL) {
+  949.             NSError *readError;
+  950. >           _bodyData = [NSData dataWithContentsOfURL:bodyFileURL
+  951.                                               options:NSDataReadingMappedIfSafe
+  952.                                                 error:&readError];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:963: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 963, column 63. Accessing an ivar of an atomic property makes the property nonatomic
+  961.           // immediate, synchronous setting of callback blocks after beginFetch working in tests.
+  962.           dispatch_async(dispatch_get_main_queue(), ^{
+  963. >           [self simulateDataCallbacksForTestBlockWithBodyData:_bodyData
+  964.                                                        response:response
+  965.                                                    responseData:responseData
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:2297: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 2297, column 44. Accessing an ivar of an atomic property makes the property nonatomic
+  2295.       dispatch_group_async(_callbackGroup, callbackQueue, ^{
+  2296.           if (!afterStopped) {
+  2297. >           NSDate *serviceStoppedAllDate = [_service stoppedAllFetchersDate];
+  2298.   
+  2299.             @synchronized(self) {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:602: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 602, column 42. Accessing an ivar of an atomic property makes the property nonatomic
+  600.       }
+  601.   
+  602. >     id<NSURLSessionDelegate> delegate = [_service sessionDelegate];
+  603.       if (!delegate || !self.canShareSession) {
+  604.         delegate = self;
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:868: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_testBlock` of an atomic property at line 868, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  866.     [_service fetcherDidBeginFetching:self];
+  867.   
+  868. >   if (_testBlock) {
+  869.   #if !GTM_DISABLE_FETCHER_TEST_BLOCK
+  870.       [self simulateFetchForTestBlock];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:567: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configuration` of an atomic property at line 567, column 9. Accessing an ivar of an atomic property makes the property nonatomic
+  565.        || (TARGET_OS_IPHONE && defined(__IPHONE_8_0) && __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0))
+  566.           // iOS 8/10.10 builds require the new backgroundSessionConfiguration method name.
+  567. >         _configuration =
+  568.               [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:sessionIdentifier];
+  569.   #elif (!TARGET_OS_IPHONE && defined(MAC_OS_X_VERSION_10_10) && MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_10) \
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:739: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_downloadResumeData` of an atomic property at line 739, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  737.     NSURLSessionTask *newSessionTask;
+  738.     BOOL needsDataAccumulator = NO;
+  739. >   if (_downloadResumeData) {
+  740.       newSessionTask = [_session downloadTaskWithResumeData:_downloadResumeData];
+  741.       GTMSESSION_ASSERT_DEBUG_OR_LOG(newSessionTask,
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:664: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 664, column 19. Accessing an ivar of an atomic property makes the property nonatomic
+  662.       mayDelay = NO;
+  663.     }
+  664. >   if (mayDelay && _service) {
+  665.       BOOL shouldFetchNow = [_service fetcherShouldBeginFetching:self];
+  666.       if (!shouldFetchNow) {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:740: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_downloadResumeData` of an atomic property at line 740, column 59. Accessing an ivar of an atomic property makes the property nonatomic
+  738.     BOOL needsDataAccumulator = NO;
+  739.     if (_downloadResumeData) {
+  740. >     newSessionTask = [_session downloadTaskWithResumeData:_downloadResumeData];
+  741.       GTMSESSION_ASSERT_DEBUG_OR_LOG(newSessionTask,
+  742.           @"Failed downloadTaskWithResumeData for %@, resume data %tu bytes",
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:765: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 765, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  763.         newSessionTask = [_session uploadTaskWithRequest:fetchRequest
+  764.                                               fromData:(NSData * GTM_NONNULL_TYPE)_bodyData];
+  765. >       GTMSESSION_ASSERT_DEBUG_OR_LOG(newSessionTask,
+  766.             @"Failed uploadTaskWithRequest for %@, %@, body data %tu bytes",
+  767.             _session, fetchRequest, _bodyData.length);
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:692: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 692, column 9. Accessing an ivar of an atomic property makes the property nonatomic
+  690.       }
+  691.   
+  692. >     if (_bodyData) {
+  693.         if (!needsUploadTask) {
+  694.           fetchRequest.HTTPBody = _bodyData;
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:791: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_taskPriority` of an atomic property at line 791, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  789.       newSessionTask.taskDescription = _taskDescription;
+  790.     }
+  791. >   if (_taskPriority >= 0) {
+  792.   #if TARGET_OS_TV || TARGET_OS_WATCH
+  793.       BOOL hasTaskPriority = YES;
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:553: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configuration` of an atomic property at line 553, column 10. Accessing an ivar of an atomic property makes the property nonatomic
+  551.     if (!self.session) {
+  552.       // Create a session.
+  553. >     if (!_configuration) {
+  554.         if (priorSessionIdentifier || self.usingBackgroundSession) {
+  555.           NSString *sessionIdentifier = priorSessionIdentifier;
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:809: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_testBlock` of an atomic property at line 809, column 8. Accessing an ivar of an atomic property makes the property nonatomic
+  807.     _testBlock = nil;
+  808.   #else
+  809. >   if (!_testBlock) {
+  810.       if (gGlobalTestBlock) {
+  811.         // Note that the test block may pass nil for all of its response parameters,
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:785: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_accumulateDataBlock` of an atomic property at line 785, column 31. Accessing an ivar of an atomic property makes the property nonatomic
+  783.     }
+  784.   
+  785. >   if (needsDataAccumulator && _accumulateDataBlock == nil) {
+  786.       self.downloadedData = [NSMutableData data];
+  787.     }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:599: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configurationBlock` of an atomic property at line 599, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  597.   
+  598.       if (_configurationBlock) {
+  599. >       _configurationBlock(self, _configuration);
+  600.       }
+  601.   
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:520: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_allowedInsecureSchemes` of an atomic property at line 520, column 11. Accessing an ivar of an atomic property makes the property nonatomic
+  518.             }
+  519.           } else {
+  520. >           GTMSESSION_ASSERT_DEBUG(NO, @"Insecure fetch request has a scheme (%@)"
+  521.                                         @" not found in fetcher allowedInsecureSchemes (%@): %@",
+  522.                                     requestScheme, _allowedInsecureSchemes ?: @" @[] ", fetchRequestURL);
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:425: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_initialBeginFetchDate` of an atomic property at line 425, column 8. Accessing an ivar of an atomic property makes the property nonatomic
+  423.                             _delegateQueue.name, _delegateQueue.maxConcurrentOperationCount);
+  424.   
+  425. >   if (!_initialBeginFetchDate) {
+  426.       // This ivar is set only here on the initial beginFetch so need not be synchronized.
+  427.       _initialBeginFetchDate = [[NSDate alloc] init];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:427: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_initialBeginFetchDate` of an atomic property at line 427, column 5. Accessing an ivar of an atomic property makes the property nonatomic
+  425.     if (!_initialBeginFetchDate) {
+  426.       // This ivar is set only here on the initial beginFetch so need not be synchronized.
+  427. >     _initialBeginFetchDate = [[NSDate alloc] init];
+  428.     }
+  429.   
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:596: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configuration` of an atomic property at line 596, column 5. Accessing an ivar of an atomic property makes the property nonatomic
+  594.   #endif
+  595.       }  // !_configuration
+  596. >     _configuration.HTTPCookieStorage = self.cookieStorage;
+  597.   
+  598.       if (_configurationBlock) {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:818: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_testBlock` of an atomic property at line 818, column 24. Accessing an ivar of an atomic property makes the property nonatomic
+  816.       }
+  817.     }
+  818. >   _isUsingTestBlock = (_testBlock != nil);
+  819.   #endif  // GTM_DISABLE_FETCHER_TEST_BLOCK
+  820.   
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:686: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 686, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  684.   
+  685.     BOOL needsUploadTask = (self.useUploadTask || self.bodyFileURL || self.bodyStreamProvider);
+  686. >   if (_bodyData || self.bodyStreamProvider || fetchRequest.HTTPBodyStream) {
+  687.       if (isEffectiveHTTPGet) {
+  688.         fetchRequest.HTTPMethod = @"POST";
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:815: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_testBlock` of an atomic property at line 815, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  813.         // global test block has been set, and the app is only testing a specific
+  814.         // fetcher.  The block simulation code will then resume the task.
+  815. >       _testBlock = gGlobalTestBlock;
+  816.       }
+  817.     }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:761: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 761, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  759.                                        _session, fetchRequest);
+  760.       } else {
+  761. >       GTMSESSION_ASSERT_DEBUG_OR_LOG(_bodyData != nil,
+  762.                                        @"Upload task needs body data, %@", fetchRequest);
+  763.         newSessionTask = [_session uploadTaskWithRequest:fetchRequest
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:501: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_allowedInsecureSchemes` of an atomic property at line 501, column 39. Accessing an ivar of an atomic property makes the property nonatomic
+  499.   
+  500.         // Check schemes first.  A file scheme request may be allowed here, or as a localhost request.
+  501. >       for (NSString *allowedScheme in _allowedInsecureSchemes) {
+  502.           if (requestScheme != nil &&
+  503.               [requestScheme caseInsensitiveCompare:allowedScheme] == NSOrderedSame) {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:788: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_taskDescription` of an atomic property at line 788, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  786.       self.downloadedData = [NSMutableData data];
+  787.     }
+  788. >   if (_taskDescription) {
+  789.       newSessionTask.taskDescription = _taskDescription;
+  790.     }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:694: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 694, column 33. Accessing an ivar of an atomic property makes the property nonatomic
+  692.       if (_bodyData) {
+  693.         if (!needsUploadTask) {
+  694. >         fetchRequest.HTTPBody = _bodyData;
+  695.         }
+  696.   #if !STRIP_GTM_FETCH_LOGGING
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:590: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configuration` of an atomic property at line 590, column 9. Accessing an ivar of an atomic property makes the property nonatomic
+  588.           self.canShareSession = NO;
+  589.         } else {
+  590. >         _configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+  591.         }
+  592.   #if !GTM_ALLOW_INSECURE_REQUESTS
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:441: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_downloadResumeData` of an atomic property at line 441, column 34. Accessing an ivar of an atomic property makes the property nonatomic
+  439.     }
+  440.   
+  441. >   if (fetchRequestURL == nil && !_downloadResumeData && !priorSessionIdentifier) {
+  442.       GTMSESSION_ASSERT_DEBUG(NO, @"Beginning a fetch requires a request with a URL");
+  443.       [self failToBeginFetchWithError:beginFailureError(GTMSessionFetcherErrorDownloadFailed)];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:665: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 665, column 28. Accessing an ivar of an atomic property makes the property nonatomic
+  663.     }
+  664.     if (mayDelay && _service) {
+  665. >     BOOL shouldFetchNow = [_service fetcherShouldBeginFetching:self];
+  666.       if (!shouldFetchNow) {
+  667.         // The fetch is deferred, but will happen later.
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:593: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configuration` of an atomic property at line 593, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  591.         }
+  592.   #if !GTM_ALLOW_INSECURE_REQUESTS
+  593. >       _configuration.TLSMinimumSupportedProtocol = kTLSProtocol12;
+  594.   #endif
+  595.       }  // !_configuration
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:801: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_taskPriority` of an atomic property at line 801, column 33. Accessing an ivar of an atomic property makes the property nonatomic
+  799.   #endif
+  800.       if (hasTaskPriority) {
+  801. >       newSessionTask.priority = _taskPriority;
+  802.       }
+  803.     }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:789: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_taskDescription` of an atomic property at line 789, column 38. Accessing an ivar of an atomic property makes the property nonatomic
+  787.     }
+  788.     if (_taskDescription) {
+  789. >     newSessionTask.taskDescription = _taskDescription;
+  790.     }
+  791.     if (_taskPriority >= 0) {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:741: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_downloadResumeData` of an atomic property at line 741, column 5. Accessing an ivar of an atomic property makes the property nonatomic
+  739.     if (_downloadResumeData) {
+  740.       newSessionTask = [_session downloadTaskWithResumeData:_downloadResumeData];
+  741. >     GTMSESSION_ASSERT_DEBUG_OR_LOG(newSessionTask,
+  742.           @"Failed downloadTaskWithResumeData for %@, resume data %tu bytes",
+  743.           _session, _downloadResumeData.length);
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:866: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 866, column 4. Accessing an ivar of an atomic property makes the property nonatomic
+  864.   
+  865.     // The service needs to know our task if it is serving as NSURLSession delegate.
+  866. >   [_service fetcherDidBeginFetching:self];
+  867.   
+  868.     if (_testBlock) {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:598: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configurationBlock` of an atomic property at line 598, column 9. Accessing an ivar of an atomic property makes the property nonatomic
+  596.       _configuration.HTTPCookieStorage = self.cookieStorage;
+  597.   
+  598. >     if (_configurationBlock) {
+  599.         _configurationBlock(self, _configuration);
+  600.       }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:764: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_bodyData` of an atomic property at line 764, column 81. Accessing an ivar of an atomic property makes the property nonatomic
+  762.                                        @"Upload task needs body data, %@", fetchRequest);
+  763.         newSessionTask = [_session uploadTaskWithRequest:fetchRequest
+  764. >                                             fromData:(NSData * GTM_NONNULL_TYPE)_bodyData];
+  765.         GTMSESSION_ASSERT_DEBUG_OR_LOG(newSessionTask,
+  766.             @"Failed uploadTaskWithRequest for %@, %@, body data %tu bytes",
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:613: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 613, column 6. Accessing an ivar of an atomic property makes the property nonatomic
+  611.       // Tell the service about the session created by this fetcher.  This also signals the
+  612.       // service's semaphore to allow other fetchers to request this session.
+  613. >     [_service fetcherDidCreateSession:self];
+  614.   
+  615.       // If this assertion fires, the client probably tried to use a session identifier that was
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:599: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configuration` of an atomic property at line 599, column 33. Accessing an ivar of an atomic property makes the property nonatomic
+  597.   
+  598.       if (_configurationBlock) {
+  599. >       _configurationBlock(self, _configuration);
+  600.       }
+  601.   
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:545: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 545, column 21. Accessing an ivar of an atomic property makes the property nonatomic
+  543.   
+  544.     if (!self.session && self.canShareSession) {
+  545. >     self.session = [_service sessionForFetcherCreation];
+  546.       // If _session is nil, then the service's session creation semaphore will block
+  547.       // until this fetcher invokes fetcherDidCreateSession: below, so this *must* invoke
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:606: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_configuration` of an atomic property at line 606, column 59. Accessing an ivar of an atomic property makes the property nonatomic
+  604.         delegate = self;
+  605.       }
+  606. >     self.session = [NSURLSession sessionWithConfiguration:_configuration
+  607.                                                    delegate:delegate
+  608.                                               delegateQueue:self.sessionDelegateQueue];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:361: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_completionHandler` of an atomic property at line 361, column 3. Accessing an ivar of an atomic property makes the property nonatomic
+  359.     GTMSessionCheckNotSynchronized(self);
+  360.   
+  361. >   _completionHandler = [handler copy];
+  362.   
+  363.     // The user may have called setDelegate: earlier if they want to use other
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:334: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_wasCreatedFromBackgroundSession` of an atomic property at line 334, column 16. Accessing an ivar of an atomic property makes the property nonatomic
+  332.       if (self.downloadResumeData.length > 0) {
+  333.         requestStr = @"<download resume data>";
+  334. >     } else if (_wasCreatedFromBackgroundSession) {
+  335.         requestStr = @"<from bg session>";
+  336.       } else {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:982: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_session` of an atomic property at line 982, column 11. Accessing an ivar of an atomic property makes the property nonatomic
+  980.     return [NSString stringWithFormat:@"%@ %p %@ %@",
+  981.             [self class], self,
+  982. >           _session ?: @"<no session>",
+  983.             _taskToFetcherMap.count > 0 ? _taskToFetcherMap : @"<no tasks>"];
+  984.   }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:1064: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_session` of an atomic property at line 1064, column 3. Accessing an ivar of an atomic property makes the property nonatomic
+  1062.     //
+  1063.     // The _taskToFetcherMap needs to stay valid until the outstanding tasks finish.
+  1064. >   _session = nil;
+  1065.   }
+  1066.   
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:1059: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_session` of an atomic property at line 1059, column 4. Accessing an ivar of an atomic property makes the property nonatomic
+  1057.   
+  1058.     // Break any retain cycle from the session holding the delegate.
+  1059. >   [_session finishTasksAndInvalidate];
+  1060.   
+  1061.     // Immediately clear the session so no new task may be issued with it.
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:1490: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_service` of an atomic property at line 1490, column 4. Accessing an ivar of an atomic property makes the property nonatomic
+  1488.     [self releaseCallbacks];
+  1489.   
+  1490. >   [_service fetcherDidStop:self];
+  1491.   
+  1492.     self.authorizer = nil;
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:224: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_wasCreatedFromBackgroundSession` of an atomic property at line 224, column 5. Accessing an ivar of an atomic property makes the property nonatomic
+  222.       [fetcher setSessionIdentifier:sessionIdentifier];
+  223.       [sessionIdentifierToFetcherMap setObject:fetcher forKey:sessionIdentifier];
+  224. >     fetcher->_wasCreatedFromBackgroundSession = YES;
+  225.       [fetcher setCommentWithFormat:@"Resuming %@",
+  226.        fetcher && fetcher->_sessionIdentifierUUID ? fetcher->_sessionIdentifierUUID : @"?"];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:2870: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_hasLoggedError` of an atomic property at line 2870, column 31. Accessing an ivar of an atomic property makes the property nonatomic
+  2868.   #if !STRIP_GTM_FETCH_LOGGING
+  2869.     // _hasLoggedError is only set by this method
+  2870. >   if (!shouldDeferLogging && !_hasLoggedError) {
+  2871.       [self logNowWithError:error];
+  2872.     }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:2286: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_callbackQueue` of an atomic property at line 2286, column 31. Accessing an ivar of an atomic property makes the property nonatomic
+  2284.                                                         block:(void (^)(void))block {
+  2285.     // testBlock simulation code may not be synchronizing when this is invoked.
+  2286. >   [self invokeOnCallbackQueue:_callbackQueue
+  2287.                afterUserStopped:afterStopped
+  2288.                           block:block];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:1584: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_initialBeginFetchDate` of an atomic property at line 1584, column 20. Accessing an ivar of an atomic property makes the property nonatomic
+  1582.     GTMSessionCheckSynchronized(self);
+  1583.   
+  1584. >   BOOL hasBegun = (_initialBeginFetchDate != nil);
+  1585.     return hasBegun && !_hasStoppedFetching;
+  1586.   }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:3138: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_retryFactor` of an atomic property at line 3138, column 46. Accessing an ivar of an atomic property makes the property nonatomic
+  3136.     // The next wait interval is the factor (2.0) times the last interval,
+  3137.     // but never less than the minimum interval.
+  3138. >   NSTimeInterval secs = _lastRetryInterval * _retryFactor;
+  3139.     if (_maxRetryInterval > 0) {
+  3140.       secs = MIN(secs, _maxRetryInterval);
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:690: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_unusedSessionTimeout` of an atomic property at line 690, column 83. Accessing an ivar of an atomic property makes the property nonatomic
+  688.       _delegateDispatcher =
+  689.           [[GTMSessionFetcherSessionDelegateDispatcher alloc] initWithParentService:self
+  690. >                                                            sessionDiscardInterval:_unusedSessionTimeout];
+  691.     }
+  692.   }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:1600: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_sessionTask` of an atomic property at line 1600, column 29. Accessing an ivar of an atomic property makes the property nonatomic
+  1598.     GTMSessionCheckSynchronized(self);
+  1599.   
+  1600. >   NSURLResponse *response = _sessionTask.response;
+  1601.     if (!response) response = _response;
+  1602.     return response;
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:914: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_testBlock` of an atomic property at line 914, column 3. Accessing an ivar of an atomic property makes the property nonatomic
+  912.     //
+  913.     // Callbacks will all occur on the callback queue.
+  914. >   _testBlock(self, ^(NSURLResponse *response, NSData *responseData, NSError *error) {
+  915.         // Callback from test block.
+  916.         if (response == nil && responseData == nil && error == nil) {
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:1004: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_discardInterval` of an atomic property at line 1004, column 34. Accessing an ivar of an atomic property makes the property nonatomic
+  1002.                                             userInfo:nil
+  1003.                                              repeats:NO];
+  1004. >     [_discardTimer setTolerance:(_discardInterval / 10)];
+  1005.       [[NSRunLoop mainRunLoop] addTimer:_discardTimer forMode:NSRunLoopCommonModes];
+  1006.     }
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:998: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_discardInterval` of an atomic property at line 998, column 7. Accessing an ivar of an atomic property makes the property nonatomic
+  996.     [_discardTimer invalidate];
+  997.     _discardTimer = nil;
+  998. >   if (_discardInterval > 0) {
+  999.       _discardTimer = [NSTimer timerWithTimeInterval:_discardInterval
+  1000.                                               target:self
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.m:999: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_discardInterval` of an atomic property at line 999, column 52. Accessing an ivar of an atomic property makes the property nonatomic
+  997.     _discardTimer = nil;
+  998.     if (_discardInterval > 0) {
+  999. >     _discardTimer = [NSTimer timerWithTimeInterval:_discardInterval
+  1000.                                               target:self
+  1001.                                             selector:@selector(discardTimerFired:)
+
+Pods/GTMSessionFetcher/Source/GTMSessionUploadFetcher.m:297: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_chunkFetcher` of an atomic property at line 297, column 5. Accessing an ivar of an atomic property makes the property nonatomic
+  295.       }
+  296.       [uploadFetchers addObject:uploadFetcher];
+  297. >     uploadFetcher->_chunkFetcher = fetcher;
+  298.       uploadFetcher->_fetcherInFlight = fetcher;
+  299.       [uploadFetcher attachSendProgressBlockToChunkFetcher:fetcher];
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:1895: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_completionHandler` of an atomic property at line 1895, column 35. Accessing an ivar of an atomic property makes the property nonatomic
+  1893.       BOOL isTaskInProgress = (holdSelf->_sessionTask
+  1894.                                && [_sessionTask state] != NSURLSessionTaskStateCompleted);
+  1895. >     BOOL needsToCallCompletion = (_completionHandler != nil);
+  1896.       BOOL isCallbackInProgress = (_callbackGroup
+  1897.           && dispatch_group_wait(_callbackGroup, dispatch_time(DISPATCH_TIME_NOW, delta)));
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:1893: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_sessionTask` of an atomic property at line 1893, column 30. Accessing an ivar of an atomic property makes the property nonatomic
+  1891.     int64_t delta = (int64_t)(100 * NSEC_PER_MSEC);  // 100 ms
+  1892.     while (1) {
+  1893. >     BOOL isTaskInProgress = (holdSelf->_sessionTask
+  1894.                                && [_sessionTask state] != NSURLSessionTaskStateCompleted);
+  1895.       BOOL needsToCallCompletion = (_completionHandler != nil);
+
+Pods/GTMSessionFetcher/Source/GTMSessionFetcher.m:1894: warning: DIRECT_ATOMIC_PROPERTY_ACCESS
+  Direct access to ivar `_sessionTask` of an atomic property at line 1894, column 34. Accessing an ivar of an atomic property makes the property nonatomic
+  1892.     while (1) {
+  1893.       BOOL isTaskInProgress = (holdSelf->_sessionTask
+  1894. >                              && [_sessionTask state] != NSURLSessionTaskStateCompleted);
+  1895.       BOOL needsToCallCompletion = (_completionHandler != nil);
+  1896.       BOOL isCallbackInProgress = (_callbackGroup
+
+Summary of the reports
+
+  DIRECT_ATOMIC_PROPERTY_ACCESS: 64
+     PARAMETER_NOT_NULL_CHECKED: 4
+                   RETAIN_CYCLE: 2
+        STRONG_DELEGATE_WARNING: 1
+         ASSIGN_POINTER_WARNING: 1
