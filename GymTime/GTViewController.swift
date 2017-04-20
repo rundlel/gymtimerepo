@@ -47,7 +47,7 @@ class GTViewController: UIViewController{
     {
         var user = FIRAuth.auth()?.currentUser
         try! FIRAuth.auth()!.signOut()
-        user = FIRAuth.auth()?.currentUser
+        user = FIRAuth.auth()?.currentUser 
 
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInVC")
         self.present(vc, animated: true, completion: nil)
