@@ -2,9 +2,8 @@
 //  ThisWeek.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 23/03/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
-//
+//  An instance of this class is created so that the week arrays etc can be accessed globally
 
 import Foundation
 
@@ -20,7 +19,6 @@ class ThisWeek {
     
     //ARRAYS
     var personalisedTimesArray = [PersonalisedTimes]()
-    
     
     var One = [String](repeating: "free", count: 15)
     

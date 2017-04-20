@@ -2,8 +2,8 @@
 //  CreateAccountViewController.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 12/02/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
+//  The author utilised the Firebase FriendlyChat project to implement some of the below functionality
 //
 
 import UIKit
@@ -20,8 +20,11 @@ class CreateAccountViewController: UIViewController {
     
     @IBOutlet var errorMessage: UILabel!
     
+    // When the user enters their email and password, Firebase creates a User object, if there is an error with the creation of this object an appropriate error message is displayed to the user
+    
     @IBAction func didTapcreateAccount(_ sender: AnyObject) {
         guard let email = createAccEmailField.text, let password = createAccPasswordField.text else { return }
+    
         FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error)
             in
             if let error = error {
@@ -41,42 +44,30 @@ class CreateAccountViewController: UIViewController {
                 
                 return
             }
-            self.setDisplayName(user!)
+           
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+    //if the user taps outside of the text field, hide keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
     
-    @IBAction func backToSignIn(_ sender: UIButton) {
-        
+    
+    @IBAction func backToSignIn(_ sender: UIButton)
+    {
        performSegue(withIdentifier: Constants.Segues.BackToSignInView, sender: nil) 
     }
     
-    func setDisplayName(_ user: FIRUser?) {
-        let changeRequest = user?.profileChangeRequest()
-        changeRequest?.displayName = user?.email!.components(separatedBy: "@")[0]
-        changeRequest?.commitChanges(){ (error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            self.signedIn(FIRAuth.auth()?.currentUser)
-        }
-    }
     
-    func signedIn(_ user: FIRUser?) {
-    MeasurementHelper.sendLoginEvent()
     
-    AppState.sharedInstance.displayName = user?.displayName ?? user?.email
-    AppState.sharedInstance.photoURL = user?.photoURL
-    AppState.sharedInstance.signedIn = true
+    func signedIn(_ user: FIRUser?)
+    {
+        MeasurementHelper.sendLoginEvent()
+        performSegue(withIdentifier: Constants.Segues.goToWelcomeScreen, sender: nil)
         
-    let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
-    NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
-    performSegue(withIdentifier: Constants.Segues.goToWelcomeScreen, sender: nil)
     }
     
     

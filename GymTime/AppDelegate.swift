@@ -2,7 +2,6 @@
 //  AppDelegate.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 29/01/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
 //
 
@@ -17,8 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions
         launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        //configures the firebase services
         FIRApp.configure()
+        
+        // enables the keyboard library for every text library
         IQKeyboardManager.sharedManager().enable = true
+        
         return true
     }
     

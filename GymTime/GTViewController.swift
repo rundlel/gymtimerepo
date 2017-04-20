@@ -2,8 +2,8 @@
 //  GTViewController.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 05/02/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
+//  This is the Controller for the 'Overview' Screen
 //
 
 import UIKit
@@ -22,12 +22,15 @@ class GTViewController: UIViewController{
     override func viewDidLoad() {
         configureDatabase()
         segmentSwitch.tintColor = UIColor(red:0.33, green:0.59, blue:0.91, alpha:1.0)
-       
+        
+        //depending on the current date, the application will use the data corresponding to an 'AverageWeek'  or a 'BusyWeek'
         ThisWeek.Instance.getMonth()
+        
+        //When the 'Overview' screen loads the user is presented with the opening hours of the gym.
         displayInitialData()
     }
 
-    
+    //In the event that the user closes the app without signing out and adds a meeting/appointment to their calendar before opening the app again the users calendar needs to be reanalysed and re-compared with the gym data to provide accurate info.
     override func viewDidAppear(_ animated: Bool) {
      ThisWeek.Instance.loadDatabase = true
         
@@ -50,6 +53,8 @@ class GTViewController: UIViewController{
         self.present(vc, animated: true, completion: nil)
     }
     
+    
+    //display appropriate data depending on which segment the user has selected
     @IBAction func displayData(_ sender: UISegmentedControl) {
         
         if(sender.selectedSegmentIndex == 0)
@@ -58,6 +63,7 @@ class GTViewController: UIViewController{
         }
         else
         {
+            //the overview of busy times during the week will differ depending on whether it is an 'average' month or a 'busy' month
             if (ThisWeek.Instance.monthType == "busy")
             {
                 displayLabel.text = "🗓✓ BEST DAYS: FRIDAY, SATURDAY, SUNDAY \n\n🗓✗ WORST DAYS: MONDAY & TUESDAY \n\n🕐✓BEST TIME: FRIDAY 7am - 12pm, 8am - 10am all week \n\n🕐✗WORST TIME: MONDAY 12pm-8pm, 4pm - 7pm all week"
@@ -68,8 +74,6 @@ class GTViewController: UIViewController{
             }
         }
     }
-    
-    
     
     
     func displayInitialData()

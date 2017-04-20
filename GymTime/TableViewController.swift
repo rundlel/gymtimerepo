@@ -57,16 +57,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     }
     
-        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         
         return  listOfTimesArray.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimeCell") as! TimeCell
         
@@ -74,19 +77,23 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.backgroundColor = .clear
         
         
-     //   cell.cellButton.contentHorizontalAlignment = .right
+     
         cell.cellButton.tag = indexPath.row
         cell.cellButton.setTitleColor(UIColor(red:0.24, green:0.51, blue:0.68, alpha:1.0), for: .disabled)
         
+        //if 'Add to Calendar' button is pressed, it is disabled
         if tappedButtons.contains(cell.cellLabel.text!)
         {
             cell.cellButton.isEnabled = false
         }
-        else{
+        else
+        {
             cell.cellButton.addTarget(self, action: #selector(addToCalendarButton(_:)), for: .touchUpInside)
             cell.cellButton.isEnabled = true
 
         }
+        
+        //This sets the status indicator
         if(cellsThatAreGood.contains(cell.cellLabel.text!))
         {
             cell.cellStatusIndicator.backgroundColor = UIColor(red:0.73, green:0.90, blue:0.40, alpha:1.0)
@@ -104,7 +111,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     
-    
+    //This function displays the intial data in the table view based on the user's preferences
     func prepareDataForDisplay()
     {
         let today = NSDate()
@@ -226,7 +233,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    
+    //if the user wants to see more times this function prepares this data to display in the tableview
     func seeMoreAvailableTimes(){
         let today = NSDate()
         let unitFlags = Set<Calendar.Component>([.weekday])
@@ -347,6 +354,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
     }
     
+    //when the user presses this button to see more times, the button is hidden
+    
     @IBAction func seeMoreTimes(_ sender: Any) {
         print("reload")
         listOfTimesArray.removeAll()
@@ -355,7 +364,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.seeMoreTimesButton.isHidden = true
         tableView.reloadData()
     }
-    
+    //determines the status in order to display the correct indicator
     func determineStatus(status: String, tracker: Int) -> String
     {
         var returnString = ""
@@ -379,6 +388,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return returnString
     }
+    
     func recordStatus(status: String, tempString: String)
     {
         if(status == "good")
@@ -394,7 +404,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             cellsThatAreBusy.append(tempString)
         }
     }
-    
+    //converts the time slot information to 12 hour format
     func convertTo12HrClock(time: Int) -> String
     {
         var tempTimeVar = time
@@ -413,13 +423,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         return timeToString
         
     }
-    
+    //adds the event to the user's calendar
     @IBAction func addToCalendarButton(_ sender: UIButton)
     {
         let arrayIndex = sender.tag
        
         let temp =  listOfTimesArray[arrayIndex]
+        //marks the button as tapped so it is disabled
         tappedButtons.append(temp)
+        //provides feedback to the user
         alertTheUser(event: temp)
 
         var whileLoopVariable = true
@@ -428,6 +440,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         var day =  NSCalendar.current.dateComponents(unitFlags, from: today as Date)
         var dayString = ThisWeek.Instance.DaysOfTheWeek[day.weekday!-1]
         
+        //sets the timezone to handle daylight savings
         var timezoneString = "GMT"
         let timezone = NSTimeZone.local
         if(timezone.isDaylightSavingTime(for: today as Date))
@@ -435,6 +448,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             timezoneString = "BST"
         }
         
+        //the cell lable String has to be converted to a timestamp in order to create an event
         
         while(whileLoopVariable)
         {
@@ -492,6 +506,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         let dayAsString = String(date!)
         let timeAsString = String(charAtIndexAsNumber!)
         
+        //creates timestamp
         
         let dateAsString = yearAsString + "-" + monthAsString + "-" + dayAsString + " " + timeAsString + ":" + "00" + ":00"
         
@@ -503,6 +518,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let dateForGym = ISO8601DateFormatter.date(from: dateAsString)
         
+        
+        //creates event from timestamp and adds it to calendar
         let eventStore : EKEventStore = EKEventStore()
         eventStore.requestAccess(to: .event) { (granted, error) in
             
@@ -533,10 +550,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         
+        //when the user clicks add to calendar the database tracks this to update the information for future users
         ref = FIRDatabase.database().reference()
         let tempToday = NSDate()
         let tempTodayComponents = NSCalendar.current.dateComponents(unitFlags, from: tempToday as Date)
         var tempTodayDay = tempTodayComponents.day
+        
+        //resets the tracking values for the previous day
         if(tempTodayDay != 1)
         {
             tempTodayDay = tempTodayDay! - 1

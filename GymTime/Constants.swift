@@ -2,15 +2,11 @@
 //  Constants.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 01/02/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
+//  The constants represent the segues used to move between screens
 //
 
 struct Constants {
-    
-    struct NotificationKeys {
-        static let SignedIn = "onSignInCompleted"
-    }
     
     struct Segues {
         static let SignInToGT = "SignInToGT"

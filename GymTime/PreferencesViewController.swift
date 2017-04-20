@@ -2,9 +2,8 @@
 //  PreferencesViewController.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 23/03/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
-//
+//  This Controller represents the "Preferences" Screen
 import UIKit
 import Foundation
 import EventKit
@@ -25,6 +24,8 @@ class PreferencesViewController: UIViewController{
     
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     
+    
+    //These integers were set according to how the gym data is categorised and the capacity of the gym. e.g. <40 is considered good therefore if 35 people go at this time it will not be considered good any more. This will be removed as the author implemented future work with alternative data
     let good = 35
     let medium = 23
     let busy = 10
@@ -39,7 +40,7 @@ class PreferencesViewController: UIViewController{
     var todayDate = NSDate()
     let unitFlags = Set<Calendar.Component>([.hour, .day, .weekday, .month])
     
-    
+    //save user preferences in the database and provide feedback to the user that this has happened
     @IBAction func savePreferencesButton(_ sender: Any) {
         
         saveFeedback.isHidden = false
@@ -80,6 +81,7 @@ class PreferencesViewController: UIViewController{
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         saveFeedback.isHidden = true
         initialisePreferenceSwitch()
         ActivityIndicator.hidesWhenStopped = true
@@ -89,6 +91,7 @@ class PreferencesViewController: UIViewController{
         ThisWeek.Instance.getMonth()
         checkAuthorisation()
         
+        //if the user has not granted permission, present an error message describing how they can fix the error and keep the continue button disabled to stop the user progressing
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
         if (status != EKAuthorizationStatus.authorized)
         {
@@ -97,6 +100,7 @@ class PreferencesViewController: UIViewController{
         }
         else
         {
+            
             if(ThisWeek.Instance.loadDatabase == true)
             {
                 getEvents()
@@ -140,21 +144,7 @@ class PreferencesViewController: UIViewController{
     
     
    
-    @IBAction func didTapContinue(_ sender: UIButton)
-    {
-        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        if (status != EKAuthorizationStatus.authorized)
-        {
-            self.mustGivePermissionLabel.text = "GymTime needs access to your calendar in order to show you your preferences. Go to Settings -> GymTime and enable the Calendar switch."
-        }
-        else
-        {
-            self.ActivityIndicator.stopAnimating()
-            self.continueButton.isEnabled = true
-        }
-
-    }
-    
+  
     @IBAction func includeWeekendSwitch(_ sender: UISwitch) {
         
         if(sender.isOn)
@@ -182,7 +172,7 @@ class PreferencesViewController: UIViewController{
     
     
     
-    
+    //use the database information to set the preferences to the last saved values
     func initialisePreferenceSwitch()
     {
         let user = FIRAuth.auth()?.currentUser
@@ -216,7 +206,7 @@ class PreferencesViewController: UIViewController{
             alertTheUser()
         }
     }
-    
+    //if the user has not granted permission they are presented with an alert that brings them to the Settings page so they can grant access to Calendar
     func alertTheUser()
     {
         let alert = UIAlertController(title: "GymTime needs permission",
@@ -234,7 +224,7 @@ class PreferencesViewController: UIViewController{
     }
     
     
-    
+    //This function retrieves the events from the user's Calendar, creates an event object and stores the object in an array
     func getEvents()
     {
         let eventStore: EKEventStore = EKEventStore()
@@ -263,6 +253,7 @@ class PreferencesViewController: UIViewController{
         }
     }
     
+    //the event duration is retrieved in seconds and the following two functions convert seconds to minutes and then hours respectively
     func durationConversionToMinutes(second: Int) -> Int {
         let minutes = second / 60
         return minutes
@@ -273,12 +264,13 @@ class PreferencesViewController: UIViewController{
         var hour = minute/60
         if(minute % 60 > 0)
         {
+            //based on the assumptions made, if the event is less than an hour the entire hour is marked as unavailable
             hour = hour + 1
         }
         return hour
     }
     
-    
+    //this function uses the events to determine when the user is free
     func fillInTimeTable()
     {
         
@@ -298,7 +290,7 @@ class PreferencesViewController: UIViewController{
            
             
             //if the event is during the Gym's opening hours
-            //ASSUMPTION user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
+            //ASSUMPTION: user needs an hour to work out and gym closes at 22:00 so only checks events up until 21:00
             
             if(hour <= 21)
             {
@@ -391,6 +383,8 @@ class PreferencesViewController: UIViewController{
         printTimeTables(array: ThisWeek.Instance.Seven)
     }
     
+    
+    //the user should not be suggested times that have already gone past, this function deals with that
     func determineWhatTimesHaveAlreadyPassed()
     {
         var components =  NSCalendar.current.dateComponents(unitFlags, from: todayDate as Date)
@@ -427,6 +421,9 @@ class PreferencesViewController: UIViewController{
         print("*******************")
     }
     
+    
+    //this function uses the free times information and gym information in the database to determine when the user should go to the gym
+    //when a suitable time is found, a PersonalisedTimes object is created and stored in an array.
     func findBestTime()
     {
         var start = NSDate()
@@ -506,7 +503,7 @@ class PreferencesViewController: UIViewController{
     
     }
     
-    
+    //this function retrieves the traffic data for the gym from the database
     func getStringFromDatabase(time: String, todaysDay: String, completion: @escaping(_ stringToReturn: String)->())
     {
         
@@ -516,7 +513,7 @@ class PreferencesViewController: UIViewController{
             completion(stringToReturn)
         })
     }
-    
+    //this function retrieves the tracking data from the database
     func numPeopleGoing(date: String, time: String, completion: @escaping(_ intToReturn: Int)->())
     {
         

@@ -2,9 +2,8 @@
 //  NavigationController.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 30/03/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
-//
+//  The NavigationController provides the back button
 
 import Foundation
 import UIKit

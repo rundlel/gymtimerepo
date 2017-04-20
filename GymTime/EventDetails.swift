@@ -2,8 +2,8 @@
 //  EventDetails.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 21/03/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
+//  This struct represents an event
 //
 
 import EventKit

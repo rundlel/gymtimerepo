@@ -2,9 +2,8 @@
 //  WelcomeScreenViewController.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 31/03/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
-//
+//  The user is presented with this screen when they create an account successfully
 
 import UIKit
 import Firebase
@@ -16,10 +15,12 @@ class WelcomeScreenViewController: UIViewController {
     
     @IBOutlet weak var informationLabel: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.informationLabel.text = "Gym Time tells you the best times for you to work out in Trinity Gym this week. \n\n\n\nAll you need to do is make sure you have all your lectures, meetings and coffee breaks scehduled in your Calendar and we'll look after the rest!"
         checkAuthorisation()
+        
         let delay = 2.0
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay)
         {
@@ -28,11 +29,12 @@ class WelcomeScreenViewController: UIViewController {
         
 
     }
-
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
     }
     
+    //The user's preferences are initialised as true and entered into the database
     func createPreferences()
     {
         let user = FIRAuth.auth()?.currentUser
@@ -40,11 +42,13 @@ class WelcomeScreenViewController: UIViewController {
         ref.child("Preferences").child((user?.uid)!).setValue(["today" : true, "weekend" : true])
     }
     
-    @IBAction func didTapOkay(_ sender: Any) {
+    @IBAction func didTapOkay(_ sender: Any)
+    {
         
         performSegue(withIdentifier: Constants.Segues.FpToSignIn, sender: nil)
     }
     
+    //Once creating an account permission for Calendar is requested
     func checkAuthorisation()
     {
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)

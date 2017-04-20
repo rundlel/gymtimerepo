@@ -2,7 +2,6 @@
 //  ViewController.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 29/01/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
 //
 

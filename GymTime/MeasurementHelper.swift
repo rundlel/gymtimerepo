@@ -2,7 +2,6 @@
 //  MeasurementHelper.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 01/02/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
 //
 
@@ -18,7 +17,4 @@ class MeasurementHelper: NSObject {
         FIRAnalytics.logEvent(withName: "logout", parameters: nil)
     }
     
-    static func sendMessageEvent() {
-        FIRAnalytics.logEvent(withName: "message", parameters: nil)
-    }
 }

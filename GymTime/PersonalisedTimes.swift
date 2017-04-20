@@ -2,9 +2,8 @@
 //  PersonalisedTimes.swift
 //  GymTime
 //
-//  Created by Laura Rundle on 22/03/2017.
 //  Copyright © 2017 Laura Rundle. All rights reserved.
-//
+//  This struct represents the times that are suitable to be suggested to the user
 
 import Foundation
 
